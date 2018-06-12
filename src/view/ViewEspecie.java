@@ -29,7 +29,6 @@ public class ViewEspecie implements ActionListener{
 	private JButton btnExcluir = new JButton("Excluir");
 	private JButton btnPesquisar = new JButton("Pesquisar");
 	private ControleEspecie control = new ControleEspecie();
-	//private ListenerEspecie listener = new ListenerEspecie();
 		
 	public ViewEspecie() {
 		janela.setVisible(true);
@@ -58,7 +57,6 @@ public class ViewEspecie implements ActionListener{
 		Especie e = new Especie();
 		e.setCodEspecie(Integer.parseInt(txtCodEspecie.getText()));
 		e.setDescricaoEspecie(txtDescricao.getText());
-		control.adiciona(e);
 		JOptionPane.showMessageDialog(null, "Espécie salva.");
 		return e;
 	}
@@ -85,7 +83,7 @@ public class ViewEspecie implements ActionListener{
 		if(cmd.equals("Pesquisar")){
 			entityToBoundary();
 		} else if(cmd.equals("Salvar")) {
-			addBoundaryToEntity();
+			control.adiciona(addBoundaryToEntity());
 		} else {
 			removeBoundaryToEntity();
 		}

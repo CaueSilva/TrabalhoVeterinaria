@@ -72,13 +72,8 @@ public class ViewMedicamento implements ActionListener {
 		m.setCodMedicamento(Integer.parseInt(txtCod.getText()));
 		m.setNomeMedicamento(txtNome.getText());
 		m.setTarjaMedicamento(txtTarja.getText());
-		control.adiciona(m);
 		JOptionPane.showMessageDialog(null, "Medicamento salvo.");
 		return m;
-	}
-
-	public void removeBoundaryToEntity() {
-		control.remove(txtPrincipio.getText());
 	}
 
 	public void entityToBoundary() {
@@ -96,13 +91,17 @@ public class ViewMedicamento implements ActionListener {
 		tblMedicamento.repaint();
 	}
 
+	public void removeBoundaryToEntity() {
+		control.remove(txtPrincipio.getText());
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		if (cmd.equals("Pesquisar")) {
 			entityToBoundary();
 		} else if (cmd.equals("Salvar")) {
-			addBoundaryToEntity();
+			control.adiciona(addBoundaryToEntity());
 		} else if (cmd.equals("Excluir")) {
 			removeBoundaryToEntity();
 		}
