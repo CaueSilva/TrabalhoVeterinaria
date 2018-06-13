@@ -5,8 +5,15 @@ public class Especie {
 	private int codEspecie;
 	private String descricaoEspecie;
 	private int codAdmin;
+	private String loginAdmin;
 	
 	
+	public String getLoginAdmin() {
+		return loginAdmin;
+	}
+	public void setLoginAdmin(String loginAdmin) {
+		this.loginAdmin = loginAdmin;
+	}
 	public int getCodEspecie() {
 		return codEspecie;
 	}

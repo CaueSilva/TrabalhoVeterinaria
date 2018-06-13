@@ -1,35 +1,25 @@
 package model;
 
 public class MedicamentoReceita {
-
-	private int codMedicamentoReceita;
-	private Receita codReceita;
-	private Medicamento codMedicamento;
+	private int codReceita;
+	private int codMedicamento;
 	private String dosagemMedicamento;
 	private String intervaloMedicamento;
-	private String pedidoReceitado;
+	private String periodoMedicamento;
 
-	public int getCodMedicamentoReceita() {
-		return codMedicamentoReceita;
-	}
-
-	public void setCodMedicamentoReceita(int codMedicamentoReceita) {
-		this.codMedicamentoReceita = codMedicamentoReceita;
-	}
-
-	public Receita getCodReceita() {
+	public int getCodReceita() {
 		return codReceita;
 	}
 
-	public void setCodReceita(Receita codReceita) {
+	public void setCodReceita(int codReceita) {
 		this.codReceita = codReceita;
 	}
 
-	public Medicamento getCodMedicamento() {
+	public int getCodMedicamento() {
 		return codMedicamento;
 	}
 
-	public void setCodMedicamento(Medicamento codMedicamento) {
+	public void setCodMedicamento(int codMedicamento) {
 		this.codMedicamento = codMedicamento;
 	}
 
@@ -49,12 +39,12 @@ public class MedicamentoReceita {
 		this.intervaloMedicamento = intervaloMedicamento;
 	}
 
-	public String getPedidoReceitado() {
-		return pedidoReceitado;
+	public String getPeriodoMedicamentoo() {
+		return periodoMedicamento;
 	}
 
-	public void setPedidoReceitado(String pedidoReceitado) {
-		this.pedidoReceitado = pedidoReceitado;
+	public void setPeriodoMedicamento(String periodoMedicamento) {
+		this.periodoMedicamento = periodoMedicamento;
 	}
 
 }

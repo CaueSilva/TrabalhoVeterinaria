@@ -7,6 +7,9 @@ import javax.swing.border.EmptyBorder;
 import controller.ControlePet;
 import controller.ControlePetTable;
 import model.Pet;
+import model.Raca;
+import model.RacaDAO;
+import model.Tutor;
 import model.TutorDAO;
 
 import javax.swing.JLabel;
@@ -181,16 +184,19 @@ public class ViewPet extends JFrame implements ActionListener {
 	public Pet adicionarEntidade() {
 		Pet p = new Pet();
 		TutorDAO tutorD = new TutorDAO();
-		Tutor t = tutorD.pesquisa(txtCpfTutor.getText());
+		Tutor t = tutorD.pesquisaEspecifica(txtCpfTutor.getText());
 		p.setNomePet(txtNomePet.getText());
 		p.setCodPet(Integer.parseInt(txtCodigo.getText()));
-		p.setCodTutor(txtTutor.getText());
-		p.setCodRaca(txtRaca.getText());
-		p.setCo
+		p.setCodTutor(t.getCodTutor());
+		
+		RacaDAO rd = new RacaDAO();
+		Raca r = rd.pesquisaEspecifica(txtRaca.getText());
+		p.setCodRaca(r.getCodRaca());
+		
 		if (rdbtnVacinacaoS != null) {
-			p.setVacinacaoPet(true);
+			p.setVacinacaoPet(0);
 		} else {
-			p.setVacinacaoPet(false);
+			p.setVacinacaoPet(1);
 		}
 		p.setCorPeloPet(txtCor.getText());
 		p.setDescricaoPet(txtDescricao.getText());
@@ -204,7 +210,7 @@ public class ViewPet extends JFrame implements ActionListener {
 			Pet p = lista.get(0);
 			txtNomePet.setText(p.getNomePet());
 			txtCodigo.setText(String.valueOf(p.getCodPet()));
-			if (p.isVacinacaoPet()) {
+			if (p.getVacinacaoPet() == 1) {
 				rdbtnVacinacaoS.setSelected(true);
 				rdbtnVacinacaoN.setSelected(false);
 			} else {
@@ -229,9 +235,9 @@ public class ViewPet extends JFrame implements ActionListener {
 		// p.setCodRaca(txtRaca.getText());
 		// p.set espécie???
 		if (rdbtnVacinacaoS != null) {
-			p.setVacinacaoPet(true);
+			p.setVacinacaoPet(0);
 		} else {
-			p.setVacinacaoPet(false);
+			p.setVacinacaoPet(1);
 		}
 		p.setCorPeloPet(txtCor.getText());
 		p.setDescricaoPet(txtDescricao.getText());

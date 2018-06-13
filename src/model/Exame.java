@@ -1,19 +1,19 @@
 package model;
 
-import java.util.*;
+import java.util.Date;
 
 public class Exame {
 	
 	private int codExame;
-	private Atendente codAtendente;
-	private Pet codPet;
-	private TipoExame codTipoExame;
+	private int codAtendente;
+	private int codPet;
+	private int codTipoExame;
 	private Date dataSolicitacao;
 	private Date dataExame;
 	private Date horaExame;
 	private String resultadoExame;
-	private float precoTotalExame;
-	private boolean mortePet;
+	private double precoTotalExame;
+	private int mortePet;
 	
 	//private List<Veterinario> veterinario = new ArrayList<>();
 	
@@ -23,22 +23,22 @@ public class Exame {
 	public void setCodExame(int codExame) {
 		this.codExame = codExame;
 	}
-	public Atendente getCodAtendente() {
+	public int getCodAtendente() {
 		return codAtendente;
 	}
-	public void setCodAtendente(Atendente codAtendente) {
+	public void setCodAtendente(int codAtendente) {
 		this.codAtendente = codAtendente;
 	}
-	public Pet getCodPet() {
+	public int getCodPet() {
 		return codPet;
 	}
-	public void setCodPet(Pet codPet) {
+	public void setCodPet(int codPet) {
 		this.codPet = codPet;
 	}
-	public TipoExame getCodTipoExame() {
+	public int getCodTipoExame() {
 		return codTipoExame;
 	}
-	public void setCodTipoExame(TipoExame codTipoExame) {
+	public void setCodTipoExame(int codTipoExame) {
 		this.codTipoExame = codTipoExame;
 	}
 	public Date getDataSolicitacao() {
@@ -65,16 +65,16 @@ public class Exame {
 	public void setResultadoExame(String resultadoExame) {
 		this.resultadoExame = resultadoExame;
 	}
-	public float getPrecoTotalExame() {
+	public double getPrecoTotalExame() {
 		return precoTotalExame;
 	}
-	public void setPrecoTotalExame(float precoTotalExame) {
+	public void setPrecoTotalExame(double precoTotalExame) {
 		this.precoTotalExame = precoTotalExame;
 	}
-	public boolean isMortePet() {
+	public int getMortePet() {
 		return mortePet;
 	}
-	public void setMortePet(boolean mortePet) {
+	public void setMortePet(int mortePet) {
 		this.mortePet = mortePet;
 	}
 	//public List<Veterinario> getVeterinario() {

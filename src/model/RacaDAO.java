@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import Conexao.Conexao;
+import conexao.Conexao;
 
 public class RacaDAO {
 	Connection con;
@@ -75,14 +75,14 @@ public class RacaDAO {
 		
 	}
 
-	public List<Raca> pesquisaEspecifica(String login) {
-		List<Raca> ra = new ArrayList<Raca>();
+	public Raca pesquisaEspecifica(String desc) {
+		Raca ra = new Raca();
 		Conexao c = new Conexao();
 		con = c.abrir();
 		PreparedStatement p;
 		try {
 			p = con.prepareStatement("SELECT * from tbRaca WHERE descricaoRaca like ?");
-			p.setString(1, "%" + login + "%");
+			p.setString(1, "%" + desc + "%");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
 				Raca r = new Raca();
@@ -90,7 +90,7 @@ public class RacaDAO {
 				r.setDescricaoRaca(rs.getString("descricaoRaca"));
 				r.setCodEspecie(rs.getInt("codEspecie"));
 				r.setCodAdmin(rs.getInt("codAdmin"));
-				ra.add(r);
+				ra = r ;
 			}
 		rs.close();
 		p.close();

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -77,7 +78,7 @@ public class ViewReceita implements ActionListener{
 		
 	}
 
-	public Receita adicionarEntidade() {
+	public Receita adicionarEntidade() throws ParseException {
 		Receita r = new Receita();
 		r.setCodReceita(Integer.parseInt(txtCodReceita.getText()));
 		r.setCodPet(Integer.parseInt(txtCodPet.getText()));
@@ -111,7 +112,12 @@ public class ViewReceita implements ActionListener{
 		} else if(cmd.contains("Veterinário")) {
 			
 		} else if(cmd.contains("Salvar")) {
-			controle.adiciona(adicionarEntidade());
+			try {
+				controle.adiciona(adicionarEntidade());
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		} else if(cmd.contains("Pesquisar")) {
 			entidadeParaBoundary();
 		} else if(cmd.contains("Excluir")) {

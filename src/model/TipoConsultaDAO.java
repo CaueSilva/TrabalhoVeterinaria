@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import Conexao.Conexao;
+import conexao.Conexao;
 
 public class TipoConsultaDAO {
 	Connection con;

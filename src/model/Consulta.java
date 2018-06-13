@@ -5,17 +5,17 @@ import java.util.Date;
 public class Consulta {
 	
 	private int codConsulta;
-	private Atendente codAtendente;
-	private Veterinario codVeterinario;
-	private Pet codPet;
-	private TipoConsulta codTipoConsulta;
+	private int codAtendente;
+	private int codVeterinario;
+	private int codPet;
+	private int codTipoConsulta;
 	private Date dataMarcacao;
 	private Date dataConsulta;
 	private Date horaConsulta;
-	private boolean encaminhamentoExame;
-	private float precoTotalConsulta;
+	private int encaminhamentoExame;
+	private double precoTotalConsulta;
 	private String resultadoConsulta;
-	private boolean mortePet;
+	private int mortePet;
 	
 	
 	
@@ -25,28 +25,28 @@ public class Consulta {
 	public void setCodConsulta(int codConsulta) {
 		this.codConsulta = codConsulta;
 	}
-	public Atendente getCodAtendente() {
+	public int getCodAtendente() {
 		return codAtendente;
 	}
-	public void setCodAtendente(Atendente codAtendente) {
+	public void setCodAtendente(int codAtendente) {
 		this.codAtendente = codAtendente;
 	}
-	public Veterinario getCodVeterinario() {
+	public int getCodVeterinario() {
 		return codVeterinario;
 	}
-	public void setCodVeterinario(Veterinario codVeterinario) {
+	public void setCodVeterinario(int codVeterinario) {
 		this.codVeterinario = codVeterinario;
 	}
-	public Pet getCodPet() {
+	public int getCodPet() {
 		return codPet;
 	}
-	public void setCodPet(Pet codPet) {
+	public void setCodPet(int codPet) {
 		this.codPet = codPet;
 	}
-	public TipoConsulta getCodTipoConsulta() {
+	public int getCodTipoConsulta() {
 		return codTipoConsulta;
 	}
-	public void setCodTipoConsulta(TipoConsulta codTipoConsulta) {
+	public void setCodTipoConsulta(int codTipoConsulta) {
 		this.codTipoConsulta = codTipoConsulta;
 	}
 	public Date getDataMarcacao() {
@@ -67,16 +67,16 @@ public class Consulta {
 	public void setHoraConsulta(Date horaConsulta) {
 		this.horaConsulta = horaConsulta;
 	}
-	public boolean isEncaminhamentoExame() {
+	public int getEncaminhamentoExame() {
 		return encaminhamentoExame;
 	}
-	public void setEncaminhamentoExame(boolean encaminhamentoExame) {
+	public void setEncaminhamentoExame(int encaminhamentoExame) {
 		this.encaminhamentoExame = encaminhamentoExame;
 	}
-	public float getPrecoTotalConsulta() {
+	public double getPrecoTotalConsulta() {
 		return precoTotalConsulta;
 	}
-	public void setPrecoTotalConsulta(float precoTotalConsulta) {
+	public void setPrecoTotalConsulta(double precoTotalConsulta) {
 		this.precoTotalConsulta = precoTotalConsulta;
 	}
 	public String getResultadoConsulta() {
@@ -85,10 +85,10 @@ public class Consulta {
 	public void setResultadoConsulta(String resultadoConsulta) {
 		this.resultadoConsulta = resultadoConsulta;
 	}
-	public boolean isMortePet() {
+	public int getMortePet() {
 		return mortePet;
 	}
-	public void setMortePet(boolean mortePet) {
+	public void setMortePet(int mortePet) {
 		this.mortePet = mortePet;
 	}
 

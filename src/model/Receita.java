@@ -5,10 +5,8 @@ import java.util.*;
 public class Receita {
 	
 	private int codReceita;
-	private Veterinario codVeterinario;
-	private Pet codPet;
-	private Exame codExame;
-	private Consulta codConsulta;
+	private int codVeterinario;
+	private int codPet;
 	private String obsReceita;
 	private Date dataEmissao;
 	private Date dataValidade;
@@ -21,29 +19,17 @@ public class Receita {
 	public void setCodReceita(int codReceita) {
 		this.codReceita = codReceita;
 	}
-	public Veterinario getCodVeterinario() {
+	public int getCodVeterinario() {
 		return codVeterinario;
 	}
-	public void setCodVeterinario(Veterinario codVeterinario) {
+	public void setCodVeterinario(int codVeterinario) {
 		this.codVeterinario = codVeterinario;
 	}
-	public Pet getCodPet() {
+	public int getCodPet() {
 		return codPet;
 	}
-	public void setCodPet(Pet codPet) {
+	public void setCodPet(int codPet) {
 		this.codPet = codPet;
-	}
-	public Exame getCodExame() {
-		return codExame;
-	}
-	public void setCodExame(Exame codExame) {
-		this.codExame = codExame;
-	}
-	public Consulta getCodConsulta() {
-		return codConsulta;
-	}
-	public void setCodConsulta(Consulta codConsulta) {
-		this.codConsulta = codConsulta;
 	}
 	public String getObsReceita() {
 		return obsReceita;
