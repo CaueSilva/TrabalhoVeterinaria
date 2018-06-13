@@ -10,6 +10,7 @@ import controller.ListenerPet;
 import model.Pet;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -23,14 +24,11 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 
 public class ViewPet extends JFrame implements ActionListener{
-	
-	private JFrame janela = new JFrame();
+
+
 	private JPanel contentPane = new JPanel();
 	private JTextField txtNomePet = new JTextField();
 	private ControlePet controle = new ControlePet();
-	/**private JTable tblPesquisarPet = new JTable(controle);
-	private JScrollPane scrollPesquisarPet = new JScrollPane();
-	*/
 	private JTable tblPesquisa = new JTable(controle);
 	private JScrollPane scrollPesquisa = new JScrollPane();
 	
@@ -46,28 +44,21 @@ public class ViewPet extends JFrame implements ActionListener{
 	private JTextField txtHoraMorte = new JTextField();
 	
 	private ControlePetTable controlePets = new ControlePetTable();
-	/**private JTable tblPetsCadastrados = new JTable(controlePets);
+	private JTable tblPets = new JTable(controlePets);
 	private JScrollPane scrollPets = new JScrollPane();
-	*/
-	private JTable tblCadastrados = new JTable(controlePets);
-	private JScrollPane scrollCadastrados = new JScrollPane();
 	
 	private JButton btnSalvar = new JButton("Salvar");
 	private JButton btnExcluir = new JButton("Excluir");
 	private JButton btnPesquisar = new JButton("Pesquisar");
-	
-	/**public static void main(String[] args) {
-		new ViewPet();
-	}*/
 
 	public ViewPet() {
-		janela.setVisible(true);
-		janela.setResizable(false);
-		janela.setTitle("Manutenção de Pets");
-		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		janela.setBounds(100, 100, 480, 630);
+		setVisible(true);
+		setResizable(false);
+		setTitle("Manutenção de Pets");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 480, 630);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		janela.setContentPane(contentPane);
+		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNomePet = new JLabel("Nome Pet:");
@@ -77,16 +68,10 @@ public class ViewPet extends JFrame implements ActionListener{
 		txtNomePet.setBounds(85, 10, 116, 22);
 		contentPane.add(txtNomePet);
 		txtNomePet.setColumns(10);
-		
 		scrollPesquisa.getViewport().add(tblPesquisa);
-		scrollPesquisa.setBounds(12, 42, 438, 97);
 		contentPane.add(scrollPesquisa);
+		scrollPesquisa.setBounds(12,42,438,97);
 		
-		/**
-		scrollPesquisarPet.setBounds(12, 42, 438, 97);
-		scrollPesquisarPet.getViewport().add(tblPesquisarPet);
-		contentPane.add(scrollPesquisarPet);
-		*/
 		JLabel lblCdigo = new JLabel("Código:");
 		lblCdigo.setBounds(12, 152, 56, 16);
 		contentPane.add(lblCdigo);
@@ -171,9 +156,9 @@ public class ViewPet extends JFrame implements ActionListener{
 		lblPetsCadastrados.setBounds(12, 431, 116, 16);
 		contentPane.add(lblPetsCadastrados);
 		
-		scrollCadastrados.getViewport().add(tblCadastrados);
-		scrollCadastrados.setBounds(12, 460, 438, 80);
-		contentPane.add(scrollCadastrados);
+		scrollPets.getViewport().add(tblPets);
+		contentPane.add(scrollPets);
+		scrollPets.setBounds(12, 460, 438, 80);
 		
 		/**scrollPets.setBounds(12, 460, 438, 80);
 		scrollPets.getViewport().add(tblPetsCadastrados);
@@ -208,6 +193,7 @@ public class ViewPet extends JFrame implements ActionListener{
 		}
 		p.setCorPeloPet(txtCor.getText());
 		p.setDescricaoPet(txtDescricao.getText());
+		controlePets.adiciona(p);
 		return p;
 	}
 	
@@ -226,7 +212,12 @@ public class ViewPet extends JFrame implements ActionListener{
 			}
 			txtCor.setText(p.getCorPeloPet());
 			txtDescricao.setText(p.getDescricaoPet());
+		} else {
+			JOptionPane.showMessageDialog(null, "A busca não retornou resultados.");
 		}
+		tblPesquisa.invalidate();
+		tblPesquisa.revalidate();
+		tblPesquisa.repaint();
 	}
 	
 	public Pet removeEntidade() {
@@ -243,6 +234,7 @@ public class ViewPet extends JFrame implements ActionListener{
 		}
 		p.setCorPeloPet(txtCor.getText());
 		p.setDescricaoPet(txtDescricao.getText());
+		controlePets.remove(p);
 		return p;
 	}
 	
@@ -253,8 +245,14 @@ public class ViewPet extends JFrame implements ActionListener{
 			trazerEntidade();
 		} else if(cmd.equals("Salvar")) {
 			controle.adiciona(adicionarEntidade());
+			tblPets.invalidate();
+			tblPets.revalidate();
+			tblPets.repaint();
 		} else if(cmd.equals("Excluir")) {
 			controle.remove(removeEntidade());
+			tblPets.invalidate();
+			tblPets.revalidate();
+			tblPets.repaint();
 		}
 	}
 }

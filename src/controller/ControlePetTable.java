@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
@@ -13,6 +14,25 @@ public class ControlePetTable implements TableModel {
 	
 	private List<Pet> listaPet = new ArrayList<>();
 	private String [] nomesColunas = {"Nome", "Tutor", "Cor Pelo", "Descriçao"};
+	
+	public void adiciona(Pet p) {
+		listaPet.add(p);
+	}
+	
+	public void remove(Pet p) {
+		List<Pet> listRemove = new ArrayList<>();
+		for(Pet pet : listaPet) {
+			if(pet.getNomePet().equals(p.getNomePet()) && pet.getCodPet() == p.getCodPet()){
+				listRemove.add(pet);
+			}
+		}
+		if(!listRemove.isEmpty()) {
+			listaPet.removeAll(listRemove);
+			listRemove = null;
+		} else {
+			JOptionPane.showMessageDialog(null, "Não foi possível remover o pet.");
+		}
+	}
 	
 	@Override
 	public void addTableModelListener(TableModelListener l) {

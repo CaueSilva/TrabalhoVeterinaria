@@ -24,7 +24,7 @@ public class ControlePet implements TableModel{
 	public List<Pet> buscaPet(String nome){
 		listaPesquisados.clear();
 		for(Pet p : listaPets) {
-			if(p.getNomePet().equals(nome)) {
+			if(p.getNomePet().contains(nome)) {
 				listaPesquisados.add(p);
 			}
 		}
