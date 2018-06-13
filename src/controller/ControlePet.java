@@ -47,6 +47,14 @@ public class ControlePet implements TableModel{
 		}
 	}
 	
+	public Tutor pesquisaTutor(int cpf) {
+		Tutor t = new Tutor();
+		if(t.getCpfTutor().equals(cpf)) {
+			return t;
+		}
+		return null;
+	}
+	
 	@Override
 	public void addTableModelListener(TableModelListener arg0) {
 	}

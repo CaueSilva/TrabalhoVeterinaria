@@ -2,16 +2,21 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.ListenerAdmin;
+import controller.ControleAdmin;
+import model.Admin;
 
-public class ViewAdmin {
+public class ViewAdmin implements ActionListener {
 	
 	private JFrame janela = new JFrame("Manutenção de Administradores");
 	private JPanel pnlPrincipal = new JPanel(new BorderLayout());
@@ -25,7 +30,11 @@ public class ViewAdmin {
 	private JButton btnSalvar = new JButton("Salvar");
 	private JButton btnExcluir = new JButton("Excluir");
 	
-	private ListenerAdmin listener = new ListenerAdmin();
+	private ControleAdmin controle = new ControleAdmin();
+	
+	public static void main(String[] args) {
+		new ViewAdmin();
+	}
 	
 	public ViewAdmin() {
 		janela.setVisible(true);
@@ -39,6 +48,7 @@ public class ViewAdmin {
 		
 		pnlPrimario.add(new JLabel("Código:"));
 		pnlPrimario.add(txtCod);
+		txtCod.setEditable(false);
 		pnlPrimario.add(btnPesquisar);
 		pnlPrimario.add(new JLabel("Nome:  "));
 		pnlPrimario.add(txtNome);
@@ -50,8 +60,43 @@ public class ViewAdmin {
 		pnlSecundario.add(btnSalvar);
 		pnlSecundario.add(btnExcluir);
 		
-		btnPesquisar.addActionListener(listener);
-		btnSalvar.addActionListener(listener);
-		btnExcluir.addActionListener(listener);
+		btnPesquisar.addActionListener(this);
+		btnSalvar.addActionListener(this);
+		btnExcluir.addActionListener(this);
+	}
+
+	public Admin adicionarEntidade() {
+		Admin a = new Admin();
+		a.setCodAdmin(Integer.parseInt(txtCod.getText()));
+		a.setNomeAdmin(txtNome.getText());
+		a.setLoginAdmin(txtLogin.getText());
+		a.setSenhaAdmin(txtSenha.getText());
+		JOptionPane.showMessageDialog(null, "Administrador adicionado.");
+		return a;
+	}
+	
+	public void entidadeParaTela() {
+		List<Admin> lista = controle.busca(Integer.parseInt(txtCod.getText()));
+		if(lista != null && lista.size() > 0) {
+			Admin a = lista.get(0);
+			txtCod.setText(String.valueOf(a.getCodAdmin()));
+			txtNome.setText(a.getNomeAdmin());
+			txtLogin.setText(a.getLoginAdmin());
+			txtSenha.setText(a.getSenhaAdmin());
+		} else {
+			JOptionPane.showMessageDialog(null, "A busca não retornou resultados.");
+		}
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent event) {
+		String cmd = event.getActionCommand();
+		if(cmd.contains("Salvar")) {
+			controle.adiciona(adicionarEntidade());
+		} else if(cmd.contains("Pesquisar")) {
+			entidadeParaTela();
+		} else if(cmd.contains("Excluir")) {
+			controle.remove(Integer.parseInt(txtCod.getText()));
+		}
 	}
 }

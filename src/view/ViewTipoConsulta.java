@@ -2,36 +2,41 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.ListenerTipoConsulta;
+import controller.ControleTipoConsulta;
+import model.TipoConsulta;
 
-public class ViewTipoConsulta {
+public class ViewTipoConsulta implements ActionListener{
 	
-	protected JFrame janela = new JFrame("Manutenção de Consultas");
+	private JFrame janela = new JFrame("Manutenção de Consultas");
 	private JPanel pnlPrincipal = new JPanel(new BorderLayout());
 	private JPanel pnlPrimario = new JPanel(new FlowLayout(FlowLayout.LEFT));
 	private JPanel pnlSecundario = new JPanel(new FlowLayout());
-	protected JLabel lblTipo = new JLabel("Tipo Consulta:");
-	private JTextField txtTipo = new JTextField(6);
-	protected JLabel lblPreco = new JLabel("Preço:       R$");
-	private JTextField txtPreco = new JTextField(12);
-	protected JLabel lblDescricao = new JLabel("Descrição:    ");
-	private JTextField txtDescricao = new JTextField(12);
-	protected JButton btnPesquisar = new JButton("Pesquisar");
-	protected JButton btnSalvar = new JButton("Salvar");
-	protected JButton btnExcluir = new JButton("Excluir");
+	private JLabel lblTipo = new JLabel("Nome Consulta:");
+	private JTextField txtTipo = new JTextField(10);
+	private JLabel lblPreco = new JLabel("Preço:   R$");
+	private JTextField txtPreco = new JTextField(8);
+	private JLabel lblDescricao = new JLabel("Código:  ");
+	private JTextField txtCodigo = new JTextField(8);
+	private JButton btnPesquisar = new JButton("Pesquisar");
+	private JButton btnSalvar = new JButton("Salvar");
+	private JButton btnExcluir = new JButton("Excluir");
 	
-	protected ListenerTipoConsulta listener = new ListenerTipoConsulta();
+	private ControleTipoConsulta controle = new ControleTipoConsulta();
 	
 	public ViewTipoConsulta() {
 		janela.setVisible(true);
-		janela.setSize(285,160);
+		janela.setSize(325,130);
 		janela.setContentPane(pnlPrincipal);
 		janela.setResizable(false);
 		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -45,14 +50,46 @@ public class ViewTipoConsulta {
 		pnlPrimario.add(lblPreco);
 		pnlPrimario.add(txtPreco);
 		pnlPrimario.add(lblDescricao);
-		pnlPrimario.add(txtDescricao);
+		pnlPrimario.add(txtCodigo);
+		txtCodigo.setEditable(false);
 		
 		pnlSecundario.add(btnSalvar);
 		pnlSecundario.add(btnExcluir);
 		
-		btnPesquisar.addActionListener(listener);
-		btnSalvar.addActionListener(listener);
-		btnExcluir.addActionListener(listener);
+		btnPesquisar.addActionListener(this);
+		btnSalvar.addActionListener(this);
+		btnExcluir.addActionListener(this);
+	}
+	
+	public TipoConsulta adicionaEntidade() {
+		TipoConsulta t = new TipoConsulta();
+		t.setDescricaoTipoConsulta(txtTipo.getText());
+		t.setPrecoConsulta(Double.parseDouble(txtPreco.getText()));
+		JOptionPane.showMessageDialog(null, "Tipo de Consulta adicionado.");
+		return t;
+	}
+	
+	public void buscaEntidade() {
+		List<TipoConsulta> lista = controle.pesquisaTipo(txtTipo.getText());
+		if(lista != null && lista.size() > 0) {
+			TipoConsulta t = lista.get(0);
+			txtPreco.setText(String.valueOf(t.getPrecoConsulta()));
+			txtCodigo.setText(String.valueOf(t.getCodTipoConsulta()));
+		} else {
+			JOptionPane.showMessageDialog(null, "A busca não retornou resultados.");
+		}
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String cmd = e.getActionCommand();
+		if(cmd.contains("Salvar")) {
+			controle.adiciona(adicionaEntidade());
+		} else if(cmd.contains("Pesquisar")) {
+			buscaEntidade();
+		} else if(cmd.contains("Excluir")) {
+			controle.remove(txtTipo.getText());
+		}
 	}
 	
 }

@@ -2,16 +2,21 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.ListenerRaca;
+import controller.ControleRaca;
+import model.Raca;
 
-public class ViewRaca {
+public class ViewRaca implements ActionListener{
 	
 	private JFrame janela = new JFrame("Manutenção de Raças");
 	private JPanel pnlPrincipal = new JPanel(new BorderLayout());
@@ -25,7 +30,7 @@ public class ViewRaca {
 	private JButton btnSalvar = new JButton("Salvar");
 	private JButton btnExcluir = new JButton("Excluir");
 	
-	private ListenerRaca listener = new ListenerRaca();
+	private ControleRaca controle = new ControleRaca();
 	
 	public ViewRaca() {
 		janela.setResizable(false);
@@ -49,11 +54,42 @@ public class ViewRaca {
 		pnlSecundario.add(btnSalvar);
 		pnlSecundario.add(btnExcluir);
 		
-		btnPesquisaRaca.addActionListener(listener);
-		btnPesquisaEspecie.addActionListener(listener);
-		btnSalvar.addActionListener(listener);
-		btnExcluir.addActionListener(listener);
+		btnPesquisaRaca.addActionListener(this);
+		btnPesquisaEspecie.addActionListener(this);
+		btnSalvar.addActionListener(this);
+		btnExcluir.addActionListener(this);
 		
+	}
+	
+	public Raca adicionaEntidade() {
+		Raca r = new Raca();
+		r.setCodRaca(Integer.parseInt(txtCodRaca.getText()));
+		r.setDescricaoRaca(txtDescricao.getText());
+		JOptionPane.showMessageDialog(null, "Raça adicionada.");
+		return r;
+	}
+	
+	public void recebeEntidade() {
+		List<Raca> lista = controle.buscaRaca(Integer.parseInt(txtCodRaca.getText()));
+		if(lista != null && lista.size() > 0) {
+			Raca r = lista.get(0);
+			txtCodRaca.setText(String.valueOf(r.getCodRaca()));
+			txtDescricao.setText(r.getDescricaoRaca());
+		} else {
+			JOptionPane.showMessageDialog(null, "A busca não retornou resultados.");
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String cmd = e.getActionCommand();
+		if(cmd.contains("Pesquisar")) {
+			recebeEntidade();
+		} else if(cmd.contains("Salvar")) {
+			controle.adiciona(adicionaEntidade());
+		} else if(cmd.contains("Excluir")) {
+			controle.removeRaca(Integer.parseInt(txtCodRaca.getText()));
+		}
 	}
 
 }
