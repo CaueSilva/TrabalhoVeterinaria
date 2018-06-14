@@ -92,13 +92,8 @@ public class ViewReceita implements ActionListener{
 		r.setCodPet(Integer.parseInt(txtNomePet.getText()));
 		r.setCodVeterinario(Integer.parseInt(txtCrmvVet.getText()));
 		r.setObsReceita(txtObs.getText());
-		try {
-			r.setDataEmissao(sdf.parse(txtEmissao.getText()));
-			r.setDataValidade(sdf.parse(txtValidade.getText()));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		r.setDataEmissao(txtEmissao.getText());
+		r.setDataValidade(txtValidade.getText());
 		return r;
 	}
 	

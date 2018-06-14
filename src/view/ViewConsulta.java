@@ -184,20 +184,12 @@ public class ViewConsulta extends JFrame implements ActionListener{
 		
 		c.setCodTipoConsulta(tipo.getCodTipoConsulta());
 		c.setCodPet(p.getCodPet());
-		try {
-			c.setDataConsulta(sdfData.parse(txtData.getText()));
-			c.setHoraConsulta(sdfHora.parse(txtHora.getText()));
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
+		c.setDataConsulta(txtData.getText());
+		c.setHoraConsulta(txtHora.getText());
 		if(rdbtnEncaminhamentoS.isSelected()) {
 			c.setMortePet(1);
-			try {
-				p.setDiaMortePet(sdfData.parse(txtData.getText()));
-				p.setHoraMortePet(sdfHora.parse(txtHoraMorte.getText()));
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}
+			p.setDiaMortePet(txtData.getText());
+			p.setHoraMortePet(txtHoraMorte.getText());
 		} else {
 			c.setMortePet(0);
 		}

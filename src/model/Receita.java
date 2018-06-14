@@ -9,6 +9,10 @@ public class Receita {
 	private String nomeVeterinario;
 	private int codPet;
 	private String nomePet;
+	private String obsReceita;
+	private String dataEmissao;
+	private String dataValidade;
+	
 	public String getNomeVeterinario() {
 		return nomeVeterinario;
 	}
@@ -21,12 +25,6 @@ public class Receita {
 	public void setNomePet(String nomePet) {
 		this.nomePet = nomePet;
 	}
-	private String obsReceita;
-	private String dataEmissao;
-	private String dataValidade;
-	
-	//private List<Medicamento> medicamento = new ArrayList<>();
-	
 	public int getCodReceita() {
 		return codReceita;
 	}
@@ -63,12 +61,5 @@ public class Receita {
 	public void setDataValidade(String dataValidade) {
 		this.dataValidade = dataValidade;
 	}
-	//public List<Medicamento> getMedicamento() {
-		//return medicamento;
-	//}
-	//public void setMedicamento(List<Medicamento> medicamento) {
-		//this.medicamento = medicamento;
-	//}
-
 	
 }

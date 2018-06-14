@@ -56,20 +56,12 @@ public class ViewExame extends View implements ActionListener{
 		
 		e.setCodTipoExame(tipo.getCodTipoExame());
 		e.setCodPet(p.getCodPet());
-		try {
-			e.setDataExame(sdfData.parse(txtData.getText()));
-			e.setHoraExame(sdfHora.parse(txtHora.getText()));
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
+		e.setDataExame(txtData.getText());
+		e.setHoraExame(txtHora.getText());
 		if(rdbtnEncaminhamentoS.isSelected()) {
 			e.setMortePet(1);
-			try {
-				p.setDiaMortePet(sdfData.parse(txtData.getText()));
-				p.setHoraMortePet(sdfHora.parse(txtHoraMorte.getText()));
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}
+			p.setDiaMortePet(txtData.getText());
+			p.setHoraMortePet(txtHoraMorte.getText());
 		} else {
 			e.setMortePet(0);
 		}
