@@ -40,7 +40,7 @@ public class ReceitaDAO {
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("select * from tbReceita");
+			p = con.prepareStatement("SELECT r.codReceita, r.obsReceita, r.dataEmissao, r.dataValidade, p.nomePet, v.nomeVeterinario FROM tbreceita r, tbpet p, tbveterinario v WHERE r.codPet = p.codPet AND r.codVeterinario = v.codVeterinario");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
 				Receita r = new Receita();
@@ -48,8 +48,8 @@ public class ReceitaDAO {
 				r.setObsReceita(rs.getString("obsReceita"));
 				r.setDataEmissao(rs.getDate("dataEmissao"));
 				r.setDataValidade(rs.getDate("dataValidade"));
-				r.setCodPet(rs.getInt("codPet"));
-				r.setCodVeterinario(rs.getInt("codVeterinario"));
+				r.setNomePet(rs.getString("nomePet"));
+				r.setNomeVeterinario(rs.getString("nomeVeterinario"));
 				rec.add(r);
 			}
 		rs.close();
@@ -82,13 +82,13 @@ public class ReceitaDAO {
 		
 	}
 
-	public List<Receita> pesquisaEspecifica(int codReceita) {
-		List<Receita> rec = new ArrayList<Receita>();
+	public Receita pesquisaEspecifica(int codReceita) {
+		Receita rec = new Receita();
 		Conexao c = new Conexao();
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("SELECT * from tbReceita WHERE codReceita = ?");
+			p = con.prepareStatement("SELECT r.codReceita, r.obsReceita, r.dataEmissao, r.dataValidade, p.nomePet, v.nomeVeterinario FROM tbreceita r, tbpet p, tbveterinario v WHERE r.codPet = p.codPet AND r.codVeterinario = v.codVeterinario AND codReceita = ?");
 			p.setInt(1, codReceita);
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
@@ -97,9 +97,9 @@ public class ReceitaDAO {
 				r.setObsReceita(rs.getString("obsReceita"));
 				r.setDataEmissao(rs.getDate("dataEmissao"));
 				r.setDataValidade(rs.getDate("dataValidade"));
-				r.setCodPet(rs.getInt("codPet"));
-				r.setCodVeterinario(rs.getInt("codVeterinario"));
-				rec.add(r);
+				r.setNomePet(rs.getString("nomePet"));
+				r.setNomeVeterinario(rs.getString("nomeVeterinario"));
+				rec=r;
 			}			
 		rs.close();
 		p.close();

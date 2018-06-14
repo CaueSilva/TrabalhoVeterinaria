@@ -6,7 +6,21 @@ public class Receita {
 	
 	private int codReceita;
 	private int codVeterinario;
+	private String nomeVeterinario;
 	private int codPet;
+	private String nomePet;
+	public String getNomeVeterinario() {
+		return nomeVeterinario;
+	}
+	public void setNomeVeterinario(String nomeVeterinario) {
+		this.nomeVeterinario = nomeVeterinario;
+	}
+	public String getNomePet() {
+		return nomePet;
+	}
+	public void setNomePet(String nomePet) {
+		this.nomePet = nomePet;
+	}
 	private String obsReceita;
 	private Date dataEmissao;
 	private Date dataValidade;

@@ -6,8 +6,22 @@ public class Raca {
 	private String descricaoRaca;
 	private int codEspecie;
 	private int codAdmin;
+	private String loginAdmin;
+	private String descEspecie;
 	
 	
+	public String getLoginAdmin() {
+		return loginAdmin;
+	}
+	public void setLoginAdmin(String loginAdmin) {
+		this.loginAdmin = loginAdmin;
+	}
+	public String getDescEspecie() {
+		return descEspecie;
+	}
+	public void setDescEspecie(String descEspecie) {
+		this.descEspecie = descEspecie;
+	}
 	public int getCodRaca() {
 		return codRaca;
 	}

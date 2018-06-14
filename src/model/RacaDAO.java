@@ -37,14 +37,14 @@ public class RacaDAO {
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("select * from tbRaca");
+			p = con.prepareStatement("SELECT r.codRaca, r.descricaoRaca, e.descricaoEspecie, a.loginAdmin FROM tbraca r, tbadmin a, tbespecie WHERE r.codEspecie = e.codEspecie AND r.codAdmin = a.codAdmin");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
 				Raca r = new Raca();
 				r.setCodRaca(rs.getInt("codRaca"));
 				r.setDescricaoRaca(rs.getString("descricaoRaca"));
-				r.setCodEspecie(rs.getInt("codEspecie"));
-				r.setCodAdmin(rs.getInt("codAdmin"));
+				r.setDescEspecie(rs.getString("descricaoEspecie"));
+				r.setLoginAdmin(rs.getString("loginAdmin"));
 				ra.add(r);
 			}
 		rs.close();
@@ -81,16 +81,16 @@ public class RacaDAO {
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("SELECT * from tbRaca WHERE descricaoRaca like ?");
+			p = con.prepareStatement("SELECT r.codRaca, r.descricaoRaca, e.descricaoEspecie, a.loginAdmin FROM tbraca r, tbadmin a, tbespecie WHERE r.codEspecie = e.codEspecie AND r.codAdmin = a.codAdmin and descricaoRaca like ?");
 			p.setString(1, "%" + desc + "%");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
 				Raca r = new Raca();
 				r.setCodRaca(rs.getInt("codRaca"));
 				r.setDescricaoRaca(rs.getString("descricaoRaca"));
-				r.setCodEspecie(rs.getInt("codEspecie"));
-				r.setCodAdmin(rs.getInt("codAdmin"));
-				ra = r ;
+				r.setDescEspecie(rs.getString("descricaoEspecie"));
+				r.setLoginAdmin(rs.getString("loginAdmin"));
+				ra=r;
 			}
 		rs.close();
 		p.close();
