@@ -21,8 +21,8 @@ public class ControleConsulta implements TableModel {
 		listaConsulta.add(c);
 	}
 	
-	public List<Consulta> buscaConsulta(int cod) {
-		List<Consulta> lista = consultaDao.pesquisaEspecifica(cod);
+	public Consulta buscaConsulta(int cod) {
+		Consulta lista = consultaDao.pesquisaEspecifica(cod);
 		return lista;
 	}
 

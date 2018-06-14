@@ -89,7 +89,7 @@ public class AdminDAO{
 				a.setNomeAdmin(rs.getString("nomeAdmin"));
 				a.setLoginAdmin(rs.getString("loginAdmin"));
 				a.setSenhaAdmin(rs.getString("senhaAdmin"));
-				admin = a;
+				admin=a;
 			}
 		rs.close();
 		p.close();

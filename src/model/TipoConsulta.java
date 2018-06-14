@@ -4,10 +4,17 @@ public class TipoConsulta {
 	
 	private int codTipoConsulta;
 	private int codAdmin;
+	private String loginAdmin;
 	private String descricaoTipoConsulta;
 	private double precoConsulta;
 	
 	
+	public String getLoginAdmin() {
+		return loginAdmin;
+	}
+	public void setLoginAdmin(String loginAdmin) {
+		this.loginAdmin = loginAdmin;
+	}	
 	public int getCodTipoConsulta() {
 		return codTipoConsulta;
 	}

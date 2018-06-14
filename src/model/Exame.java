@@ -6,16 +6,35 @@ public class Exame {
 	
 	private int codExame;
 	private int codAtendente;
+	private String nomeAtendente;
 	private int codPet;
+	private String nomePet;
 	private int codTipoExame;
+	private String descTipoExame;
+	public String getNomeAtendente() {
+		return nomeAtendente;
+	}
+	public void setNomeAtendente(String nomeAtendente) {
+		this.nomeAtendente = nomeAtendente;
+	}
+	public String getNomePet() {
+		return nomePet;
+	}
+	public void setNomePet(String nomePet) {
+		this.nomePet = nomePet;
+	}
+	public String getDescTipoExame() {
+		return descTipoExame;
+	}
+	public void setDescTipoExame(String descTipoExame) {
+		this.descTipoExame = descTipoExame;
+	}
 	private Date dataSolicitacao;
 	private Date dataExame;
 	private Date horaExame;
 	private String resultadoExame;
 	private double precoTotalExame;
 	private int mortePet;
-	
-	//private List<Veterinario> veterinario = new ArrayList<>();
 	
 	public int getCodExame() {
 		return codExame;

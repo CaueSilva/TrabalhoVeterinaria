@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import conexao.Conexao;
 
 public class VeterinarioDAO {
-Connection con;
+	Connection con;
 	
 	public void adicionar(Veterinario v) {
 		Conexao c = new Conexao();
@@ -40,7 +40,7 @@ Connection con;
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("select * from tbVeterinario");
+			p = con.prepareStatement("select v.codVeterinario, v.nomeVeterinario, v.crmV, v.loginVeterinario, a.loginAdmin from tbVeterinario v, tbadmin a WHERE v.codAdmin = a.codAdmin");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
 				Veterinario v = new Veterinario();
@@ -48,9 +48,7 @@ Connection con;
 				v.setNomeVeterinario(rs.getString("nomeVeterinario"));
 				v.setCrmv(rs.getString("crmV"));
 				v.setLoginVeterinario(rs.getString("loginVeterinario"));
-				v.setSenhaVeterinario(rs.getString("senhaVeterinario"));
-				v.setNivelPermissao(rs.getInt("nivelPermissao"));
-				v.setCodAdmin(rs.getInt("codAdmin"));
+				v.setLoginAdmin(rs.getString("loginAdmin"));
 				vet.add(v);
 			}
 		rs.close();
@@ -90,7 +88,7 @@ Connection con;
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("SELECT * from tbVeterinario WHERE crmV like ?");
+			p = con.prepareStatement("select v.codVeterinario, v.nomeVeterinario, v.crmV, v.loginVeterinario, a.loginAdmin from tbVeterinario v, tbadmin a WHERE v.codAdmin = a.codAdmin and crmV like ?");
 			p.setString(1, "%" + crm + "%");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
@@ -99,10 +97,8 @@ Connection con;
 				v.setNomeVeterinario(rs.getString("nomeVeterinario"));
 				v.setCrmv(rs.getString("crmV"));
 				v.setLoginVeterinario(rs.getString("loginVeterinario"));
-				v.setSenhaVeterinario(rs.getString("senhaVeterinario"));
-				v.setNivelPermissao(rs.getInt("nivelPermissao"));
-				v.setCodAdmin(rs.getInt("codAdmin"));
-				vet = v;
+				v.setLoginAdmin(rs.getString("loginAdmin"));
+				vet=v;
 			}
 		rs.close();
 		p.close();

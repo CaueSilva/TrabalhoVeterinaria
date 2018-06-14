@@ -4,10 +4,17 @@ public class TipoExame {
 	
 	private int codTipoExame;
 	private int codAdmin;
+	private String loginAdmin;
 	private String descricaoTipoExame;
 	private double precoExame;
 	
-	
+
+	public String getLoginAdmin() {
+		return loginAdmin;
+	}
+	public void setLoginAdmin(String loginAdmin) {
+		this.loginAdmin = loginAdmin;
+	}
 	public int getCodTipoExame() {
 		return codTipoExame;
 	}

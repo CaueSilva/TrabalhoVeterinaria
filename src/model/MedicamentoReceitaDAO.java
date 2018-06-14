@@ -39,14 +39,16 @@ Connection con;
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("select * from tbMedicamentoReceita");
+			p = con.prepareStatement("select mr.dosagemMedicamento, mr.intervaloMedicamento, mr.periodoMedicamento, m.nomeMedicamento, r.codReceita " + 
+					"from tbmedicamentoreceita mr, tbmedicamento m, tbreceita " + 
+					"WHERE mr.codMedicamento = m.codMedicamento AND mr.codReceita = r.codReceita");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
 				MedicamentoReceita m = new MedicamentoReceita();
 				m.setDosagemMedicamento(rs.getString("dosagemMedicamento"));
 				m.setIntervaloMedicamento(rs.getString("intervaloMedicamento"));
 				m.setPeriodoMedicamento(rs.getString("periodoMedicamento"));
-				m.setCodMedicamento(rs.getInt("codMedicamento"));
+				m.setNomeMedicamento(rs.getString("nomeMedicamento"));
 				m.setCodReceita(rs.getInt("codReceita"));
 				med.add(m);
 			}
@@ -85,7 +87,9 @@ Connection con;
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("SELECT * from tbMedicamentoReceita WHERE principioAtivo = ?");
+			p = con.prepareStatement("select mr.dosagemMedicamento, mr.intervaloMedicamento, mr.periodoMedicamento, m.nomeMedicamento, r.codReceita " + 
+					"from tbmedicamentoreceita mr, tbmedicamento m, tbreceita " + 
+					"WHERE mr.codMedicamento = m.codMedicamento AND mr.codReceita = r.codReceita AND principioAtivo = ?");
 			p.setInt(1, codReceita);
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
@@ -93,7 +97,7 @@ Connection con;
 				m.setDosagemMedicamento(rs.getString("dosagemMedicamento"));
 				m.setIntervaloMedicamento(rs.getString("intervaloMedicamento"));
 				m.setPeriodoMedicamento(rs.getString("periodoMedicamento"));
-				m.setCodMedicamento(rs.getInt("codMedicamento"));
+				m.setNomeMedicamento(rs.getString("nomeMedicamento"));
 				m.setCodReceita(rs.getInt("codReceita"));
 				med.add(m);
 			}

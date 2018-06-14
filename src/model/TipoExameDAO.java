@@ -37,14 +37,14 @@ Connection con;
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("select * from tbTipoExame");
+			p = con.prepareStatement("SELECT te.codTipoExame, te.descricaoTipoExame, te.precoExame, a.loginAdmin FROM tbtipoexame te, tbadmin a WHERE te.codAdmin = a.codAdmin");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
 				TipoExame t = new TipoExame();
 				t.setCodTipoExame(rs.getInt("codTipoExame"));
 				t.setDescricaoTipoExame(rs.getString("descricaoTipoExame"));
 				t.setPrecoExame(rs.getDouble("precoExame"));
-				t.setCodAdmin(rs.getInt("codAdmin"));
+				t.setLoginAdmin(rs.getString("loginAdmin"));
 				te.add(t);
 			}
 		rs.close();
@@ -81,7 +81,7 @@ Connection con;
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("SELECT * from tbTipoExame WHERE descricaoTipoExame like ?");
+			p = con.prepareStatement("SELECT te.codTipoExame, te.descricaoTipoExame, te.precoExame, a.loginAdmin FROM tbtipoexame te, tbadmin a WHERE te.codAdmin = a.codAdmin AND descricaoTipoExame like ?");
 			p.setString(1, "%" + desc + "%");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
@@ -89,8 +89,8 @@ Connection con;
 				t.setCodTipoExame(rs.getInt("codTipoExame"));
 				t.setDescricaoTipoExame(rs.getString("descricaoTipoExame"));
 				t.setPrecoExame(rs.getDouble("precoExame"));
-				t.setCodAdmin(rs.getInt("codAdmin"));
-				te = t;
+				t.setLoginAdmin(rs.getString("loginAdmin"));
+				te=t;
 			}
 		rs.close();
 		p.close();

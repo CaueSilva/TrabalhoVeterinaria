@@ -6,9 +6,37 @@ public class Consulta {
 	
 	private int codConsulta;
 	private int codAtendente;
+	private String loginAtendente;
 	private int codVeterinario;
+	private String nomeVeterinario;
 	private int codPet;
+	private String nomePet;
 	private int codTipoConsulta;
+	private String descTipoConsulta;
+	public String getLoginAtendente() {
+		return loginAtendente;
+	}
+	public void setLoginAtendente(String loginAtendente) {
+		this.loginAtendente = loginAtendente;
+	}
+	public String getNomeVeterinario() {
+		return nomeVeterinario;
+	}
+	public void setNomeVeterinario(String nomeVeterinario) {
+		this.nomeVeterinario = nomeVeterinario;
+	}
+	public String getNomePet() {
+		return nomePet;
+	}
+	public void setNomePet(String nomePet) {
+		this.nomePet = nomePet;
+	}
+	public String getDescTipoConsulta() {
+		return descTipoConsulta;
+	}
+	public void setDescTipoConsulta(String descTipoConsulta) {
+		this.descTipoConsulta = descTipoConsulta;
+	}
 	private Date dataMarcacao;
 	private Date dataConsulta;
 	private Date horaConsulta;

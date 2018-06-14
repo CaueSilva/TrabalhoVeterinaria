@@ -13,8 +13,22 @@ public class Pet {
 	private Date diaMortePet;
 	private Date horaMortePet;
 	private int codTutor;
+	private String nomeTutor;
 	private int codRaca;
+	private String descRaca;
 	
+	public String getNomeTutor() {
+		return nomeTutor;
+	}
+	public void setNomeTutor(String nomeTutor) {
+		this.nomeTutor = nomeTutor;
+	}
+	public String getDescRaca() {
+		return descRaca;
+	}
+	public void setDescRaca(String descRaca) {
+		this.descRaca = descRaca;
+	}
 	public int getCodPet() {
 		return codPet;
 	}

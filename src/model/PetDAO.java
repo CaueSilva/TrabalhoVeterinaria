@@ -44,7 +44,7 @@ public class PetDAO {
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("select * from tbPet");
+			p = con.prepareStatement("SELECT p.codPet, p.nomePet, p.vacinacaoPet, p.corPeloPet, p.descricaoPet, p.portePet, p.diaMortePet, p.horarioMortePet, t.nomeTutor, r.descricaoRaca FROM tbpet p, tbtutor t, tbraca r WHERE p.codTutor = t.codTutor AND p.codRaca = r.codRaca");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
 				Pet p1 = new Pet();
@@ -56,8 +56,8 @@ public class PetDAO {
 				p1.setPortePet(rs.getString("portePet"));
 				p1.setDiaMortePet(rs.getDate("diaMortePet"));
 				p1.setHoraMortePet(rs.getDate("horarioMortePet"));
-				p1.setCodTutor(rs.getInt("codTutor"));
-				p1.setCodRaca(rs.getInt("codRaca"));
+				p1.setNomeTutor(rs.getString("nomeTutor"));
+				p1.setDescRaca(rs.getString("descricaoRaca"));
 				pet.add(p1);
 			}
 		rs.close();
@@ -100,7 +100,7 @@ public class PetDAO {
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("SELECT * from tbPet WHERE nomePet like ?");
+			p = con.prepareStatement("SELECT p.codPet, p.nomePet, p.vacinacaoPet, p.corPeloPet, p.descricaoPet, p.portePet, p.diaMortePet, p.horarioMortePet, t.nomeTutor, r.descricaoRaca FROM tbpet p, tbtutor t, tbraca r WHERE p.codTutor = t.codTutor AND p.codRaca = r.codRaca AND nomePet like ?");
 			p.setString(1, "%" + nome + "%");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
@@ -113,8 +113,8 @@ public class PetDAO {
 				p1.setPortePet(rs.getString("portePet"));
 				p1.setDiaMortePet(rs.getDate("diaMortePet"));
 				p1.setHoraMortePet(rs.getDate("horarioMortePet"));
-				p1.setCodTutor(rs.getInt("codTutor"));
-				p1.setCodRaca(rs.getInt("codRaca"));
+				p1.setNomeTutor(rs.getString("nomeTutor"));
+				p1.setDescRaca(rs.getString("descricaoRaca"));
 				pet.add(p1);
 			}
 		rs.close();

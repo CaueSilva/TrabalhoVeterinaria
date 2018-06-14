@@ -4,13 +4,19 @@ public class Atendente {
 	
 	private int codAtendente;
 	private int codAdmin;
+	private String loginAdmin;	
 	private String nomeAtendente;
 	private String cpfAtendente;
 	private String loginAtendente;
 	private String senhaAtendente;
 	private int nivelPermissao;
 	
-	
+	public String getLoginAdmin() {
+		return loginAdmin;
+	}
+	public void setLoginAdmin(String loginAdmin) {
+		this.loginAdmin = loginAdmin;
+	}
 	public int getCodAtendente() {
 		return codAtendente;
 	}

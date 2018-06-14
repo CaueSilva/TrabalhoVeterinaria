@@ -3,9 +3,22 @@ package model;
 public class MedicamentoReceita {
 	private int codReceita;
 	private int codMedicamento;
+	private String nomeMedicamento;
 	private String dosagemMedicamento;
 	private String intervaloMedicamento;
 	private String periodoMedicamento;
+	
+	public String getNomeMedicamento() {
+		return nomeMedicamento;
+	}
+
+	public void setNomeMedicamento(String nomeMedicamento) {
+		this.nomeMedicamento = nomeMedicamento;
+	}
+
+	public String getPeriodoMedicamento() {
+		return periodoMedicamento;
+	}
 
 	public int getCodReceita() {
 		return codReceita;

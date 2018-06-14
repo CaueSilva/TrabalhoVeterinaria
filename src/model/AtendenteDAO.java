@@ -40,7 +40,7 @@ public class AtendenteDAO {
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("select * from tbAtendente");
+			p = con.prepareStatement("SELECT atd.codAtendente, atd.nomeAtendente, atd.cpfAtendente, atd.loginAtendente, a.loginAdmin FROM tbatendente atd, tbadmin a WHERE atd.codAdmin = a.loginAdmin");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
 				Atendente a = new Atendente();
@@ -48,8 +48,7 @@ public class AtendenteDAO {
 				a.setNomeAtendente(rs.getString("nomeAtendente"));
 				a.setCpfAtendente(rs.getString("cpfAtendente"));
 				a.setLoginAtendente(rs.getString("loginAtendente"));
-				a.setNivelPermissao(rs.getInt("nivelPermissao"));
-				a.setCodAdmin(rs.getInt("codAdmin"));
+				a.setLoginAdmin(rs.getString("loginAdmin"));
 				atend.add(a);
 			}
 		rs.close();
@@ -83,13 +82,13 @@ public class AtendenteDAO {
 		
 	}
 
-	public List<Atendente> pesquisaEspecifica(String login) {
-		List<Atendente> atend = new ArrayList<Atendente>();
+	public Atendente pesquisaEspecifica(String login) {
+		Atendente atend = new Atendente();
 		Conexao c = new Conexao();
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("SELECT * from tbAtendente WHERE loginAtendente like ?");
+			p = con.prepareStatement("SELECT atd.codAtendente, atd.nomeAtendente, atd.cpfAtendente, atd.loginAtendente, a.loginAdmin FROM tbatendente atd, tbadmin a WHERE atd.codAdmin = a.loginAdmin and loginAtendente like ?");
 			p.setString(1, "%" + login + "%");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
@@ -98,8 +97,8 @@ public class AtendenteDAO {
 				a.setNomeAtendente(rs.getString("nomeAtendente"));
 				a.setCpfAtendente(rs.getString("cpfAtendente"));
 				a.setLoginAtendente(rs.getString("loginAtendente"));
-				a.setCodAdmin(rs.getInt("codAdmin"));
-				atend.add(a);
+				a.setLoginAdmin(rs.getString("loginAdmin"));
+				atend=a;
 			}
 		rs.close();
 		p.close();

@@ -46,7 +46,9 @@ public class ConsultaDAO {
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("select * from tbConsulta");
+			p = con.prepareStatement("SELECT c.codConsulta, c.dataMarcacao, c.dataConsulta, c.horaConsulta, c.encaminhamentoExame, c.precoTotalConsulta, c.resultadoConsulta, c.mortePet, p.nomePet, v.nomeVeterinario, atd.loginAtendente, tc.descricaoTipoConsulta " + 
+					"FROM tbconsulta c, tbpet p, tbveterinario v, tbtipoconsulta tc, tbatendente atd " + 
+					"WHERE c.codPet = p.codPet AND c.codVeterinario = v.codVeterinario AND c.codTipoConsulta = tc.codTipoConsulta AND c.codAtendente = atd.loginAtendente");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
 				Consulta c1 = new Consulta();
@@ -58,10 +60,10 @@ public class ConsultaDAO {
 				c1.setPrecoTotalConsulta(rs.getDouble("precoTotalConsulta"));
 				c1.setResultadoConsulta(rs.getString("resultadoConsulta"));
 				c1.setMortePet(rs.getInt("mortePet"));
-				c1.setCodPet(rs.getInt("codPet"));
-				c1.setCodVeterinario(rs.getInt("codVeterinario"));
-				c1.setCodAtendente(rs.getInt("codAtendente"));
-				c1.setCodTipoConsulta(rs.getInt("codTipoConsulta"));
+				c1.setNomePet(rs.getString("nomePet"));
+				c1.setNomeVeterinario(rs.getString("nomeVeterinario"));
+				c1.setLoginAtendente(rs.getString("loginAtendente"));
+				c1.setDescTipoConsulta(rs.getString("descricaoTipoConsulta"));
 				cons.add(c1);
 			}
 		rs.close();
@@ -100,13 +102,15 @@ public class ConsultaDAO {
 		
 	}
 
-	public List<Consulta> pesquisaEspecifica(int cod) {
-		List<Consulta> cons = new ArrayList<Consulta>();
+	public Consulta pesquisaEspecifica(int cod) {
+		Consulta cons = new Consulta();
 		Conexao c = new Conexao();
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("SELECT * from tbConsulta WHERE loginAtendente = ?");
+			p = con.prepareStatement("SELECT c.codConsulta, c.dataMarcacao, c.dataConsulta, c.horaConsulta, c.encaminhamentoExame, c.precoTotalConsulta, c.resultadoConsulta, c.mortePet, p.nomePet, v.nomeVeterinario, atd.loginAtendente, tc.descricaoTipoConsulta " + 
+									 "FROM tbconsulta c, tbpet p, tbveterinario v, tbtipoconsulta tc, tbatendente atd " + 
+									 "WHERE c.codPet = p.codPet AND c.codVeterinario = v.codVeterinario AND c.codTipoConsulta = tc.codTipoConsulta AND c.codAtendente = atd.loginAtendente AND loginAtendente = ?");
 			p.setInt(1, cod);
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
@@ -119,11 +123,11 @@ public class ConsultaDAO {
 				c1.setPrecoTotalConsulta(rs.getDouble("precoTotalConsulta"));
 				c1.setResultadoConsulta(rs.getString("resultadoConsulta"));
 				c1.setMortePet(rs.getInt("mortePet"));
-				c1.setCodPet(rs.getInt("codPet"));
-				c1.setCodVeterinario(rs.getInt("codVeterinario"));
-				c1.setCodAtendente(rs.getInt("codAtendente"));
-				c1.setCodTipoConsulta(rs.getInt("codTipoConsulta"));
-				cons.add(c1);
+				c1.setNomePet(rs.getString("nomePet"));
+				c1.setNomeVeterinario(rs.getString("nomeVeterinario"));
+				c1.setLoginAtendente(rs.getString("loginAtendente"));
+				c1.setDescTipoConsulta(rs.getString("descricaoTipoConsulta"));
+				cons=c1;
 			}
 		rs.close();
 		p.close();

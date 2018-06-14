@@ -6,14 +6,19 @@ public class Veterinario {
 	
 	private int codVeterinario;
 	private int codAdmin;
+	private String loginAdmin;
 	private String nomeVeterinario;
 	private String crmv;
 	private String loginVeterinario;
 	private String senhaVeterinario;
-	private int nivelPermissao;
-	
-	private List<Exame> exame = new ArrayList<>();
-	
+	private int nivelPermissao;	
+
+	public String getLoginAdmin() {
+		return loginAdmin;
+	}
+	public void setLoginAdmin(String loginAdmin) {
+		this.loginAdmin = loginAdmin;
+	}
 	public int getCodVeterinario() {
 		return codVeterinario;
 	}
@@ -56,13 +61,5 @@ public class Veterinario {
 	public void setNivelPermissao(int nivelPermissao) {
 		this.nivelPermissao = nivelPermissao;
 	}
-	public List<Exame> getExame() {
-		return exame;
-	}
-	public void setExame(List<Exame> exame) {
-		this.exame = exame;
-	}
-	
-	
 
 }

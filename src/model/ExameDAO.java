@@ -44,7 +44,9 @@ Connection con;
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("select * from tbExame");
+			p = con.prepareStatement("SELECT e.codExame, e.dataSolicitacao, e.dataExame, e.horaExame, e.resultadoExame, e.precoTotalExame, e.mortePet, p.nomePet, a.loginAtendente, te.descricaoTipoExame " + 
+					"FROM tbexame e, tbpet p, tbatendente a, tbtipoexame te " + 
+					"WHERE e.codPet = p.codPet AND e.codAtendente = a.codAtendente AND e.codTipoExame = te.codTipoExame");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
 				Exame e = new Exame();
@@ -55,9 +57,9 @@ Connection con;
 				e.setResultadoExame(rs.getString("resultadoExame"));
 				e.setPrecoTotalExame(rs.getDouble("precoTotalExame"));
 				e.setMortePet(rs.getInt("mortePet"));
-				e.setCodPet(rs.getInt("codPet"));
-				e.setCodAtendente(rs.getInt("codAtendente"));
-				e.setCodTipoExame(rs.getInt("codTipoExame"));
+				e.setNomePet(rs.getString("nomePet"));
+				e.setNomeAtendente(rs.getString("loginAtendente"));
+				e.setDescTipoExame(rs.getString("descricaoTipoExame"));
 				exam.add(e);
 			}
 		rs.close();
@@ -94,13 +96,15 @@ Connection con;
 		
 	}
 
-	public List<Exame> pesquisaEspecifica(int cod) {
-		List<Exame> exam = new ArrayList<Exame>();
+	public Exame pesquisaEspecifica(int cod) {
+		Exame exam = new Exame();
 		Conexao c = new Conexao();
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("SELECT * from tbExame WHERE codExame = ?");
+			p = con.prepareStatement("SELECT e.codExame, e.dataSolicitacao, e.dataExame, e.horaExame, e.resultadoExame, e.precoTotalExame, e.mortePet, p.nomePet, a.loginAtendente, te.descricaoTipoExame " + 
+									 "FROM tbexame e, tbpet p, tbatendente a, tbtipoexame te " + 
+								     "WHERE e.codPet = p.codPet AND e.codAtendente = a.codAtendente AND e.codTipoExame = te.codTipoExame AND codExame = ?");
 			p.setInt(1, cod);
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
@@ -112,10 +116,10 @@ Connection con;
 				e.setResultadoExame(rs.getString("resultadoExame"));
 				e.setPrecoTotalExame(rs.getDouble("precoTotalExame"));
 				e.setMortePet(rs.getInt("mortePet"));
-				e.setCodPet(rs.getInt("codPet"));
-				e.setCodAtendente(rs.getInt("codAtendente"));
-				e.setCodTipoExame(rs.getInt("codTipoExame"));
-				exam.add(e);
+				e.setNomePet(rs.getString("nomePet"));
+				e.setNomeAtendente(rs.getString("loginAtendente"));
+				e.setDescTipoExame(rs.getString("descricaoTipoExame"));
+				exam=e;
 			}
 		rs.close();
 		p.close();

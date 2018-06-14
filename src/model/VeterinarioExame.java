@@ -2,27 +2,34 @@ package model;
 
 public class VeterinarioExame {
 	
-	private int codVeterinarioExame;
-	private Exame codExame;
-	private Veterinario codVeterinario;
+	private int codExame;
+	private int codVeterinario;
+	private String nomeVeterinario;
+	private String crmv;
 	
 	
-	public int getCodVeterinarioExame() {
-		return codVeterinarioExame;
+	public String getNomeVeterinario() {
+		return nomeVeterinario;
 	}
-	public void setCodVeterinarioExame(int codVeterinarioExame) {
-		this.codVeterinarioExame = codVeterinarioExame;
+	public void setNomeVeterinario(String nomeVeterinario) {
+		this.nomeVeterinario = nomeVeterinario;
 	}
-	public Exame getCodExame() {
+	public String getCrmv() {
+		return crmv;
+	}
+	public void setCrmv(String crmv) {
+		this.crmv = crmv;
+	}
+	public int getCodExame() {
 		return codExame;
 	}
-	public void setCodExame(Exame codExame) {
+	public void setCodExame(int codExame) {
 		this.codExame = codExame;
 	}
-	public Veterinario getCodVeterinario() {
+	public int getCodVeterinario() {
 		return codVeterinario;
 	}
-	public void setCodVeterinario(Veterinario codVeterinario) {
+	public void setCodVeterinario(int codVeterinario) {
 		this.codVeterinario = codVeterinario;
 	}
 	

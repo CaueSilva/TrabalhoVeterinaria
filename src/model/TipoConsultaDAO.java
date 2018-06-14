@@ -37,14 +37,14 @@ public class TipoConsultaDAO {
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("select * from tbTipoConsulta");
+			p = con.prepareStatement("SELECT tc.codTipoConsulta, tc.descricaoTipoConsulta, tc.precoConsulta, a.loginAdmin FROM tbtipoconsulta tc, tbadmin a WHERE tc.codAdmin = a.codAdmin");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
 				TipoConsulta t = new TipoConsulta();
 				t.setCodTipoConsulta(rs.getInt("codTipoConsulta"));
 				t.setDescricaoTipoConsulta(rs.getString("descricaoTipoConsulta"));
 				t.setPrecoConsulta(rs.getDouble("precoConsulta"));
-				t.setCodAdmin(rs.getInt("codAdmin"));
+				t.setLoginAdmin(rs.getString("loginAdmin"));
 				tc.add(t);
 			}
 		rs.close();
@@ -81,7 +81,7 @@ public class TipoConsultaDAO {
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("SELECT * from tbTipoConsulta WHERE descricaoTipoConsulta like ?");
+			p = con.prepareStatement("\"SELECT tc.codTipoConsulta, tc.descricaoTipoConsulta, tc.precoConsulta, a.loginAdmin FROM tbtipoconsulta tc, tbadmin a WHERE tc.codAdmin = a.codAdmin AND descricaoTipoConsulta like ?");
 			p.setString(1, "%" + desc + "%");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
@@ -89,8 +89,8 @@ public class TipoConsultaDAO {
 				t.setCodTipoConsulta(rs.getInt("codTipoConsulta"));
 				t.setDescricaoTipoConsulta(rs.getString("descricaoTipoConsulta"));
 				t.setPrecoConsulta(rs.getDouble("precoConsulta"));
-				t.setCodAdmin(rs.getInt("codAdmin"));
-				tc = t;
+				t.setLoginAdmin(rs.getString("loginAdmin"));
+				tc=t;
 			}
 		rs.close();
 		p.close();

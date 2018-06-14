@@ -28,8 +28,8 @@ public class ControleExame implements TableModel{
 		}
 	}
 	
-	public List<Exame> buscaExame(int cod) {
-		List<Exame> lista = exameDao.pesquisaEspecifica(cod);
+	public Exame buscaExame(int cod) {
+		Exame lista = exameDao.pesquisaEspecifica(cod);
 		return lista;
 	}
 
