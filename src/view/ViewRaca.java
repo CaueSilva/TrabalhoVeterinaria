@@ -28,7 +28,7 @@ public class ViewRaca implements ActionListener{
 	private JButton btnPesquisaRaca = new JButton("Pesquisar");
 	private JButton btnPesquisaEspecie = new JButton("Pesquisar");
 	private JButton btnSalvar = new JButton("Salvar");
-	private JButton btnExcluir = new JButton("Excluir");
+	private JButton btnCancelar = new JButton("Cancelar");
 	
 	private ControleRaca controle = new ControleRaca();
 	
@@ -52,12 +52,12 @@ public class ViewRaca implements ActionListener{
 		pnlPrimario.add(txtDescricao);
 		
 		pnlSecundario.add(btnSalvar);
-		pnlSecundario.add(btnExcluir);
+		pnlSecundario.add(btnCancelar);
 		
 		btnPesquisaRaca.addActionListener(this);
 		btnPesquisaEspecie.addActionListener(this);
 		btnSalvar.addActionListener(this);
-		btnExcluir.addActionListener(this);
+		btnCancelar.addActionListener(this);
 		
 	}
 	
@@ -87,8 +87,8 @@ public class ViewRaca implements ActionListener{
 			recebeEntidade();
 		} else if(cmd.contains("Salvar")) {
 			controle.adiciona(adicionaEntidade());
-		} else if(cmd.contains("Excluir")) {
-			controle.removeRaca(Integer.parseInt(txtCodRaca.getText()));
+		} else if(cmd.contains("Cancelar")) {
+			janela.dispose();
 		}
 	}
 

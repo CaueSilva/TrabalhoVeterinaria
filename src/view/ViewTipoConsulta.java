@@ -30,7 +30,7 @@ public class ViewTipoConsulta implements ActionListener{
 	private JTextField txtCodigo = new JTextField(8);
 	private JButton btnPesquisar = new JButton("Pesquisar");
 	private JButton btnSalvar = new JButton("Salvar");
-	private JButton btnExcluir = new JButton("Excluir");
+	private JButton btnCancelar = new JButton("Cancelar");
 	
 	private ControleTipoConsulta controle = new ControleTipoConsulta();
 	
@@ -54,11 +54,11 @@ public class ViewTipoConsulta implements ActionListener{
 		txtCodigo.setEditable(false);
 		
 		pnlSecundario.add(btnSalvar);
-		pnlSecundario.add(btnExcluir);
+		pnlSecundario.add(btnCancelar);
 		
 		btnPesquisar.addActionListener(this);
 		btnSalvar.addActionListener(this);
-		btnExcluir.addActionListener(this);
+		btnCancelar.addActionListener(this);
 	}
 	
 	public TipoConsulta adicionaEntidade() {
@@ -87,8 +87,8 @@ public class ViewTipoConsulta implements ActionListener{
 			controle.adiciona(adicionaEntidade());
 		} else if(cmd.contains("Pesquisar")) {
 			buscaEntidade();
-		} else if(cmd.contains("Excluir")) {
-			controle.remove(txtTipo.getText());
+		} else if(cmd.contains("Cancelar")) {
+			janela.dispose();
 		}
 	}
 	

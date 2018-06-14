@@ -34,7 +34,7 @@ public class ViewReceita implements ActionListener{
 	//private JButton btnPesquisarPet = new JButton("Pesquisar Pet");
 	//private JButton btnPesquisarVet = new JButton("Pesquisar Veterinário");
 	private JButton btnSalvar = new JButton("Salvar");
-	private JButton btnExcluir = new JButton("Excluir");
+	private JButton btnCancelar = new JButton("Cancelar");
 	
 	private ControleReceita controle = new ControleReceita();
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -68,13 +68,13 @@ public class ViewReceita implements ActionListener{
 		pnlPrimario.add(txtValidade);
 		
 		pnlSecundario.add(btnSalvar);
-		pnlSecundario.add(btnExcluir);
+		pnlSecundario.add(btnCancelar);
 		
 		btnPesquisarReceita.addActionListener(this);
 		//btnPesquisarPet.addActionListener(this);
 		//btnPesquisarVet.addActionListener(this);
 		btnSalvar.addActionListener(this);
-		btnExcluir.addActionListener(this);
+		btnCancelar.addActionListener(this);
 		
 	}
 
@@ -120,8 +120,8 @@ public class ViewReceita implements ActionListener{
 			}
 		} else if(cmd.contains("Pesquisar")) {
 			entidadeParaBoundary();
-		} else if(cmd.contains("Excluir")) {
-			controle.removeReceita(Integer.parseInt(txtCodReceita.getText()));
+		} else if(cmd.contains("Cancelar")) {
+			janela.dispose();
 		}
 	}
 }

@@ -12,6 +12,10 @@ public class ViewConsulta extends View {
 	private JLabel encaminhamentoExame = new JLabel("Encaminhamento de Exame: ");
 	private ListenerConsulta listener = new ListenerConsulta();
 
+	public static void main(String[] args) {
+		new ViewConsulta();
+	}
+	
 	public ViewConsulta() {
 		setResizable(false);
 		setTitle("Manutenção de Consultas");
@@ -20,7 +24,7 @@ public class ViewConsulta extends View {
 		
 		btnPesquisar.addActionListener(listener);
 		btnSalvar.addActionListener(listener);
-		btnExcluir.addActionListener(listener);
+		btnCancelar.addActionListener(listener);
 	}
 	
 }

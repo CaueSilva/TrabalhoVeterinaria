@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import com.sun.javafx.scene.control.ControlAcceleratorSupport;
 
 import controller.ControleAtendente;
+import model.Admin;
+import model.AdminDAO;
 import model.Atendente;
 
 public class ViewAtendente implements ActionListener {
@@ -32,9 +34,13 @@ public class ViewAtendente implements ActionListener {
 	private JTextField txtPermissao = new JTextField(3);
 	private JButton btnPesquisar = new JButton("Pesquisar");
 	private JButton btnSalvar = new JButton("Salvar");
-	private JButton btnExcluir = new JButton("Excluir");
+	private JButton btnCancelar = new JButton("Cancelar");
 	
 	private ControleAtendente controle = new ControleAtendente();
+	
+	public static void main(String[] args) {
+		new ViewAtendente();
+	}
 	
 	public ViewAtendente() {
 		janela.setSize(228,235);
@@ -62,23 +68,26 @@ public class ViewAtendente implements ActionListener {
 		pnlPrimario.add(txtPermissao);
 		
 		pnlSecundario.add(btnSalvar);
-		pnlSecundario.add(btnExcluir);
+		pnlSecundario.add(btnCancelar);
 		
 		btnPesquisar.addActionListener(this);
 		btnSalvar.addActionListener(this);
-		btnExcluir.addActionListener(this);
+		btnCancelar.addActionListener(this);
 	}
 
 	public Atendente adicionaEntidade() {
-		Atendente a = new Atendente();
-		//a.setCodAdmin(Integer.parseInt(txtCodigo.getText()));
-		a.setCpfAtendente(txtCPF.getText());
-		a.setNomeAtendente(txtNome.getText());
-		a.setLoginAtendente(txtLogin.getText());
-		a.setSenhaAtendente(txtSenha.getText());
-		a.setNivelPermissao(Integer.parseInt(txtPermissao.getText()));
+		Atendente atendente = new Atendente();
+		AdminDAO ad = new AdminDAO();
+		Admin a = ad.pesquisaEspecifica(String.valueOf(atendente.getCodAdmin()));
+		
+		atendente.setCodAdmin(a.getCodAdmin());
+		atendente.setCpfAtendente(txtCPF.getText());
+		atendente.setNomeAtendente(txtNome.getText());
+		atendente.setLoginAtendente(txtLogin.getText());
+		atendente.setSenhaAtendente(txtSenha.getText());
+		atendente.setNivelPermissao(Integer.parseInt(txtPermissao.getText()));
 		JOptionPane.showMessageDialog(null, "Atendente salvo.");
-		return a;
+		return atendente;
 	}
 	
 	public void recebeEntidade() {
@@ -102,8 +111,8 @@ public class ViewAtendente implements ActionListener {
 			controle.adiciona(adicionaEntidade());
 		} else if(cmd.contains("Pesquisar")) {
 			recebeEntidade();
-		} else if(cmd.contains("Excluir")) {
-			controle.removeAtendente(txtCPF.getText());
+		} else if(cmd.contains("Pesquisar")) {
+			janela.dispose();
 		}
 	}
 }

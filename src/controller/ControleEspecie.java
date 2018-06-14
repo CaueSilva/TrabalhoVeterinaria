@@ -6,40 +6,24 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import model.Especie;
+import model.EspecieDAO;
 
 public class ControleEspecie {
 	
-	private List<Especie> listaEspecie = new ArrayList<>();
-	private List<Especie> listaPesquisados = new ArrayList<>();
+	private EspecieDAO especieDao = new EspecieDAO();
 	
 	public void adiciona(Especie especie) {
-		listaEspecie.add(especie);
-	}
-	
-	public List<Especie> busca(int cod) {
-		listaPesquisados.clear();
-		for(Especie e : listaEspecie) {
-			if(e.getCodEspecie() == cod) {
-				listaPesquisados.add(e);
-			}
-		}
-		return listaPesquisados;
-	}
-	
-	public void remove(int cod) {
-		List<Especie> listaRemove = new ArrayList<>();
-		for(Especie e : listaEspecie) {
-			if(e.getCodEspecie() == cod) {
-				JOptionPane.showMessageDialog(null, "Espécie removida.");
-				listaRemove.add(e);
-			}
-		} if (!listaRemove.isEmpty()) {
-			listaEspecie.removeAll(listaRemove);
-			listaRemove = null;
-			JOptionPane.showMessageDialog(null, "Espécie removida.");
+		if(!especie.getDescricaoEspecie().equals("")) {
+			especieDao.adicionar(especie);
+			JOptionPane.showMessageDialog(null, "Espécie "+especie.getDescricaoEspecie()+" adicionada.");
 		} else {
-			JOptionPane.showMessageDialog(null, "Espécie não pôde ser removida.");
+			JOptionPane.showMessageDialog(null, "Não foi possível salvar espécie.");
 		}
+	}
+	
+	public Especie busca(String descricao) {
+		Especie e = especieDao.pesquisaEspecifica(descricao);
+		return e;
 	}
 
 }

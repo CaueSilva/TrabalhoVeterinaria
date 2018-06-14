@@ -1,6 +1,5 @@
 package view;
 
-import controller.JTableController;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -23,9 +22,8 @@ public class View extends JFrame {
 	protected JTextField txtTipo = new JTextField();
 	protected JLabel lblPesquisarPet = new JLabel("Pesquisar Pet (Nome):");
 	protected JTextField txtPesquisarPet = new JTextField();
-	protected JTableController control = new JTableController();
 	 
-	protected JTable tblPet = new JTable(control);
+	protected JTable tblPet;
 	protected JLabel lblData = new JLabel("Data:");
 	protected JTextField txtData = new JTextField();
 	protected JLabel lblHora = new JLabel("Hora:");
@@ -38,7 +36,7 @@ public class View extends JFrame {
 	protected JLabel lblResultado = new JLabel("Resultado:");
 	protected JTextField txtResultado = new JTextField();
 	protected JLabel lblDisponiveis = new JLabel("Dispon\u00EDveis:");
-	protected JTable tblDisponivel = new JTable(control);
+	protected JTable tblDisponivel;
 	protected JLabel lblPreco = new JLabel("Preço: R$");
 	protected JTextField txtPreco = new JTextField();
 	protected JLabel lblHoraMorte = new JLabel("Hora Morte:");
@@ -47,7 +45,7 @@ public class View extends JFrame {
 	protected JScrollPane scrollPet = new JScrollPane();
 	protected JButton btnPesquisar = new JButton("Pesquisar");
 	protected JButton btnSalvar = new JButton("Salvar");
-	protected JButton btnExcluir = new JButton("Excluir");
+	protected JButton btnCancelar = new JButton("Cancelar");
 	protected JRadioButton rdbtnEncaminhamentoS = new JRadioButton("Sim");
 	protected JRadioButton rdbtnEncaminhamentoN = new JRadioButton("Não");;
 	protected JLabel lblEncaminhamento = new JLabel("Encaminhamento Exame:");
@@ -167,8 +165,8 @@ public class View extends JFrame {
 		btnSalvar.setBounds(290, 592, 97, 25);
 		pnlPrincipal.add(btnSalvar);
 		
-		btnExcluir.setBounds(393, 592, 97, 25);
-		pnlPrincipal.add(btnExcluir);
+		btnCancelar.setBounds(393, 592, 97, 25);
+		pnlPrincipal.add(btnCancelar);
 		
 		lblHoraMorte.setBounds(226, 279, 74, 16);
 		pnlPrincipal.add(lblHoraMorte);

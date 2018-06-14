@@ -32,7 +32,7 @@ public class ViewMedicamento implements ActionListener {
 	private JTextField txtTarja = new JTextField(18);
 	private JButton btnPesquisar = new JButton("Pesquisar");
 	private JButton btnSalvar = new JButton("Salvar");
-	private JButton btnExcluir = new JButton("Excluir");
+	private JButton btnCancelar = new JButton("Cancelar");
 
 	public ViewMedicamento() {
 		scroll.getViewport().add(tblMedicamento);
@@ -59,11 +59,11 @@ public class ViewMedicamento implements ActionListener {
 
 		pnlSecundario.setSize(150, 150);
 		pnlSecundario.add(btnSalvar);
-		pnlSecundario.add(btnExcluir);
+		pnlSecundario.add(btnCancelar);
 
 		btnPesquisar.addActionListener(this);
 		btnSalvar.addActionListener(this);
-		btnExcluir.addActionListener(this);
+		btnCancelar.addActionListener(this);
 	}
 
 	public Medicamento addBoundaryToEntity() {
@@ -91,10 +91,6 @@ public class ViewMedicamento implements ActionListener {
 		tblMedicamento.repaint();
 	}
 
-	public void removeBoundaryToEntity() {
-		control.remove(txtPrincipio.getText());
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
@@ -102,8 +98,8 @@ public class ViewMedicamento implements ActionListener {
 			entityToBoundary();
 		} else if (cmd.equals("Salvar")) {
 			control.adiciona(addBoundaryToEntity());
-		} else if (cmd.equals("Excluir")) {
-			removeBoundaryToEntity();
+		} else if (cmd.equals("Cancelar")) {
+			janela.dispose();
 		}
 	}
 

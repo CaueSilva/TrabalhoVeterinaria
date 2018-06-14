@@ -75,8 +75,8 @@ Connection con;
 		
 	}
 
-	public List<TipoExame> pesquisaEspecifica(String desc) {
-		List<TipoExame> te = new ArrayList<TipoExame>();
+	public TipoExame pesquisaEspecifica(String desc) {
+		TipoExame te = new TipoExame();
 		Conexao c = new Conexao();
 		con = c.abrir();
 		PreparedStatement p;
@@ -90,7 +90,7 @@ Connection con;
 				t.setDescricaoTipoExame(rs.getString("descricaoTipoExame"));
 				t.setPrecoExame(rs.getDouble("precoExame"));
 				t.setCodAdmin(rs.getInt("codAdmin"));
-				te.add(t);
+				te = t;
 			}
 		rs.close();
 		p.close();

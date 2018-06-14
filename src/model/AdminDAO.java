@@ -74,8 +74,8 @@ public class AdminDAO{
 		
 	}
 
-	public List<Admin> pesquisaEspecifica(String login) {
-		List<Admin> admin = new ArrayList<Admin>();
+	public Admin pesquisaEspecifica(String login) {
+		Admin admin = new Admin();
 		Conexao c = new Conexao();
 		con = c.abrir();
 		PreparedStatement p;
@@ -89,7 +89,7 @@ public class AdminDAO{
 				a.setNomeAdmin(rs.getString("nomeAdmin"));
 				a.setLoginAdmin(rs.getString("loginAdmin"));
 				a.setSenhaAdmin(rs.getString("senhaAdmin"));
-				admin.add(a);
+				admin = a;
 			}
 		rs.close();
 		p.close();

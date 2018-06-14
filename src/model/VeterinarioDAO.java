@@ -84,8 +84,8 @@ Connection con;
 		
 	}
 
-	public List<Veterinario> pesquisaEspecifica(String crm) {
-		List<Veterinario> vet = new ArrayList<Veterinario>();
+	public Veterinario pesquisaEspecifica(String crm) {
+		Veterinario vet = new Veterinario();
 		Conexao c = new Conexao();
 		con = c.abrir();
 		PreparedStatement p;
@@ -102,7 +102,7 @@ Connection con;
 				v.setSenhaVeterinario(rs.getString("senhaVeterinario"));
 				v.setNivelPermissao(rs.getInt("nivelPermissao"));
 				v.setCodAdmin(rs.getInt("codAdmin"));
-				vet.add(v);
+				vet = v;
 			}
 		rs.close();
 		p.close();

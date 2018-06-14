@@ -36,7 +36,7 @@ public class ViewTutor implements ActionListener{
 	private JTextField txtTelefone = new JTextField(9);
 	private JTextField txtEmail = new JTextField(24);
 	private JButton btnSalvar = new JButton("Salvar");
-	private JButton btnExcluir = new JButton("Excluir");
+	private JButton btnCancelar = new JButton("Cancelar");
 	private JButton btnPesquisar = new JButton("Pesquisar");
 	
 	private ControleTutor controle = new ControleTutor();
@@ -85,10 +85,10 @@ public class ViewTutor implements ActionListener{
 		pnlPrimario.add(txtEmail);
 		
 		pnlSecundario.add(btnSalvar);
-		pnlSecundario.add(btnExcluir);
+		pnlSecundario.add(btnCancelar);
 		
 		btnPesquisar.addActionListener(this);
-		btnExcluir.addActionListener(this);
+		btnCancelar.addActionListener(this);
 		btnSalvar.addActionListener(this);
 		
 	}
@@ -137,8 +137,8 @@ public class ViewTutor implements ActionListener{
 			controle.adiciona(adicionaTutor());
 		} else if(cmd.contains("Pesquisar")) {
 			buscaEntidade();
-		} else if(cmd.equals("Excluir")) {
-			controle.remove(txtCpf.getText());
+		} else if(cmd.equals("Cancelar")) {
+			janela.dispose();
 		}
 		
 	}

@@ -28,7 +28,7 @@ public class ViewAdmin implements ActionListener {
 	private JTextField txtSenha = new JTextField(15);
 	private JButton btnPesquisar = new JButton("Pesquisar");
 	private JButton btnSalvar = new JButton("Salvar");
-	private JButton btnExcluir = new JButton("Excluir");
+	private JButton btnCancelar = new JButton("Cancelar");
 	
 	private ControleAdmin controle = new ControleAdmin();
 	
@@ -58,11 +58,11 @@ public class ViewAdmin implements ActionListener {
 		pnlPrimario.add(txtSenha);
 		
 		pnlSecundario.add(btnSalvar);
-		pnlSecundario.add(btnExcluir);
+		pnlSecundario.add(btnCancelar);
 		
 		btnPesquisar.addActionListener(this);
 		btnSalvar.addActionListener(this);
-		btnExcluir.addActionListener(this);
+		btnCancelar.addActionListener(this);
 	}
 
 	public Admin adicionarEntidade() {
@@ -76,9 +76,8 @@ public class ViewAdmin implements ActionListener {
 	}
 	
 	public void entidadeParaTela() {
-		List<Admin> lista = controle.busca(Integer.parseInt(txtCod.getText()));
-		if(lista != null && lista.size() > 0) {
-			Admin a = lista.get(0);
+		Admin a = controle.busca(txtLogin.getText());
+		if(a != null) {
 			txtCod.setText(String.valueOf(a.getCodAdmin()));
 			txtNome.setText(a.getNomeAdmin());
 			txtLogin.setText(a.getLoginAdmin());
@@ -95,8 +94,8 @@ public class ViewAdmin implements ActionListener {
 			controle.adiciona(adicionarEntidade());
 		} else if(cmd.contains("Pesquisar")) {
 			entidadeParaTela();
-		} else if(cmd.contains("Excluir")) {
-			controle.remove(Integer.parseInt(txtCod.getText()));
+		} else if(cmd.contains("Cancelar")) {
+			janela.dispose();
 		}
 	}
 }

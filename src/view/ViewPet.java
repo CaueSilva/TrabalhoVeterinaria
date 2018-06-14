@@ -50,9 +50,13 @@ public class ViewPet extends JFrame implements ActionListener {
 	private JScrollPane scrollPets = new JScrollPane();
 
 	private JButton btnSalvar = new JButton("Salvar");
-	private JButton btnExcluir = new JButton("Excluir");
+	private JButton btnCancelar = new JButton("Cancelar");
 	private JButton btnPesquisar = new JButton("Pesquisar");
 	private JButton btnPesquisarTutor = new JButton("Pesquisar Tutor");
+
+	public static void main(String[] args) {
+		new ViewPet();
+	}
 
 	public ViewPet() {
 		setVisible(true);
@@ -82,6 +86,7 @@ public class ViewPet extends JFrame implements ActionListener {
 		txtCodigo.setBounds(85, 152, 72, 22);
 		contentPane.add(txtCodigo);
 		txtCodigo.setColumns(10);
+		txtCodigo.setEditable(false);
 
 		JLabel lblTutor = new JLabel("Tutor:");
 		lblTutor.setBounds(169, 152, 39, 16);
@@ -165,8 +170,8 @@ public class ViewPet extends JFrame implements ActionListener {
 		btnSalvar.setBounds(243, 550, 97, 25);
 		contentPane.add(btnSalvar);
 
-		btnExcluir.setBounds(353, 550, 97, 25);
-		contentPane.add(btnExcluir);
+		btnCancelar.setBounds(353, 550, 97, 25);
+		contentPane.add(btnCancelar);
 
 		btnPesquisar.setBounds(215, 9, 97, 25);
 		contentPane.add(btnPesquisar);
@@ -176,27 +181,20 @@ public class ViewPet extends JFrame implements ActionListener {
 
 		btnPesquisar.addActionListener(this);
 		btnSalvar.addActionListener(this);
-		btnExcluir.addActionListener(this);
+		btnCancelar.addActionListener(this);
 		btnPesquisarTutor.addActionListener(this);
 
 	}
 
 	public Pet adicionarEntidade() {
 		Pet p = new Pet();
-		TutorDAO tutorD = new TutorDAO();
-		Tutor t = tutorD.pesquisaEspecifica(txtCpfTutor.getText());
 		p.setNomePet(txtNomePet.getText());
-		p.setCodPet(Integer.parseInt(txtCodigo.getText()));
-		p.setCodTutor(t.getCodTutor());
-		
-		RacaDAO rd = new RacaDAO();
-		Raca r = rd.pesquisaEspecifica(txtRaca.getText());
-		p.setCodRaca(r.getCodRaca());
-		
-		if (rdbtnVacinacaoS != null) {
-			p.setVacinacaoPet(0);
-		} else {
+		p.setCodTutor(Integer.parseInt(txtCpfTutor.getText()));
+		p.setCodRaca(Integer.parseInt(txtRaca.getText()));
+		if (rdbtnVacinacaoS.isSelected()) {
 			p.setVacinacaoPet(1);
+		} else {
+			p.setVacinacaoPet(0);
 		}
 		p.setCorPeloPet(txtCor.getText());
 		p.setDescricaoPet(txtDescricao.getText());
@@ -206,10 +204,13 @@ public class ViewPet extends JFrame implements ActionListener {
 
 	public void trazerEntidade() {
 		List<Pet> lista = controle.buscaPet(txtNomePet.getText());
+		TutorDAO tDao = new TutorDAO();
+		Tutor t = tDao.pesquisaEspecifica(txtCpfTutor.getText());
 		if (!lista.isEmpty() && lista.size() > 0) {
-			Pet p = lista.get(0);
+			/**Pet p = lista.get(0);
 			txtNomePet.setText(p.getNomePet());
 			txtCodigo.setText(String.valueOf(p.getCodPet()));
+			txtCpfTutor.setText(String.valueOf(t.getCpfTutor()));
 			if (p.getVacinacaoPet() == 1) {
 				rdbtnVacinacaoS.setSelected(true);
 				rdbtnVacinacaoN.setSelected(false);
@@ -218,13 +219,13 @@ public class ViewPet extends JFrame implements ActionListener {
 				rdbtnVacinacaoS.setSelected(false);
 			}
 			txtCor.setText(p.getCorPeloPet());
-			txtDescricao.setText(p.getDescricaoPet());
+			txtDescricao.setText(p.getDescricaoPet());*/
+			tblPesquisa.invalidate();
+			tblPesquisa.revalidate();
+			tblPesquisa.repaint();
 		} else {
 			JOptionPane.showMessageDialog(null, "A busca não retornou resultados.");
 		}
-		tblPesquisa.invalidate();
-		tblPesquisa.revalidate();
-		tblPesquisa.repaint();
 	}
 
 	public Pet removeEntidade() {
@@ -248,20 +249,17 @@ public class ViewPet extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
-		if(cmd.equals("Pesquisar")) {
+		if (cmd.equals("Pesquisar")) {
 			trazerEntidade();
-		} else if(cmd.contains("Tutor")){
-			controle.pesquisaTutor(Integer.parseInt(txtCpfTutor.getText()));
-		} else if(cmd.equals("Salvar")) {
+		} else if (cmd.contains("Tutor")) {
+
+		} else if (cmd.equals("Salvar")) {
 			controle.adiciona(adicionarEntidade());
 			tblPets.invalidate();
 			tblPets.revalidate();
 			tblPets.repaint();
-		} else if(cmd.equals("Excluir")) {
-			controle.remove(removeEntidade());
-			tblPets.invalidate();
-			tblPets.revalidate();
-			tblPets.repaint();
+		} else if (cmd.equals("Cancelar")) {
+			dispose();
 		}
 	}
 }

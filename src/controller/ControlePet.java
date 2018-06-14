@@ -8,66 +8,47 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 import model.Pet;
+import model.PetDAO;
 import model.Tutor;
 
-public class ControlePet implements TableModel{
-	
+public class ControlePet implements TableModel {
+
 	private List<Pet> listaPets = new ArrayList<>();
 	private List<Pet> listaPesquisados = new ArrayList<>();
-	private String [] nomesColunas = {"Nome", "Tutor", "Cor Pelo", "Descriçao"};
-	
+	private String[] nomesColunas = { "Nome", "Tutor", "Cor", "Descriçao" };
+	private PetDAO petDao = new PetDAO();
+
 	public void adiciona(Pet p) {
-		listaPets.add(p);
-		JOptionPane.showMessageDialog(null, "Pet "+p.getNomePet()+" adicionado.");
+		if (!p.getNomePet().equals("")) {
+			petDao.adicionar(p);
+			JOptionPane.showMessageDialog(null, "Pet " + p.getNomePet() + " adicionado.");
+		}
 	}
-	
-	public List<Pet> buscaPet(String nome){
+
+	public List<Pet> buscaPet(String nome) {
 		listaPesquisados.clear();
-		for(Pet p : listaPets) {
-			if(p.getNomePet().contains(nome)) {
+		listaPesquisados = petDao.pesquisaEspecifica(nome);
+		for (Pet p : listaPets) {
+			if (p.getNomePet().contains(nome)) {
 				listaPesquisados.add(p);
 			}
 		}
 		return listaPesquisados;
 	}
-	
-	public void remove(Pet pet) {
-		List<Pet> listRmv = new ArrayList<>();
-		for(Pet p : listaPets) {
-			if(p.getNomePet().equals(pet.getNomePet()) && p.getCodPet() == pet.getCodPet()) {
-				listRmv.add(p);
-			}
-		}
-		if (!listRmv.isEmpty()) {
-			listaPets.removeAll(listRmv);
-			listRmv = null;
-			JOptionPane.showMessageDialog(null, "Pet removido.");
-		} else {
-			JOptionPane.showMessageDialog(null, "Não foi possível remover o Pet.");
-		}
-	}
-	
-	public Tutor pesquisaTutor(int cpf) {
-		Tutor t = new Tutor();
-		if(t.getCpfTutor().equals(cpf)) {
-			return t;
-		}
-		return null;
-	}
-	
+
 	@Override
 	public void addTableModelListener(TableModelListener arg0) {
 	}
 
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
-		if(columnIndex == 0) {
+		if (columnIndex == 0) {
 			return String.class;
-		} else if(columnIndex == 1) {
+		} else if (columnIndex == 1) {
 			return Tutor.class;
-		} else if(columnIndex == 2) {
+		} else if (columnIndex == 2) {
 			return String.class;
-		} else if(columnIndex == 3) {
+		} else if (columnIndex == 3) {
 			return String.class;
 		}
 		return null;
@@ -91,13 +72,13 @@ public class ControlePet implements TableModel{
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Pet p = listaPesquisados.get(rowIndex);
-		if(columnIndex == 0) {
+		if (columnIndex == 0) {
 			return p.getNomePet();
-		} else if(columnIndex == 1) {
+		} else if (columnIndex == 1) {
 			return p.getCodTutor();
-		} else if(columnIndex == 2) {
+		} else if (columnIndex == 2) {
 			return p.getCorPeloPet();
-		} else if(columnIndex == 3) {
+		} else if (columnIndex == 3) {
 			return p.getDescricaoPet();
 		}
 		return null;
