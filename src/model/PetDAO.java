@@ -26,8 +26,8 @@ public class PetDAO {
 				   p.setString(3, p1.getCorPeloPet());
 				   p.setString(4, p1.getDescricaoPet());
 				   p.setString(5, p1.getPortePet());
-				   p.setDate(6, (Date) p1.getDiaMortePet());
-				   p.setDate(7, (Date) p1.getHoraMortePet());
+				   p.setString(6, p1.getDiaMortePet());
+				   p.setString(7, p1.getHoraMortePet());
 				   p.setInt(8, p1.getCodTutor());
 				   p.setInt(9, p1.getCodRaca());
 				   p.executeUpdate();
@@ -54,8 +54,8 @@ public class PetDAO {
 				p1.setCorPeloPet(rs.getString("corPeloPet"));
 				p1.setDescricaoPet(rs.getString("descricaoPet"));
 				p1.setPortePet(rs.getString("portePet"));
-				p1.setDiaMortePet(rs.getDate("diaMortePet"));
-				p1.setHoraMortePet(rs.getDate("horarioMortePet"));
+				p1.setDiaMortePet(rs.getString("diaMortePet"));
+				p1.setHoraMortePet(rs.getString("horarioMortePet"));
 				p1.setNomeTutor(rs.getString("nomeTutor"));
 				p1.setDescRaca(rs.getString("descricaoRaca"));
 				pet.add(p1);
@@ -80,8 +80,8 @@ public class PetDAO {
 					p.setString(3, p1.getCorPeloPet());
 			   		p.setString(4, p1.getDescricaoPet());
 			   		p.setString(5, p1.getPortePet());
-			   		p.setDate(6, (Date) p1.getDiaMortePet());
-			   		p.setDate(7, (Date) p1.getHoraMortePet());
+			   		p.setString(6, p1.getDiaMortePet());
+			   		p.setString(7, p1.getHoraMortePet());
 			   		p.setInt(8, p1.getCodTutor());
 			   		p.setInt(9, p1.getCodRaca());
 			   		p.setInt(10, p1.getCodPet());
@@ -111,8 +111,8 @@ public class PetDAO {
 				p1.setCorPeloPet(rs.getString("corPeloPet"));
 				p1.setDescricaoPet(rs.getString("descricaoPet"));
 				p1.setPortePet(rs.getString("portePet"));
-				p1.setDiaMortePet(rs.getDate("diaMortePet"));
-				p1.setHoraMortePet(rs.getDate("horarioMortePet"));
+				p1.setDiaMortePet(rs.getString("diaMortePet"));
+				p1.setHoraMortePet(rs.getString("horarioMortePet"));
 				p1.setNomeTutor(rs.getString("nomeTutor"));
 				p1.setDescRaca(rs.getString("descricaoRaca"));
 				pet.add(p1);

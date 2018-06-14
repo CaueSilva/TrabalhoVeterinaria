@@ -10,8 +10,8 @@ public class Pet {
 	private String corPeloPet;
 	private String descricaoPet;
 	private String portePet;
-	private Date diaMortePet;
-	private Date horaMortePet;
+	private String diaMortePet;
+	private String horaMortePet;
 	private int codTutor;
 	private String nomeTutor;
 	private int codRaca;
@@ -65,16 +65,16 @@ public class Pet {
 	public void setPortePet(String portePet) {
 		this.portePet = portePet;
 	}
-	public Date getDiaMortePet() {
+	public String getDiaMortePet() {
 		return diaMortePet;
 	}
-	public void setDiaMortePet(Date diaMortePet) {
+	public void setDiaMortePet(String diaMortePet) {
 		this.diaMortePet = diaMortePet;
 	}
-	public Date getHoraMortePet() {
+	public String getHoraMortePet() {
 		return horaMortePet;
 	}
-	public void setHoraMortePet(Date horaMortePet) {
+	public void setHoraMortePet(String horaMortePet) {
 		this.horaMortePet = horaMortePet;
 	}
 	public int getCodTutor() {

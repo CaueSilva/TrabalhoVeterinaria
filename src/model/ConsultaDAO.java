@@ -21,9 +21,9 @@ public class ConsultaDAO {
 		PreparedStatement p;
 		try {
 			p = con.prepareStatement("insert into tbConsulta (dataMarcacao, dataConsulta, horaConsulta, encaminhamentoExame, precoTotalConsulta, resultadoConsulta, mortePet, codPet, codVeterinario, codAtendente, codTipoConsulta) values (?,?,?,?,?,?,?,?,?,?,?)");
-				   p.setDate(1, (Date) c1.getDataMarcacao());
-				   p.setDate(2, (Date) c1.getDataConsulta());
-				   p.setDate(3, (Date) c1.getHoraConsulta());
+				   p.setString(1, c1.getDataMarcacao());
+				   p.setString(2, c1.getDataConsulta());
+				   p.setString(3, c1.getHoraConsulta());
 				   p.setInt(4, c1.getEncaminhamentoExame());
 				   p.setDouble(5, c1.getPrecoTotalConsulta());
 				   p.setString(6, c1.getResultadoConsulta());
@@ -53,9 +53,9 @@ public class ConsultaDAO {
 			while(rs.next()){
 				Consulta c1 = new Consulta();
 				c1.setCodConsulta(rs.getInt("codConsulta"));
-				c1.setDataMarcacao(rs.getDate("dataMarcacao"));
-				c1.setDataConsulta(rs.getDate("dataConsulta"));
-				c1.setHoraConsulta(rs.getDate("horaConsulta"));
+				c1.setDataMarcacao(rs.getString("dataMarcacao"));
+				c1.setDataConsulta(rs.getString("dataConsulta"));
+				c1.setHoraConsulta(rs.getString("horaConsulta"));
 				c1.setEncaminhamentoExame(rs.getInt("encaminhamentoExame"));
 				c1.setPrecoTotalConsulta(rs.getDouble("precoTotalConsulta"));
 				c1.setResultadoConsulta(rs.getString("resultadoConsulta"));
@@ -81,9 +81,9 @@ public class ConsultaDAO {
 		PreparedStatement p;
 		try {
 			p = con.prepareStatement("update tbConsulta set dataMarcacao = ?, dataConsulta = ?, horaConsulta = ?, encaminhamentoExame = ?, precoTotalConsulta = ?, resultadoConsulta = ?, mortePet = ?, codPet = ?, codVeterinario = ?, codAtendente = ?, codTipoConsulta = ? where codConsulta = ?");
-			 	p.setDate(1, (Date) c1.getDataMarcacao());
-			    p.setDate(2, (Date) c1.getDataConsulta());
-			    p.setDate(3, (Date) c1.getHoraConsulta());
+			 	p.setString(1, c1.getDataMarcacao());
+			    p.setString(2, c1.getDataConsulta());
+			    p.setString(3, c1.getHoraConsulta());
 			    p.setInt(4, c1.getEncaminhamentoExame());
 			    p.setDouble(5, c1.getPrecoTotalConsulta());
 			    p.setString(6, c1.getResultadoConsulta());
@@ -116,9 +116,9 @@ public class ConsultaDAO {
 			while(rs.next()){
 				Consulta c1 = new Consulta();
 				c1.setCodConsulta(rs.getInt("codConsulta"));
-				c1.setDataMarcacao(rs.getDate("dataMarcacao"));
-				c1.setDataConsulta(rs.getDate("dataConsulta"));
-				c1.setHoraConsulta(rs.getDate("horaConsulta"));
+				c1.setDataMarcacao(rs.getString("dataMarcacao"));
+				c1.setDataConsulta(rs.getString("dataConsulta"));
+				c1.setHoraConsulta(rs.getString("horaConsulta"));
 				c1.setEncaminhamentoExame(rs.getInt("encaminhamentoExame"));
 				c1.setPrecoTotalConsulta(rs.getDouble("precoTotalConsulta"));
 				c1.setResultadoConsulta(rs.getString("resultadoConsulta"));

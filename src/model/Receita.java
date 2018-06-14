@@ -22,8 +22,8 @@ public class Receita {
 		this.nomePet = nomePet;
 	}
 	private String obsReceita;
-	private Date dataEmissao;
-	private Date dataValidade;
+	private String dataEmissao;
+	private String dataValidade;
 	
 	//private List<Medicamento> medicamento = new ArrayList<>();
 	
@@ -51,16 +51,16 @@ public class Receita {
 	public void setObsReceita(String obsReceita) {
 		this.obsReceita = obsReceita;
 	}
-	public Date getDataEmissao() {
+	public String getDataEmissao() {
 		return dataEmissao;
 	}
-	public void setDataEmissao(Date dataEmissao) {
+	public void setDataEmissao(String dataEmissao) {
 		this.dataEmissao = dataEmissao;
 	}
-	public Date getDataValidade() {
+	public String getDataValidade() {
 		return dataValidade;
 	}
-	public void setDataValidade(Date dataValidade) {
+	public void setDataValidade(String dataValidade) {
 		this.dataValidade = dataValidade;
 	}
 	//public List<Medicamento> getMedicamento() {

@@ -11,6 +11,18 @@ public class Exame {
 	private String nomePet;
 	private int codTipoExame;
 	private String descTipoExame;
+	private String dataSolicitacao;
+	private String dataExame;
+	private String horaExame;
+	private String resultadoExame;
+	private double precoTotalExame;
+	private int mortePet;
+	
+
+	
+	public void setDescTipoExame(String descTipoExame) {
+		this.descTipoExame = descTipoExame;
+	}	
 	public String getNomeAtendente() {
 		return nomeAtendente;
 	}
@@ -26,16 +38,6 @@ public class Exame {
 	public String getDescTipoExame() {
 		return descTipoExame;
 	}
-	public void setDescTipoExame(String descTipoExame) {
-		this.descTipoExame = descTipoExame;
-	}
-	private Date dataSolicitacao;
-	private Date dataExame;
-	private Date horaExame;
-	private String resultadoExame;
-	private double precoTotalExame;
-	private int mortePet;
-	
 	public int getCodExame() {
 		return codExame;
 	}
@@ -60,22 +62,22 @@ public class Exame {
 	public void setCodTipoExame(int codTipoExame) {
 		this.codTipoExame = codTipoExame;
 	}
-	public Date getDataSolicitacao() {
+	public String getDataSolicitacao() {
 		return dataSolicitacao;
 	}
-	public void setDataSolicitacao(Date dataSolicitacao) {
-		this.dataSolicitacao = dataSolicitacao;
+	public void setDataSolicitacao(String string) {
+		this.dataSolicitacao = string;
 	}
-	public Date getDataExame() {
+	public String getDataExame() {
 		return dataExame;
 	}
-	public void setDataExame(Date dataExame) {
-		this.dataExame = dataExame;
+	public void setDataExame(String string) {
+		this.dataExame = string;
 	}
-	public Date getHoraExame() {
+	public String getHoraExame() {
 		return horaExame;
 	}
-	public void setHoraExame(Date horaExame) {
+	public void setHoraExame(String horaExame) {
 		this.horaExame = horaExame;
 	}
 	public String getResultadoExame() {
@@ -101,8 +103,7 @@ public class Exame {
 	//}
 	//public void setVeterinario(List<Veterinario> veterinario) {
 		//this.veterinario = veterinario;
-	//}
-	
+	//}	
 	
 
 }

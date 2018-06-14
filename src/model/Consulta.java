@@ -13,6 +13,14 @@ public class Consulta {
 	private String nomePet;
 	private int codTipoConsulta;
 	private String descTipoConsulta;
+	private String dataMarcacao;
+	private String dataConsulta;
+	private String horaConsulta;
+	private int encaminhamentoExame;
+	private double precoTotalConsulta;
+	private String resultadoConsulta;
+	private int mortePet;
+
 	public String getLoginAtendente() {
 		return loginAtendente;
 	}
@@ -37,14 +45,6 @@ public class Consulta {
 	public void setDescTipoConsulta(String descTipoConsulta) {
 		this.descTipoConsulta = descTipoConsulta;
 	}
-	private Date dataMarcacao;
-	private Date dataConsulta;
-	private Date horaConsulta;
-	private int encaminhamentoExame;
-	private double precoTotalConsulta;
-	private String resultadoConsulta;
-	private int mortePet;
-	
 	
 	
 	public int getCodConsulta() {
@@ -77,22 +77,22 @@ public class Consulta {
 	public void setCodTipoConsulta(int codTipoConsulta) {
 		this.codTipoConsulta = codTipoConsulta;
 	}
-	public Date getDataMarcacao() {
+	public String getDataMarcacao() {
 		return dataMarcacao;
 	}
-	public void setDataMarcacao(Date dataMarcacao) {
+	public void setDataMarcacao(String dataMarcacao) {
 		this.dataMarcacao = dataMarcacao;
 	}
-	public Date getDataConsulta() {
+	public String getDataConsulta() {
 		return dataConsulta;
 	}
-	public void setDataConsulta(Date dataConsulta) {
+	public void setDataConsulta(String dataConsulta) {
 		this.dataConsulta = dataConsulta;
 	}
-	public Date getHoraConsulta() {
+	public String getHoraConsulta() {
 		return horaConsulta;
 	}
-	public void setHoraConsulta(Date horaConsulta) {
+	public void setHoraConsulta(String horaConsulta) {
 		this.horaConsulta = horaConsulta;
 	}
 	public int getEncaminhamentoExame() {

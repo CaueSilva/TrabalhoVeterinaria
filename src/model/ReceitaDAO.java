@@ -22,8 +22,8 @@ public class ReceitaDAO {
 		try {
 			p = con.prepareStatement("insert into tbReceita (obsReceita , dataEmissao, dataValidade, codPet, codVeterinario) values (?,?,?,?,?)");
 				   p.setString(1, r.getObsReceita());
-				   p.setDate(2, (Date) r.getDataEmissao());
-				   p.setDate(3, (Date) r.getDataValidade());
+				   p.setString(2, r.getDataEmissao());
+				   p.setString(3, r.getDataValidade());
 				   p.setInt(4, r.getCodPet());
 				   p.setInt(5, r.getCodVeterinario());
 				   p.executeUpdate();
@@ -46,8 +46,8 @@ public class ReceitaDAO {
 				Receita r = new Receita();
 				r.setCodReceita(rs.getInt("codReceita"));
 				r.setObsReceita(rs.getString("obsReceita"));
-				r.setDataEmissao(rs.getDate("dataEmissao"));
-				r.setDataValidade(rs.getDate("dataValidade"));
+				r.setDataEmissao(rs.getString("dataEmissao"));
+				r.setDataValidade(rs.getString("dataValidade"));
 				r.setNomePet(rs.getString("nomePet"));
 				r.setNomeVeterinario(rs.getString("nomeVeterinario"));
 				rec.add(r);
@@ -68,8 +68,8 @@ public class ReceitaDAO {
 		try {
 			p = con.prepareStatement("update tbReceita set obsReceita = ?, dataEmissao = ?, dataValidade = ?, codPet = ?, codVeterinario = ? where codReceita = ?");
 					p.setString(1, r.getObsReceita());
-			   		p.setDate(2, (Date) r.getDataEmissao());
-			   		p.setDate(3, (Date) r.getDataValidade());
+			   		p.setString(2, r.getDataEmissao());
+			   		p.setString(3, r.getDataValidade());
 			   		p.setInt(4, r.getCodPet());
 			   		p.setInt(5, r.getCodVeterinario());
 			   		p.setInt(6, r.getCodReceita());
@@ -95,8 +95,8 @@ public class ReceitaDAO {
 				Receita r = new Receita();
 				r.setCodReceita(rs.getInt("codReceita"));
 				r.setObsReceita(rs.getString("obsReceita"));
-				r.setDataEmissao(rs.getDate("dataEmissao"));
-				r.setDataValidade(rs.getDate("dataValidade"));
+				r.setDataEmissao(rs.getString("dataEmissao"));
+				r.setDataValidade(rs.getString("dataValidade"));
 				r.setNomePet(rs.getString("nomePet"));
 				r.setNomeVeterinario(rs.getString("nomeVeterinario"));
 				rec=r;
