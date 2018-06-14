@@ -4,37 +4,31 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.JOptionPane;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
-import model.Exame;
-import model.ExameDAO;
-import model.Pet;
-import model.PetDAO;
+import model.Consulta;
+import model.ConsultaDAO;
 
-public class ControleExame implements TableModel{
+public class ControleConsulta implements TableModel {
 	
-	private String [] nomesColunas = {"Data", "Hora", "Pet", "Tipo Exame"};
-	private ExameDAO exameDao = new ExameDAO();
-	private List<Exame> listaExames = new ArrayList<>();
+	private String [] nomesColunas = {"Data", "Hora", "Pet", "Tipo Consulta"};
+	private ConsultaDAO consultaDao = new ConsultaDAO();
+	private List<Consulta> listaConsulta = new ArrayList<>();
 	
-	public void adiciona(Exame e) {
-		if(e != null) {
-			exameDao.adicionar(e);
-			listaExames.add(e);
-		} else {
-			JOptionPane.showMessageDialog(null, "Não foi possível adicionar exame.");
-		}
+	public void adiciona(Consulta c) {
+		consultaDao.adicionar(c);
+		listaConsulta.add(c);
 	}
 	
-	public List<Exame> buscaExame(int cod) {
-		List<Exame> lista = exameDao.pesquisaEspecifica(cod);
+	public List<Consulta> buscaConsulta(int cod) {
+		List<Consulta> lista = consultaDao.pesquisaEspecifica(cod);
 		return lista;
 	}
 
 	@Override
 	public void addTableModelListener(TableModelListener l) {
+		
 	}
 
 	@Override
@@ -44,7 +38,7 @@ public class ControleExame implements TableModel{
 		} else if(columnIndex == 1) {
 			return Date.class;
 		} else if(columnIndex == 2) {
-			return Integer.class;
+			return String.class;
 		} else if(columnIndex == 3) {
 			return Integer.class;
 		}
@@ -63,20 +57,20 @@ public class ControleExame implements TableModel{
 
 	@Override
 	public int getRowCount() {
-		return listaExames.size();
+		return listaConsulta.size();
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Exame e = listaExames.get(rowIndex);
+		Consulta c = listaConsulta.get(rowIndex);
 		if(columnIndex == 0) {
-			return e.getDataExame();
+			return c.getDataConsulta();
 		} else if(columnIndex == 1) {
-			return e.getHoraExame();
+			return c.getHoraConsulta();
 		} else if(columnIndex == 2) {
-			return e.getCodPet();
+			return c.getCodPet();
 		} else if(columnIndex == 3) {
-			return e.getCodTipoExame();
+			return c.getCodTipoConsulta();
 		}
 		return null;
 	}

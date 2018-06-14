@@ -31,8 +31,6 @@ public class View extends JFrame {
 	protected JLabel lblMortePet = new JLabel("Morte Pet:");
 	protected JRadioButton rdbtnMorteS = new JRadioButton("Sim");
 	protected JRadioButton rdbtnMorteN = new JRadioButton("Não");
-	protected JLabel lblDataMorte = new JLabel("Data Morte:");
-	protected JTextField txtDataMorte = new JTextField();
 	protected JLabel lblResultado = new JLabel("Resultado:");
 	protected JTextField txtResultado = new JTextField();
 	protected JLabel lblDisponiveis = new JLabel("Dispon\u00EDveis:");
@@ -100,9 +98,8 @@ public class View extends JFrame {
 		
 		scrollPet.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPet.setBounds(12, 106, 478, 97);
+		scrollPet.getViewport().add(tblPet);
 		pnlPrincipal.add(scrollPet);
-		
-		scrollPet.setViewportView(tblPet);
 		
 		lblData.setBounds(12, 211, 56, 16);
 		pnlPrincipal.add(lblData);
@@ -132,13 +129,6 @@ public class View extends JFrame {
 		bgMorte.add(rdbtnMorteS);
 		bgMorte.add(rdbtnMorteN);
 		
-		lblDataMorte.setBounds(12, 279, 74, 16);
-		pnlPrincipal.add(lblDataMorte);
-		
-		txtDataMorte.setBounds(98, 279, 116, 22);
-		pnlPrincipal.add(txtDataMorte);
-		txtDataMorte.setColumns(10);
-		
 		lblResultado.setBounds(12, 312, 74, 16);
 		pnlPrincipal.add(lblResultado);
 		
@@ -151,9 +141,8 @@ public class View extends JFrame {
 		
 		scrollDisponiveis.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollDisponiveis.setBounds(12, 441, 478, 97);
+		scrollDisponiveis.getViewport().add(tblDisponivel);
 		pnlPrincipal.add(scrollDisponiveis);
-		
-		scrollDisponiveis.setViewportView(tblDisponivel);
 		
 		lblPreco.setBounds(12, 551, 64, 16);
 		pnlPrincipal.add(lblPreco);
@@ -168,10 +157,10 @@ public class View extends JFrame {
 		btnCancelar.setBounds(393, 592, 97, 25);
 		pnlPrincipal.add(btnCancelar);
 		
-		lblHoraMorte.setBounds(226, 279, 74, 16);
+		lblHoraMorte.setBounds(12, 283, 74, 16);
 		pnlPrincipal.add(lblHoraMorte);
 		
-		txtHoraMorte.setBounds(300, 279, 116, 22);
+		txtHoraMorte.setBounds(98, 280, 116, 22);
 		pnlPrincipal.add(txtHoraMorte);
 		txtHoraMorte.setColumns(10);
 		

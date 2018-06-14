@@ -21,6 +21,7 @@ public class ControlePet implements TableModel {
 	public void adiciona(Pet p) {
 		if (!p.getNomePet().equals("")) {
 			petDao.adicionar(p);
+			listaPets.add(p);
 			JOptionPane.showMessageDialog(null, "Pet " + p.getNomePet() + " adicionado.");
 		}
 	}
@@ -28,11 +29,6 @@ public class ControlePet implements TableModel {
 	public List<Pet> buscaPet(String nome) {
 		listaPesquisados.clear();
 		listaPesquisados = petDao.pesquisaEspecifica(nome);
-		for (Pet p : listaPets) {
-			if (p.getNomePet().contains(nome)) {
-				listaPesquisados.add(p);
-			}
-		}
 		return listaPesquisados;
 	}
 
@@ -66,7 +62,7 @@ public class ControlePet implements TableModel {
 
 	@Override
 	public int getRowCount() {
-		return listaPesquisados.size();
+		return listaPets.size();
 	}
 
 	@Override

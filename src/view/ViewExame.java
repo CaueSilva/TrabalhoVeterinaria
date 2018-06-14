@@ -20,8 +20,8 @@ public class ViewExame extends View implements ActionListener{
 
 	private ControleExame controle = new ControleExame();
 	private ControlePet controlePet = new ControlePet();
-	private SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
-	private SimpleDateFormat sdfHora = new SimpleDateFormat("hh:MM");
+	private SimpleDateFormat sdfData = new SimpleDateFormat("yyyy-MM-dd");
+	private SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm");
 	
 	public ViewExame() {
 		setResizable(false);
@@ -65,7 +65,8 @@ public class ViewExame extends View implements ActionListener{
 		if(rdbtnEncaminhamentoS.isSelected()) {
 			e.setMortePet(1);
 			try {
-				e.setHoraExame(sdfHora.parse(txtHoraMorte.getText()));
+				p.setDiaMortePet(sdfData.parse(txtData.getText()));
+				p.setHoraMortePet(sdfHora.parse(txtHoraMorte.getText()));
 			} catch (ParseException e1) {
 				e1.printStackTrace();
 			}
@@ -74,6 +75,9 @@ public class ViewExame extends View implements ActionListener{
 		}
 		e.setResultadoExame(txtResultado.getText());
 		e.setPrecoTotalExame(Double.parseDouble(txtPreco.getText()));
+		tblDisponivel.invalidate();
+		tblDisponivel.revalidate();
+		tblDisponivel.repaint();
 		return e;
 	}
 	
@@ -95,11 +99,7 @@ public class ViewExame extends View implements ActionListener{
 		if(cmd.contains("Pesquisar")) {
 			buscaEntidade();
 		} else if(cmd.contains("Salvar")) {
-			ControlePet controlePet = new ControlePet();
-			controlePet.buscaPet(txtPesquisarPet.getText());
-			tblDisponivel.invalidate();
-			tblDisponivel.revalidate();
-			tblDisponivel.repaint();
+			controle.adiciona(adicionaEntidade());
 		} else if(cmd.contains("Cancelar")) {
 			dispose();
 		}

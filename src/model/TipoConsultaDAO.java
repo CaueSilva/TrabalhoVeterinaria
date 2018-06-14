@@ -75,8 +75,8 @@ public class TipoConsultaDAO {
 		
 	}
 
-	public List<TipoConsulta> pesquisaEspecifica(String desc) {
-		List<TipoConsulta> tc = new ArrayList<TipoConsulta>();
+	public TipoConsulta pesquisaEspecifica(String desc) {
+		TipoConsulta tc = new TipoConsulta();
 		Conexao c = new Conexao();
 		con = c.abrir();
 		PreparedStatement p;
@@ -90,7 +90,7 @@ public class TipoConsultaDAO {
 				t.setDescricaoTipoConsulta(rs.getString("descricaoTipoConsulta"));
 				t.setPrecoConsulta(rs.getDouble("precoConsulta"));
 				t.setCodAdmin(rs.getInt("codAdmin"));
-				tc.add(t);
+				tc = t;
 			}
 		rs.close();
 		p.close();

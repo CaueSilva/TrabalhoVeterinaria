@@ -53,7 +53,7 @@ public class ViewPet extends JFrame implements ActionListener {
 	private JButton btnCancelar = new JButton("Cancelar");
 	private JButton btnPesquisar = new JButton("Pesquisar");
 	private JButton btnPesquisarTutor = new JButton("Pesquisar Tutor");
-
+	
 	public static void main(String[] args) {
 		new ViewPet();
 	}
@@ -228,22 +228,14 @@ public class ViewPet extends JFrame implements ActionListener {
 		}
 	}
 
-	public Pet removeEntidade() {
-		Pet p = new Pet();
-		p.setNomePet(txtNomePet.getText());
-		p.setCodPet(Integer.parseInt(txtCodigo.getText()));
-		// p.setCodTutor(txtTutor.getText());
-		// p.setCodRaca(txtRaca.getText());
-		// p.set espécie???
-		if (rdbtnVacinacaoS != null) {
-			p.setVacinacaoPet(0);
+	public void pesquisaTutor() {
+		TutorDAO td = new TutorDAO();
+		Tutor t = td.pesquisaEspecifica(txtCpfTutor.getText());
+		if(t != null) {
+			JOptionPane.showMessageDialog(null, "O tutor não está cadastrado no sistema.");
 		} else {
-			p.setVacinacaoPet(1);
+			JOptionPane.showMessageDialog(null, "O tutor está cadastrado.");
 		}
-		p.setCorPeloPet(txtCor.getText());
-		p.setDescricaoPet(txtDescricao.getText());
-		controlePets.remove(p);
-		return p;
 	}
 
 	@Override
@@ -252,7 +244,7 @@ public class ViewPet extends JFrame implements ActionListener {
 		if (cmd.equals("Pesquisar")) {
 			trazerEntidade();
 		} else if (cmd.contains("Tutor")) {
-
+			pesquisaTutor();
 		} else if (cmd.equals("Salvar")) {
 			controle.adiciona(adicionarEntidade());
 			tblPets.invalidate();
