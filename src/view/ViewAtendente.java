@@ -38,10 +38,6 @@ public class ViewAtendente implements ActionListener {
 	
 	private ControleAtendente controle = new ControleAtendente();
 	
-	public static void main(String[] args) {
-		new ViewAtendente();
-	}
-	
 	public ViewAtendente() {
 		janela.setSize(228,235);
 		janela.setVisible(true);
@@ -111,7 +107,7 @@ public class ViewAtendente implements ActionListener {
 			controle.adiciona(adicionaEntidade());
 		} else if(cmd.contains("Pesquisar")) {
 			recebeEntidade();
-		} else if(cmd.contains("Pesquisar")) {
+		} else if(cmd.contains("Cancelar")) {
 			janela.dispose();
 		}
 	}

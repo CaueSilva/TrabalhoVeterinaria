@@ -206,7 +206,7 @@ public class ViewConsulta extends JFrame implements ActionListener{
 		return c;
 	}
 	
-	public void buscaEntidade() {
+	public void recebeEntidade() {
 		ControlePet controlPet = new ControlePet();
 		List<Pet> listaPet = controlPet.buscaPet(txtPesquisarPet.getText());
 		if(listaPet != null && listaPet.size() > 0 ){
@@ -227,7 +227,7 @@ public class ViewConsulta extends JFrame implements ActionListener{
 			tblDisponivel.revalidate();
 			tblDisponivel.repaint();
 		} else if(cmd.contains("Pesquisar")) {
-			buscaEntidade();
+			recebeEntidade();
 		} else if(cmd.contains("Cancelar")) {
 			dispose();
 		}

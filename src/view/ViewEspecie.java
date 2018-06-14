@@ -63,7 +63,7 @@ public class ViewEspecie implements ActionListener{
 		btnCancelar.addActionListener(this);
 	}
 	
-	public Especie addBoundaryToEntity() {
+	public Especie adicionaEntidade() {
 		Especie e = new Especie();
 		AdminDAO adminDao = new AdminDAO();
 		Admin a = adminDao.pesquisaEspecifica(txtLogin.getText());
@@ -74,7 +74,7 @@ public class ViewEspecie implements ActionListener{
 		return e;
 	}
 	
-	public void entityToBoundary() {
+	public void recebeEntidade() {
 		Especie e = controle.busca(txtDescricao.getText());
 		if(e != null) {
 			txtCodEspecie.setText(String.valueOf(e.getCodEspecie()));
@@ -89,9 +89,9 @@ public class ViewEspecie implements ActionListener{
 	public void actionPerformed(ActionEvent event) {
 		String cmd = event.getActionCommand();
 		if(cmd.equals("Pesquisar")){
-			entityToBoundary();
+			recebeEntidade();
 		} else if(cmd.equals("Salvar")) {
-			controle.adiciona(addBoundaryToEntity());
+			controle.adiciona(adicionaEntidade());
 		} else {
 			janela.dispose();
 		}

@@ -69,7 +69,7 @@ public class ViewTipoExame implements ActionListener{
 		return t;
 	}
 	
-	public void buscaEntidade() {
+	public void recebeEntidade() {
 		List<TipoExame> lista = controle.pesquisaTipo(txtTipo.getText());
 		if(lista != null && lista.size() > 0) {
 			TipoExame t = lista.get(0);
@@ -86,7 +86,7 @@ public class ViewTipoExame implements ActionListener{
 		if(cmd.contains("Salvar")) {
 			controle.adiciona(adicionaEntidade());
 		} else if(cmd.contains("Pesquisar")) {
-			buscaEntidade();
+			recebeEntidade();
 		} else if(cmd.contains("Cancelar")) {
 			janela.dispose();
 		}

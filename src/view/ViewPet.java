@@ -186,7 +186,7 @@ public class ViewPet extends JFrame implements ActionListener {
 
 	}
 
-	public Pet adicionarEntidade() {
+	public Pet adicionaEntidade() {
 		Pet p = new Pet();
 		p.setNomePet(txtNomePet.getText());
 		p.setCodTutor(Integer.parseInt(txtCpfTutor.getText()));
@@ -202,7 +202,7 @@ public class ViewPet extends JFrame implements ActionListener {
 		return p;
 	}
 
-	public void trazerEntidade() {
+	public void recebeEntidade() {
 		List<Pet> lista = controle.buscaPet(txtNomePet.getText());
 		TutorDAO tDao = new TutorDAO();
 		Tutor t = tDao.pesquisaEspecifica(txtCpfTutor.getText());
@@ -242,11 +242,11 @@ public class ViewPet extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		if (cmd.equals("Pesquisar")) {
-			trazerEntidade();
+			recebeEntidade();
 		} else if (cmd.contains("Tutor")) {
 			pesquisaTutor();
 		} else if (cmd.equals("Salvar")) {
-			controle.adiciona(adicionarEntidade());
+			controle.adiciona(adicionaEntidade());
 			tblPets.invalidate();
 			tblPets.revalidate();
 			tblPets.repaint();

@@ -93,7 +93,7 @@ public class ViewTutor implements ActionListener{
 		
 	}
 	
-	public Tutor adicionaTutor() {
+	public Tutor adicionaEntidade() {
 		Tutor t = new Tutor();
 		t.setCpfTutor(txtCpf.getText());
 		t.setNomeTutor(txtNome.getText());
@@ -111,7 +111,7 @@ public class ViewTutor implements ActionListener{
 		return t;
 	}
 	
-	public void buscaEntidade() {
+	public void recebeEntidade() {
 		List<Tutor> lista = controle.buscaTutor(txtCpf.getText());
 		if(lista != null && lista.size() > 0) {
 			Tutor t = lista.get(0);
@@ -134,9 +134,9 @@ public class ViewTutor implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		if(cmd.contains("Salvar")) {
-			controle.adiciona(adicionaTutor());
+			controle.adiciona(adicionaEntidade());
 		} else if(cmd.contains("Pesquisar")) {
-			buscaEntidade();
+			recebeEntidade();
 		} else if(cmd.equals("Cancelar")) {
 			janela.dispose();
 		}

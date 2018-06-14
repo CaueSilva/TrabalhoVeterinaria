@@ -12,11 +12,17 @@ import java.util.concurrent.ArrayBlockingQueue;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.ControlePet;
 import controller.ControleReceita;
+import controller.ControleVeterinario;
+import model.Pet;
 import model.Receita;
+import model.Veterinario;
+import model.VeterinarioDAO;
 
 public class ViewReceita implements ActionListener{
 	
@@ -25,41 +31,43 @@ public class ViewReceita implements ActionListener{
 	private JPanel pnlPrimario = new JPanel(new FlowLayout(FlowLayout.LEFT));
 	private JPanel pnlSecundario = new JPanel(new FlowLayout());
 	private JTextField txtCodReceita = new JTextField(8);
-	private JTextField txtCodPet = new JTextField(6);
-	private JTextField txtCodVet = new JTextField(6);
+	private JTextField txtNomePet = new JTextField(9);
+	private JTextField txtCrmvVet = new JTextField(8);
 	private JTextField txtObs = new JTextField(26);
 	private JTextField txtEmissao = new JTextField(7);
 	private JTextField txtValidade = new JTextField(8);
 	private JButton btnPesquisarReceita = new JButton("Pesquisar");
-	//private JButton btnPesquisarPet = new JButton("Pesquisar Pet");
-	//private JButton btnPesquisarVet = new JButton("Pesquisar Veterinário");
+	private JButton btnPesquisarPet = new JButton("Pesquisar Pet");
+	private JButton btnPesquisarVet = new JButton("Pesquisar Vet.");
 	private JButton btnSalvar = new JButton("Salvar");
 	private JButton btnCancelar = new JButton("Cancelar");
 	
 	private ControleReceita controle = new ControleReceita();
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	
+	public static void main(String[] args) {
+		new ViewReceita();
+	}
+	
 	public ViewReceita() {
-		janela.setSize(306,200);
+		janela.setSize(306,235);
 		janela.setVisible(true);
 		janela.setContentPane(pnlPrincipal);
 		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		janela.setResizable(false);
-		
-		txtEmissao.setBounds(0, 0, 15, 15);
-		
+				
 		pnlPrincipal.add(pnlPrimario, BorderLayout.CENTER);
 		pnlPrincipal.add(pnlSecundario, BorderLayout.SOUTH);
 		
 		pnlPrimario.add(new JLabel("Código Receita: "));
 		pnlPrimario.add(txtCodReceita);
 		pnlPrimario.add(btnPesquisarReceita);
-		pnlPrimario.add(new JLabel("Código Pet:"));
-		pnlPrimario.add(txtCodPet);
-		//pnlPrimario.add(btnPesquisarPet);
-		pnlPrimario.add(new JLabel("Código Vet.:"));
-		pnlPrimario.add(txtCodVet);
-		//pnlPrimario.add(btnPesquisarVet);
+		pnlPrimario.add(new JLabel("Nome Pet:"));
+		pnlPrimario.add(txtNomePet);
+		pnlPrimario.add(btnPesquisarPet);
+		pnlPrimario.add(new JLabel("CRMV Vet.: "));
+		pnlPrimario.add(txtCrmvVet);
+		pnlPrimario.add(btnPesquisarVet);
 		pnlPrimario.add(new JLabel("Observações: "));
 		pnlPrimario.add(txtObs);
 		pnlPrimario.add(new JLabel("Emissão:"));
@@ -78,48 +86,64 @@ public class ViewReceita implements ActionListener{
 		
 	}
 
-	public Receita adicionarEntidade() throws ParseException {
+	public Receita adicionaEntidade() {
 		Receita r = new Receita();
 		r.setCodReceita(Integer.parseInt(txtCodReceita.getText()));
-		r.setCodPet(Integer.parseInt(txtCodPet.getText()));
-		r.setCodVeterinario(Integer.parseInt(txtCodVet.getText()));
+		r.setCodPet(Integer.parseInt(txtNomePet.getText()));
+		r.setCodVeterinario(Integer.parseInt(txtCrmvVet.getText()));
 		r.setObsReceita(txtObs.getText());
-		r.setDataEmissao(sdf.parse(txtEmissao.getText()));
-		r.setDataValidade(sdf.parse(txtValidade.getText()));
+		try {
+			r.setDataEmissao(sdf.parse(txtEmissao.getText()));
+			r.setDataValidade(sdf.parse(txtValidade.getText()));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return r;
 	}
 	
-	public void entidadeParaBoundary() {
+	public void recebeReceita() {
 		List<Receita> lista = controle.buscaReceita(Integer.parseInt(txtCodReceita.getText()));
 		if(lista != null && lista.size() > 0) {
 			Receita r = lista.get(0);
+			ControleVeterinario controleVet = new ControleVeterinario();
+			Veterinario v = controleVet.buscaVeterinario(txtCrmvVet.getText());
+			
 			txtCodReceita.setText(String.valueOf(r.getCodReceita()));
-			txtCodPet.setText(String.valueOf(r.getCodPet()));
-			txtCodVet.setText(String.valueOf(r.getCodVeterinario()));
+			txtNomePet.setText(r.getNomePet());
+			txtCrmvVet.setText(v.getCrmv());
 			txtObs.setText(r.getObsReceita());
 			txtEmissao.setText(sdf.format(r.getDataEmissao()));
 			txtValidade.setText(sdf.format(r.getDataValidade()));
 		}
 	}
 	
+	public void recebePet() {
+		ControlePet controlePet = new ControlePet();
+		List<Pet> lista = controlePet.buscaPet(txtNomePet.getText());
+		if(lista != null && lista.size() > 0) {
+			JOptionPane.showMessageDialog(null, "O pet está cadastrado.");
+		}
+	}
+	public void recebeVet() {
+		ControleVeterinario controleVet = new ControleVeterinario();
+		Veterinario v = controleVet.buscaVeterinario(txtCrmvVet.getText());
+		if(v != null) {
+			JOptionPane.showMessageDialog(null, "O veterinário está cadastrado.");
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
-		if(cmd.contains("Receita")) {
-			
-		} else if(cmd.contains("Pet")) {
-			
-		} else if(cmd.contains("Veterinário")) {
-			
+		if(cmd.contains("Pet")) {
+			recebePet();
+		} else if(cmd.contains("Vet")) {
+			recebeVet();
 		} else if(cmd.contains("Salvar")) {
-			try {
-				controle.adiciona(adicionarEntidade());
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		} else if(cmd.contains("Pesquisar")) {
-			entidadeParaBoundary();
+				controle.adiciona(adicionaEntidade());
+		} else if(cmd.equals("Pesquisar")) {
+			recebeReceita();
 		} else if(cmd.contains("Cancelar")) {
 			janela.dispose();
 		}

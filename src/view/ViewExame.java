@@ -81,7 +81,7 @@ public class ViewExame extends View implements ActionListener{
 		return e;
 	}
 	
-	public void buscaEntidade() {
+	public void recebeEntidade() {
 		ControlePet controlPet = new ControlePet();
 		List<Pet> listaPet = controlPet.buscaPet(txtPesquisarPet.getText());
 		if(listaPet != null && listaPet.size() > 0 ){
@@ -97,7 +97,7 @@ public class ViewExame extends View implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		if(cmd.contains("Pesquisar")) {
-			buscaEntidade();
+			recebeEntidade();
 		} else if(cmd.contains("Salvar")) {
 			controle.adiciona(adicionaEntidade());
 		} else if(cmd.contains("Cancelar")) {

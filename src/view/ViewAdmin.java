@@ -32,10 +32,6 @@ public class ViewAdmin implements ActionListener {
 	
 	private ControleAdmin controle = new ControleAdmin();
 	
-	public static void main(String[] args) {
-		new ViewAdmin();
-	}
-	
 	public ViewAdmin() {
 		janela.setVisible(true);
 		janela.setSize(250,190);
@@ -65,7 +61,7 @@ public class ViewAdmin implements ActionListener {
 		btnCancelar.addActionListener(this);
 	}
 
-	public Admin adicionarEntidade() {
+	public Admin adicionaEntidade() {
 		Admin a = new Admin();
 		a.setCodAdmin(Integer.parseInt(txtCod.getText()));
 		a.setNomeAdmin(txtNome.getText());
@@ -75,7 +71,7 @@ public class ViewAdmin implements ActionListener {
 		return a;
 	}
 	
-	public void entidadeParaTela() {
+	public void recebeEntidade() {
 		Admin a = controle.busca(txtLogin.getText());
 		if(a != null) {
 			txtCod.setText(String.valueOf(a.getCodAdmin()));
@@ -91,9 +87,9 @@ public class ViewAdmin implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		String cmd = event.getActionCommand();
 		if(cmd.contains("Salvar")) {
-			controle.adiciona(adicionarEntidade());
+			controle.adiciona(adicionaEntidade());
 		} else if(cmd.contains("Pesquisar")) {
-			entidadeParaTela();
+			recebeEntidade();
 		} else if(cmd.contains("Cancelar")) {
 			janela.dispose();
 		}

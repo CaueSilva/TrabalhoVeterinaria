@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,81 +12,91 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.ControleEspecie;
 import controller.ControleRaca;
+import model.Especie;
 import model.Raca;
 
-public class ViewRaca implements ActionListener{
-	
+public class ViewRaca implements ActionListener {
+
 	private JFrame janela = new JFrame("Manutenção de Raças");
 	private JPanel pnlPrincipal = new JPanel(new BorderLayout());
 	private JPanel pnlPrimario = new JPanel(new FlowLayout(FlowLayout.LEFT));
 	private JPanel pnlSecundario = new JPanel(new FlowLayout());
-	private JTextField txtCodRaca = new JTextField(8);
-	private JTextField txtCodExpecie = new JTextField(8);
-	private JTextField txtDescricao = new JTextField(26);
-	private JButton btnPesquisaRaca = new JButton("Pesquisar");
-	private JButton btnPesquisaEspecie = new JButton("Pesquisar");
+	private JTextField txtCodRaca = new JTextField(12);
+	private JTextField txtDescricaoEspecie = new JTextField(8);
+	private JTextField txtDescricaoRaca = new JTextField(11);
+	private JButton btnPesquisaRaca = new JButton("Pesquisar Raça");
+	private JButton btnPesquisaEspecie = new JButton("Pesquisar Espécie");
 	private JButton btnSalvar = new JButton("Salvar");
 	private JButton btnCancelar = new JButton("Cancelar");
-	
+
 	private ControleRaca controle = new ControleRaca();
-	
+
 	public ViewRaca() {
 		janela.setResizable(false);
 		janela.setVisible(true);
-		janela.setSize(307,182);
+		janela.setSize(367, 160);
 		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		janela.setContentPane(pnlPrincipal);
-		
+
 		pnlPrincipal.add(pnlPrimario, BorderLayout.CENTER);
 		pnlPrincipal.add(pnlSecundario, BorderLayout.SOUTH);
-		
-		pnlPrimario.add(new JLabel("Código Raça:      "));
-		pnlPrimario.add(txtCodRaca);
+
+		pnlPrimario.add(new JLabel("Descrição Raça:"));
+		pnlPrimario.add(txtDescricaoRaca);
 		pnlPrimario.add(btnPesquisaRaca);
-		pnlPrimario.add(new JLabel("Código Espécie: "));
-		pnlPrimario.add(txtCodExpecie);
+		pnlPrimario.add(new JLabel("Descrição Espécie:"));
+		pnlPrimario.add(txtDescricaoEspecie);
 		pnlPrimario.add(btnPesquisaEspecie);
-		pnlPrimario.add(new JLabel("Descrição:"));
-		pnlPrimario.add(txtDescricao);
-		
+		pnlPrimario.add(new JLabel("Código Raça: "));
+		pnlPrimario.add(txtCodRaca);
+		txtCodRaca.setEditable(false);
+
 		pnlSecundario.add(btnSalvar);
 		pnlSecundario.add(btnCancelar);
-		
+
 		btnPesquisaRaca.addActionListener(this);
-		btnPesquisaEspecie.addActionListener(this);
 		btnSalvar.addActionListener(this);
 		btnCancelar.addActionListener(this);
-		
+		btnPesquisaEspecie.addActionListener(this);
 	}
-	
+
 	public Raca adicionaEntidade() {
 		Raca r = new Raca();
 		r.setCodRaca(Integer.parseInt(txtCodRaca.getText()));
-		r.setDescricaoRaca(txtDescricao.getText());
+		r.setDescricaoRaca(txtDescricaoRaca.getText());
 		JOptionPane.showMessageDialog(null, "Raça adicionada.");
 		return r;
 	}
-	
-	public void recebeEntidade() {
-		List<Raca> lista = controle.buscaRaca(Integer.parseInt(txtCodRaca.getText()));
-		if(lista != null && lista.size() > 0) {
-			Raca r = lista.get(0);
+
+	public void recebeRaca() {
+		Raca r = controle.buscaRaca(txtDescricaoRaca.getText());
+		ControleEspecie controleEspecie = new ControleEspecie();
+		Especie e = controleEspecie.busca(txtDescricaoEspecie.getText());
+
+		if (r != null) {
+			txtDescricaoEspecie.setText(e.getDescricaoEspecie());
 			txtCodRaca.setText(String.valueOf(r.getCodRaca()));
-			txtDescricao.setText(r.getDescricaoRaca());
-		} else {
-			JOptionPane.showMessageDialog(null, "A busca não retornou resultados.");
+		}
+	}
+
+	public void recebeEspecie() {
+		ControleEspecie controleEspecie = new ControleEspecie();
+		Especie e = controleEspecie.busca(txtDescricaoEspecie.getText());
+		if(e != null) {
+			txtDescricaoEspecie.setText(e.getDescricaoEspecie());
 		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
-		if(cmd.contains("Pesquisar")) {
-			recebeEntidade();
-		} else if(cmd.contains("Salvar")) {
+		if (cmd.contains("Raça")) {
+			recebeRaca();
+		} else if (cmd.contains("Salvar")) {
 			controle.adiciona(adicionaEntidade());
-		} else if(cmd.contains("Cancelar")) {
+		} else if (cmd.contains("Cancelar")) {
 			janela.dispose();
 		}
 	}

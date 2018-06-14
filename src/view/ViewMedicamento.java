@@ -52,6 +52,7 @@ public class ViewMedicamento implements ActionListener {
 		pnlPrimario.add(scroll);
 		pnlPrimario.add(new JLabel("Código Medicamento: "));
 		pnlPrimario.add(txtCod);
+		txtCod.setEditable(false);
 		pnlPrimario.add(new JLabel(" Nome: "));
 		pnlPrimario.add(txtNome);
 		pnlPrimario.add(new JLabel("Tarja: "));
@@ -66,17 +67,17 @@ public class ViewMedicamento implements ActionListener {
 		btnCancelar.addActionListener(this);
 	}
 
-	public Medicamento addBoundaryToEntity() {
+	public Medicamento adicionaEntidade() {
 		Medicamento m = new Medicamento();
 		m.setPrincipioAtivo(txtPrincipio.getText());
-		m.setCodMedicamento(Integer.parseInt(txtCod.getText()));
+		//m.setCodMedicamento(Integer.parseInt(txtCod.getText()));
 		m.setNomeMedicamento(txtNome.getText());
 		m.setTarjaMedicamento(txtTarja.getText());
 		JOptionPane.showMessageDialog(null, "Medicamento salvo.");
 		return m;
 	}
 
-	public void entityToBoundary() {
+	public void recebeEntidade() {
 		List<Medicamento> lista = control.busca(txtPrincipio.getText());
 		if (lista != null && lista.size() > 0) {
 			Medicamento m = lista.get(0);
@@ -95,9 +96,9 @@ public class ViewMedicamento implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		if (cmd.equals("Pesquisar")) {
-			entityToBoundary();
+			recebeEntidade();
 		} else if (cmd.equals("Salvar")) {
-			control.adiciona(addBoundaryToEntity());
+			control.adiciona(adicionaEntidade());
 		} else if (cmd.equals("Cancelar")) {
 			janela.dispose();
 		}
