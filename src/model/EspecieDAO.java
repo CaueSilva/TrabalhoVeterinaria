@@ -73,8 +73,8 @@ public class EspecieDAO {
 		
 	}
 
-	public List<Especie> pesquisaEspecifica(String desc) {
-		List<Especie> esp = new ArrayList<Especie>();
+	public Especie pesquisaEspecifica(String desc) {
+		Especie esp = new Especie();
 		Conexao c = new Conexao();
 		con = c.abrir();
 		PreparedStatement p;
@@ -87,7 +87,7 @@ public class EspecieDAO {
 				e.setCodEspecie(rs.getInt("codEspecie"));
 				e.setDescricaoEspecie(rs.getString("descricaoEspecie"));
 				e.setLoginAdmin(rs.getString("loginadmin"));
-				esp.add(e);
+				esp =e;
 			}
 		rs.close();
 		p.close();
