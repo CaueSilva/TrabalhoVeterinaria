@@ -62,7 +62,7 @@ public class ViewExame extends View implements ActionListener {
 			e.setMortePet(0);
 		}
 		e.setResultadoExame(txtResultado.getText());
-		e.setPrecoTotalExame(Double.parseDouble(txtPreco.getText()));
+		e.setPrecoTotalExame(txtPreco.getText());
 		tblDisponivel.invalidate();
 		tblDisponivel.revalidate();
 		tblDisponivel.repaint();

@@ -64,7 +64,7 @@ public class ViewTipoConsulta implements ActionListener{
 	private TipoConsulta adicionaEntidade() {
 		TipoConsulta t = new TipoConsulta();
 		t.setDescricaoTipoConsulta(txtTipo.getText());
-		t.setPrecoConsulta(Double.parseDouble(txtPreco.getText()));
+		t.setPrecoConsulta(txtPreco.getText());
 		JOptionPane.showMessageDialog(null, "Tipo de Consulta adicionado.");
 		return t;
 	}

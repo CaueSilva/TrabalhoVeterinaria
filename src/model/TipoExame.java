@@ -6,7 +6,7 @@ public class TipoExame {
 	private int codAdmin;
 	private String loginAdmin;
 	private String descricaoTipoExame;
-	private double precoExame;
+	private String precoExame;
 	
 
 	public String getLoginAdmin() {
@@ -33,10 +33,10 @@ public class TipoExame {
 	public void setDescricaoTipoExame(String descricaoTipoExame) {
 		this.descricaoTipoExame = descricaoTipoExame;
 	}
-	public double getPrecoExame() {
+	public String getPrecoExame() {
 		return precoExame;
 	}
-	public void setPrecoExame(double precoExame) {
+	public void setPrecoExame(String precoExame) {
 		this.precoExame = precoExame;
 	}
 	

@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 import model.TipoExame;
@@ -9,7 +11,7 @@ public class ControleTipoExame {
 	
 	private TipoExameDAO tipoExameDao = new TipoExameDAO();
 	
-	public void adiciona(TipoExame t) {
+	public void adiciona(TipoExame t) throws SQLException {
 		if(t != null) {
 			tipoExameDao.adicionar(t);
 		} else {

@@ -189,7 +189,7 @@ public class ViewConsulta extends JFrame implements ActionListener{
 			c.setMortePet(0);
 		}
 		c.setResultadoConsulta(txtResultado.getText());
-		c.setPrecoTotalConsulta(Double.parseDouble(txtPreco.getText()));
+		c.setPrecoTotalConsulta(txtPreco.getText());
 		return c;
 	}
 	

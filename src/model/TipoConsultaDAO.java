@@ -21,7 +21,7 @@ public class TipoConsultaDAO {
 		try {
 			p = con.prepareStatement("insert into tbTipoConsulta (descricaoTipoConsulta, precoConsulta, codAdmin) values (?,?,?)");
 				   p.setString(1, tc.getDescricaoTipoConsulta());
-				   p.setDouble(2, tc.getPrecoConsulta());
+				   p.setString(2, tc.getPrecoConsulta());
 				   //p.setInt(3, tc.getCodAdmin());
 				   p.setInt(3, 1);
 				   p.executeUpdate();
@@ -44,7 +44,7 @@ public class TipoConsultaDAO {
 				TipoConsulta t = new TipoConsulta();
 				t.setCodTipoConsulta(rs.getInt("codTipoConsulta"));
 				t.setDescricaoTipoConsulta(rs.getString("descricaoTipoConsulta"));
-				t.setPrecoConsulta(rs.getDouble("precoConsulta"));
+				t.setPrecoConsulta(rs.getString("precoConsulta"));
 				t.setLoginAdmin(rs.getString("loginAdmin"));
 				tc.add(t);
 			}
@@ -64,7 +64,7 @@ public class TipoConsultaDAO {
 		try {
 			p = con.prepareStatement("update tbTipoConsulta set descricaoTipoConsulta = ?, precoConsulta = ?, codAdmin = ? where codTipoConsulta = ?");
 					p.setString(1, tc.getDescricaoTipoConsulta());
-					p.setDouble(2, tc.getPrecoConsulta());
+					p.setString(2, tc.getPrecoConsulta());
 					//p.setInt(3, tc.getCodAdmin());
 					 p.setInt(3, 1);
 			 		p.setInt(4, tc.getCodTipoConsulta());
@@ -90,7 +90,7 @@ public class TipoConsultaDAO {
 				TipoConsulta t = new TipoConsulta();
 				t.setCodTipoConsulta(rs.getInt("codTipoConsulta"));
 				t.setDescricaoTipoConsulta(rs.getString("descricaoTipoConsulta"));
-				t.setPrecoConsulta(rs.getDouble("precoConsulta"));
+				t.setPrecoConsulta(rs.getString("precoConsulta"));
 				t.setLoginAdmin(rs.getString("loginAdmin"));
 				tc=t;
 			}

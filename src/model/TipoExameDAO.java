@@ -14,22 +14,17 @@ import conexao.Conexao;
 public class TipoExameDAO {
 Connection con;
 	
-	public void adicionar(TipoExame te) {
+	public void adicionar(TipoExame te) throws SQLException {
 		Conexao c = new Conexao();
 		con = c.abrir();
-		PreparedStatement p;
-		try {
-			p = con.prepareStatement("insert into tbTipoExame (descricaoTipoExame, precoExame, codAdmin) values (?,?,?)");
+		PreparedStatement p = con.prepareStatement("insert into tbTipoExame (descricaoTipoExame, precoExame, codAdmin) values (?,?,?)");
 				   p.setString(1, te.getDescricaoTipoExame());
-				   p.setDouble(2, te.getPrecoExame());
+				   p.setString(2, te.getPrecoExame());
 				   //p.setInt(3, te.getCodAdmin());
 				   p.setInt(3, 1);
 				   p.executeUpdate();
 				   p.close();
 			con = c.fechar();
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
-		}	
 	}
 
 	public List<TipoExame> retornaDados() {
@@ -44,7 +39,7 @@ Connection con;
 				TipoExame t = new TipoExame();
 				t.setCodTipoExame(rs.getInt("codTipoExame"));
 				t.setDescricaoTipoExame(rs.getString("descricaoTipoExame"));
-				t.setPrecoExame(rs.getDouble("precoExame"));
+				t.setPrecoExame(rs.getString("precoExame"));
 				t.setLoginAdmin(rs.getString("loginAdmin"));
 				te.add(t);
 			}
@@ -64,7 +59,7 @@ Connection con;
 		try {
 			p = con.prepareStatement("update tbTipoExame set descricaoTipoExame = ?, precoExame = ?, codAdmin = ? where codTipoExame = ?");
 					p.setString(1, te.getDescricaoTipoExame());
-					p.setDouble(2, te.getPrecoExame());
+					p.setString(2, te.getPrecoExame());
 					//p.setInt(3, te.getCodAdmin());
 					p.setInt(3, 1);
 			 		p.setInt(4, te.getCodTipoExame());
@@ -90,7 +85,7 @@ Connection con;
 				TipoExame t = new TipoExame();
 				t.setCodTipoExame(rs.getInt("codTipoExame"));
 				t.setDescricaoTipoExame(rs.getString("descricaoTipoExame"));
-				t.setPrecoExame(rs.getDouble("precoExame"));
+				t.setPrecoExame(rs.getString("precoExame"));
 				t.setLoginAdmin(rs.getString("loginAdmin"));
 				te=t;
 			}

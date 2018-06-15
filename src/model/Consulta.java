@@ -17,7 +17,7 @@ public class Consulta {
 	private String dataConsulta;
 	private String horaConsulta;
 	private int encaminhamentoExame;
-	private double precoTotalConsulta;
+	private String precoTotalConsulta;
 	private String resultadoConsulta;
 	private int mortePet;
 
@@ -101,10 +101,10 @@ public class Consulta {
 	public void setEncaminhamentoExame(int encaminhamentoExame) {
 		this.encaminhamentoExame = encaminhamentoExame;
 	}
-	public double getPrecoTotalConsulta() {
+	public String getPrecoTotalConsulta() {
 		return precoTotalConsulta;
 	}
-	public void setPrecoTotalConsulta(double precoTotalConsulta) {
+	public void setPrecoTotalConsulta(String precoTotalConsulta) {
 		this.precoTotalConsulta = precoTotalConsulta;
 	}
 	public String getResultadoConsulta() {

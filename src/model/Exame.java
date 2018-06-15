@@ -15,7 +15,7 @@ public class Exame {
 	private String dataExame;
 	private String horaExame;
 	private String resultadoExame;
-	private double precoTotalExame;
+	private String precoTotalExame;
 	private int mortePet;
 	
 
@@ -86,10 +86,10 @@ public class Exame {
 	public void setResultadoExame(String resultadoExame) {
 		this.resultadoExame = resultadoExame;
 	}
-	public double getPrecoTotalExame() {
+	public String getPrecoTotalExame() {
 		return precoTotalExame;
 	}
-	public void setPrecoTotalExame(double precoTotalExame) {
+	public void setPrecoTotalExame(String precoTotalExame) {
 		this.precoTotalExame = precoTotalExame;
 	}
 	public int getMortePet() {

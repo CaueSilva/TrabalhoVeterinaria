@@ -25,7 +25,7 @@ public class ConsultaDAO {
 				   p.setString(2, c1.getDataConsulta());
 				   p.setString(3, c1.getHoraConsulta());
 				   p.setInt(4, c1.getEncaminhamentoExame());
-				   p.setDouble(5, c1.getPrecoTotalConsulta());
+				   p.setString(5, c1.getPrecoTotalConsulta());
 				   p.setString(6, c1.getResultadoConsulta());
 				   p.setInt(7, c1.getMortePet());
 				   p.setInt(8, c1.getCodPet());
@@ -57,7 +57,7 @@ public class ConsultaDAO {
 				c1.setDataConsulta(rs.getString("dataConsulta"));
 				c1.setHoraConsulta(rs.getString("horaConsulta"));
 				c1.setEncaminhamentoExame(rs.getInt("encaminhamentoExame"));
-				c1.setPrecoTotalConsulta(rs.getDouble("precoTotalConsulta"));
+				c1.setPrecoTotalConsulta(rs.getString("precoTotalConsulta"));
 				c1.setResultadoConsulta(rs.getString("resultadoConsulta"));
 				c1.setMortePet(rs.getInt("mortePet"));
 				c1.setNomePet(rs.getString("nomePet"));
@@ -85,7 +85,7 @@ public class ConsultaDAO {
 			    p.setString(2, c1.getDataConsulta());
 			    p.setString(3, c1.getHoraConsulta());
 			    p.setInt(4, c1.getEncaminhamentoExame());
-			    p.setDouble(5, c1.getPrecoTotalConsulta());
+			    p.setString(5, c1.getPrecoTotalConsulta());
 			    p.setString(6, c1.getResultadoConsulta());
 			    p.setInt(7, c1.getMortePet());
 			    p.setInt(8, c1.getCodPet());
@@ -120,7 +120,7 @@ public class ConsultaDAO {
 				c1.setDataConsulta(rs.getString("dataConsulta"));
 				c1.setHoraConsulta(rs.getString("horaConsulta"));
 				c1.setEncaminhamentoExame(rs.getInt("encaminhamentoExame"));
-				c1.setPrecoTotalConsulta(rs.getDouble("precoTotalConsulta"));
+				c1.setPrecoTotalConsulta(rs.getString("precoTotalConsulta"));
 				c1.setResultadoConsulta(rs.getString("resultadoConsulta"));
 				c1.setMortePet(rs.getInt("mortePet"));
 				c1.setNomePet(rs.getString("nomePet"));

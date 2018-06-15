@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -63,7 +64,7 @@ public class ViewTipoExame implements ActionListener{
 	private TipoExame adicionaEntidade() {
 		TipoExame t = new TipoExame();
 		t.setDescricaoTipoExame(txtTipo.getText());
-		t.setPrecoExame(Double.parseDouble(txtPreco.getText()));
+		t.setPrecoExame(txtPreco.getText());
 		JOptionPane.showMessageDialog(null, "Tipo de exame adicionado.");
 		return t;
 	}
@@ -82,7 +83,12 @@ public class ViewTipoExame implements ActionListener{
 	public void actionPerformed(ActionEvent event) {
 		String cmd = event.getActionCommand();
 		if(cmd.contains("Salvar")) {
-			controle.adiciona(adicionaEntidade());
+			try {
+				controle.adiciona(adicionaEntidade());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else if(cmd.contains("Pesquisar")) {
 			recebeEntidade();
 		} else if(cmd.contains("Cancelar")) {
