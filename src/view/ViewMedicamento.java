@@ -70,7 +70,6 @@ public class ViewMedicamento implements ActionListener {
 	private Medicamento adicionaEntidade() {
 		Medicamento m = new Medicamento();
 		m.setPrincipioAtivo(txtPrincipio.getText());
-		//m.setCodMedicamento(Integer.parseInt(txtCod.getText()));
 		m.setNomeMedicamento(txtNome.getText());
 		m.setTarjaMedicamento(txtTarja.getText());
 		JOptionPane.showMessageDialog(null, "Medicamento salvo.");

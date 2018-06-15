@@ -28,13 +28,13 @@ public class ViewVeterinario implements ActionListener{
 	private JTextField txtCRMV = new JTextField(6);
 	private JTextField txtLogin = new JTextField(12);
 	private JTextField txtSenha = new JTextField(12);
-	private JTextField txtPermissao = new JTextField(3);
+	private JTextField txtPermissao = new JTextField(6);
 	private JButton btnPesquisar = new JButton("Pesquisar");
 	private JButton btnSalvar = new JButton("Salvar");
 	private JButton btnCancelar = new JButton("Cancelar");
 	
 	private ControleVeterinario controle = new ControleVeterinario();
-
+	
 	public ViewVeterinario() {
 		janela.setVisible(true);
 		janela.setSize(230, 230);
@@ -59,6 +59,8 @@ public class ViewVeterinario implements ActionListener{
 		pnlPrimario.add(txtSenha);
 		pnlPrimario.add(new JLabel("Permissão:"));
 		pnlPrimario.add(txtPermissao);
+		txtPermissao.setText("Veterinário");
+		txtPermissao.setEditable(false);
 		
 		pnlSecundario.add(btnSalvar);
 		pnlSecundario.add(btnCancelar);
@@ -71,11 +73,7 @@ public class ViewVeterinario implements ActionListener{
 	
 	private Veterinario adicionaEntidade() {
 		Veterinario v = new Veterinario();
-		AdminDAO ad = new AdminDAO();
-		Admin a = ad.pesquisaEspecifica(String.valueOf(v.getCodAdmin()));
-		
 		v.setCrmv(txtCRMV.getText());
-		v.setCodAdmin(a.getCodAdmin());
 		v.setNomeVeterinario(txtNome.getText());
 		v.setLoginVeterinario(txtLogin.getText());
 		v.setSenhaVeterinario(txtSenha.getText());

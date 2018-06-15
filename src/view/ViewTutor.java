@@ -41,10 +41,6 @@ public class ViewTutor implements ActionListener{
 	
 	private ControleTutor controle = new ControleTutor();
 	
-	public static void main(String[] args) {
-		new ViewTutor();
-	}
-	
 	public ViewTutor() {
 		janela.setVisible(true);
 		janela.setSize(495, 230);

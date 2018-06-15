@@ -45,10 +45,6 @@ public class ViewReceita implements ActionListener{
 	private ControleReceita controle = new ControleReceita();
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	
-	public static void main(String[] args) {
-		new ViewReceita();
-	}
-	
 	public ViewReceita() {
 		janela.setSize(306,235);
 		janela.setVisible(true);
@@ -79,8 +75,8 @@ public class ViewReceita implements ActionListener{
 		pnlSecundario.add(btnCancelar);
 		
 		btnPesquisarReceita.addActionListener(this);
-		//btnPesquisarPet.addActionListener(this);
-		//btnPesquisarVet.addActionListener(this);
+		btnPesquisarPet.addActionListener(this);
+		btnPesquisarVet.addActionListener(this);
 		btnSalvar.addActionListener(this);
 		btnCancelar.addActionListener(this);
 		

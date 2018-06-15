@@ -53,10 +53,6 @@ public class ViewPet extends JFrame implements ActionListener {
 	private JButton btnCancelar = new JButton("Cancelar");
 	private JButton btnPesquisar = new JButton("Pesquisar");
 	private JButton btnPesquisarTutor = new JButton("Pesquisar Tutor");
-	
-	public static void main(String[] args) {
-		new ViewPet();
-	}
 
 	public ViewPet() {
 		setVisible(true);

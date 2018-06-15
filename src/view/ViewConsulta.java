@@ -3,11 +3,11 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import controller.ControleConsulta;
 import controller.ControlePet;
@@ -31,38 +32,32 @@ public class ViewConsulta extends JFrame implements ActionListener{
 	public JPanel pnlPrincipal;
 	protected JTextField txtCodigo = new JTextField();
 	protected JTextField txtTipo = new JTextField();
-	protected JTextField txtPesquisarPet = new JTextField();
+	protected JTextField txtNomePet = new JTextField();
 
 	private ControleConsulta controle = new ControleConsulta();
 	private ControlePet controlePet = new ControlePet();
 	protected JTable tblPet = new JTable(controlePet);
 	protected JTable tblDisponivel = new JTable(controle);
 	
-	protected JTextField txtData = new JTextField();
-	protected JTextField txtHora = new JTextField();
+	protected JFormattedTextField txtData = new JFormattedTextField(mascaraData("##/##/####"));
+	protected JFormattedTextField txtHora = new JFormattedTextField(mascaraHora("##:##"));
 	protected JRadioButton rdbtnMorteS = new JRadioButton("Sim");
 	protected JRadioButton rdbtnMorteN = new JRadioButton("Não");
 	protected JTextField txtResultado = new JTextField();
 	protected JTextField txtPreco = new JTextField();
-	protected JTextField txtHoraMorte = new JTextField();
+	protected JFormattedTextField txtHoraMorte = new JFormattedTextField(mascaraHora("##:##"));
 	protected JScrollPane scrollDisponiveis = new JScrollPane();
 	protected JScrollPane scrollPet = new JScrollPane();
-	protected JButton btnPesquisar = new JButton("Pesquisar");
+	protected JButton btnPesquisarPet = new JButton("Pesquisar Pet");
 	protected JButton btnSalvar = new JButton("Salvar");
 	protected JButton btnCancelar = new JButton("Cancelar");
 	protected JRadioButton rdbtnEncaminhamentoS = new JRadioButton("Sim");
 	protected JRadioButton rdbtnEncaminhamentoN = new JRadioButton("Não");;
 	protected JLabel lblEncaminhamento = new JLabel("Encaminhamento Exame:");
-
-	private SimpleDateFormat sdfData = new SimpleDateFormat("yyyy-MM-dd");
-	private SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm");
-	
-	
-	public static void main(String[] args) {
-		new ViewConsulta();
-	}
+	private final JButton btnPesquisarConsulta = new JButton("Pesquisar Consulta");
 	
 	public ViewConsulta() {
+		setTitle("Manutenção de Consultas");
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -86,16 +81,16 @@ public class ViewConsulta extends JFrame implements ActionListener{
 		
 		pnlPrincipal.add(new JLabel("Pesquisar Pet (Nome):")).setBounds(12, 74, 138, 16);
 		
-		txtPesquisarPet.setBounds(162, 71, 116, 22);
-		pnlPrincipal.add(txtPesquisarPet);
-		txtPesquisarPet.setColumns(10);
+		txtNomePet.setBounds(162, 71, 116, 22);
+		pnlPrincipal.add(txtNomePet);
+		txtNomePet.setColumns(10);
 		
-		btnPesquisar.setBounds(290, 70, 97, 25);
-		pnlPrincipal.add(btnPesquisar);
+		btnPesquisarPet.setBounds(290, 70, 141, 25);
+		pnlPrincipal.add(btnPesquisarPet);
 		
 		scrollPet.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPet.setBounds(12, 106, 478, 97);
-		scrollPet.getViewport().add(tblPet);
+		scrollPet.setViewportView(tblPet);
 		pnlPrincipal.add(scrollPet);
 		
 		pnlPrincipal.add(new JLabel("Data:")).setBounds(12, 211, 56, 16);
@@ -106,7 +101,6 @@ public class ViewConsulta extends JFrame implements ActionListener{
 		
 		pnlPrincipal.add(new JLabel("Hora:")).setBounds(226, 211, 56, 16);
 		
-		txtHora = new JTextField();
 		txtHora.setBounds(300, 211, 116, 22);
 		pnlPrincipal.add(txtHora);
 		txtHora.setColumns(10);
@@ -133,7 +127,7 @@ public class ViewConsulta extends JFrame implements ActionListener{
 		
 		scrollDisponiveis.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollDisponiveis.setBounds(12, 441, 478, 97);
-		scrollDisponiveis.getViewport().add(tblDisponivel);
+		scrollDisponiveis.setViewportView(tblDisponivel);
 		pnlPrincipal.add(scrollDisponiveis);
 		
 		pnlPrincipal.add(new JLabel("Preço: R$")).setBounds(12, 551, 64, 16);
@@ -166,12 +160,13 @@ public class ViewConsulta extends JFrame implements ActionListener{
 		bgEncaminhamento.add(rdbtnEncaminhamentoS);
 		bgEncaminhamento.add(rdbtnEncaminhamentoN);
 		
-		txtCodigo.setEditable(false);
+		btnPesquisarConsulta.setBounds(290, 9, 141, 25);
+		pnlPrincipal.add(btnPesquisarConsulta);
 		
-		btnPesquisar.addActionListener(this);
+		btnPesquisarPet.addActionListener(this);
 		btnSalvar.addActionListener(this);
 		btnCancelar.addActionListener(this);
-		
+		btnPesquisarConsulta.addActionListener(this);
 	}
 	
 	private Consulta adicionaEntidade() {
@@ -179,7 +174,7 @@ public class ViewConsulta extends JFrame implements ActionListener{
 		TipoConsultaDAO tipoConsultaDao = new TipoConsultaDAO();
 		TipoConsulta tipo = tipoConsultaDao.pesquisaEspecifica(txtTipo.getText());
 		ControlePet control = new ControlePet();
-		List<Pet> pet = control.buscaPet(txtPesquisarPet.getText());
+		List<Pet> pet = control.buscaPet(txtNomePet.getText());
 		Pet p = pet.get(0);
 		
 		c.setCodTipoConsulta(tipo.getCodTipoConsulta());
@@ -198,15 +193,43 @@ public class ViewConsulta extends JFrame implements ActionListener{
 		return c;
 	}
 	
-	private void recebeEntidade() {
+	private void recebePet() {
 		ControlePet controlPet = new ControlePet();
-		List<Pet> listaPet = controlPet.buscaPet(txtPesquisarPet.getText());
+		List<Pet> listaPet = controlPet.buscaPet(txtNomePet.getText());
 		if(listaPet != null && listaPet.size() > 0 ){
 			tblPet.invalidate();
 			tblPet.revalidate();
 			tblPet.repaint();
 		} else {
 			JOptionPane.showMessageDialog(null, "A busca não retornou resultados.");
+		}
+	}
+	
+	private void recebeConsulta() {
+		ControleConsulta controleConsulta = new ControleConsulta();
+		Consulta c = controleConsulta.buscaConsulta(txtCodigo.getColumns());
+		ControlePet controlePet = new ControlePet();
+		List<Pet> listaPet = controlePet.buscaPet(c.getNomePet());
+		Pet p = listaPet.get(0);
+		
+		if(c != null) {
+			txtTipo.setText(String.valueOf(c.getCodTipoConsulta()));
+			txtNomePet.setText(c.getNomePet());
+			txtData.setValue(c.getDataConsulta());
+			txtHora.setValue(c.getHoraConsulta());
+			if(c.getMortePet() == 0) {
+				rdbtnMorteN.setSelected(true);
+			} else {
+				rdbtnMorteS.setSelected(true);
+				txtHoraMorte.setText(p.getHoraMortePet());;
+			}
+			txtResultado.setText(c.getResultadoConsulta());
+			txtPreco.setText(String.valueOf(c.getPrecoTotalConsulta()));
+			if(c.getEncaminhamentoExame() == 0) {
+				rdbtnEncaminhamentoN.setSelected(true);
+			} else {
+				rdbtnEncaminhamentoS.setSelected(true);
+			}
 		}
 	}
 
@@ -218,12 +241,35 @@ public class ViewConsulta extends JFrame implements ActionListener{
 			tblDisponivel.invalidate();
 			tblDisponivel.revalidate();
 			tblDisponivel.repaint();
-		} else if(cmd.contains("Pesquisar")) {
-			recebeEntidade();
+		} else if(cmd.contains("Pet")) {
+			recebePet();
+		} else if(cmd.contains("Consulta"))	{
+			recebeConsulta();
 		} else if(cmd.contains("Cancelar")) {
 			dispose();
 		}
-		
+	}
+	
+	private MaskFormatter mascaraData(String mascara) {
+		MaskFormatter mask = new MaskFormatter();
+		try {
+			mask.setMask(mascara);
+			mask.setPlaceholderCharacter(' ');
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return mask;
+	}
+	
+	private MaskFormatter mascaraHora(String mascara) {
+		MaskFormatter mask = new MaskFormatter();
+		try {
+			mask.setMask(mascara);
+			mask.setPlaceholderCharacter(' ');
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return mask;
 	}
 	
 }

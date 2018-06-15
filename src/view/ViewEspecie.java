@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,7 +15,6 @@ import javax.swing.JTextField;
 import controller.ControleEspecie;
 import model.Admin;
 import model.AdminDAO;
-//import controller.ListenerEspecie;
 import model.Especie;
 
 public class ViewEspecie implements ActionListener{
@@ -33,10 +31,6 @@ public class ViewEspecie implements ActionListener{
 	private JButton btnPesquisar = new JButton("Pesquisar");
 	private ControleEspecie controle = new ControleEspecie();
 	
-	public static void main(String[] args) {
-		new ViewEspecie();
-	}
-		
 	public ViewEspecie() {
 		janela.setVisible(true);
 		janela.setResizable(false);
@@ -69,7 +63,6 @@ public class ViewEspecie implements ActionListener{
 		Admin a = adminDao.pesquisaEspecifica(txtLogin.getText());
 		
 		e.setLoginAdmin(a.getLoginAdmin());
-		e.setCodAdmin(a.getCodAdmin());
 		e.setDescricaoEspecie(txtDescricao.getText());
 		return e;
 	}
