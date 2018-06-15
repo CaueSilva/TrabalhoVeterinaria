@@ -61,7 +61,7 @@ public class ViewAdmin implements ActionListener {
 		btnCancelar.addActionListener(this);
 	}
 
-	public Admin adicionaEntidade() {
+	private Admin adicionaEntidade() {
 		Admin a = new Admin();
 		a.setCodAdmin(Integer.parseInt(txtCod.getText()));
 		a.setNomeAdmin(txtNome.getText());
@@ -71,7 +71,7 @@ public class ViewAdmin implements ActionListener {
 		return a;
 	}
 	
-	public void recebeEntidade() {
+	private void recebeEntidade() {
 		Admin a = controle.busca(txtLogin.getText());
 		if(a != null) {
 			txtCod.setText(String.valueOf(a.getCodAdmin()));

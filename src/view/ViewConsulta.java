@@ -174,7 +174,7 @@ public class ViewConsulta extends JFrame implements ActionListener{
 		
 	}
 	
-	public Consulta adicionaEntidade() {
+	private Consulta adicionaEntidade() {
 		Consulta c = new Consulta();
 		TipoConsultaDAO tipoConsultaDao = new TipoConsultaDAO();
 		TipoConsulta tipo = tipoConsultaDao.pesquisaEspecifica(txtTipo.getText());
@@ -198,7 +198,7 @@ public class ViewConsulta extends JFrame implements ActionListener{
 		return c;
 	}
 	
-	public void recebeEntidade() {
+	private void recebeEntidade() {
 		ControlePet controlPet = new ControlePet();
 		List<Pet> listaPet = controlPet.buscaPet(txtPesquisarPet.getText());
 		if(listaPet != null && listaPet.size() > 0 ){

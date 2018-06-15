@@ -62,7 +62,7 @@ public class ViewRaca implements ActionListener {
 		btnPesquisaEspecie.addActionListener(this);
 	}
 
-	public Raca adicionaEntidade() {
+	private Raca adicionaEntidade() {
 		Raca r = new Raca();
 		r.setCodRaca(Integer.parseInt(txtCodRaca.getText()));
 		r.setDescricaoRaca(txtDescricaoRaca.getText());
@@ -70,7 +70,7 @@ public class ViewRaca implements ActionListener {
 		return r;
 	}
 
-	public void recebeRaca() {
+	private void recebeRaca() {
 		Raca r = controle.buscaRaca(txtDescricaoRaca.getText());
 		ControleEspecie controleEspecie = new ControleEspecie();
 		Especie e = controleEspecie.busca(txtDescricaoEspecie.getText());
@@ -81,7 +81,7 @@ public class ViewRaca implements ActionListener {
 		}
 	}
 
-	public void recebeEspecie() {
+	private void recebeEspecie() {
 		ControleEspecie controleEspecie = new ControleEspecie();
 		Especie e = controleEspecie.busca(txtDescricaoEspecie.getText());
 		if(e != null) {

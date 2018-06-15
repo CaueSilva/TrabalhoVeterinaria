@@ -67,7 +67,7 @@ public class ViewMedicamento implements ActionListener {
 		btnCancelar.addActionListener(this);
 	}
 
-	public Medicamento adicionaEntidade() {
+	private Medicamento adicionaEntidade() {
 		Medicamento m = new Medicamento();
 		m.setPrincipioAtivo(txtPrincipio.getText());
 		//m.setCodMedicamento(Integer.parseInt(txtCod.getText()));
@@ -77,7 +77,7 @@ public class ViewMedicamento implements ActionListener {
 		return m;
 	}
 
-	public void recebeEntidade() {
+	private void recebeEntidade() {
 		List<Medicamento> lista = control.busca(txtPrincipio.getText());
 		if (lista != null && lista.size() > 0) {
 			Medicamento m = lista.get(0);

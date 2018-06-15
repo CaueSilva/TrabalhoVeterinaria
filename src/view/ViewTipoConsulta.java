@@ -61,7 +61,7 @@ public class ViewTipoConsulta implements ActionListener{
 		btnCancelar.addActionListener(this);
 	}
 	
-	public TipoConsulta adicionaEntidade() {
+	private TipoConsulta adicionaEntidade() {
 		TipoConsulta t = new TipoConsulta();
 		t.setDescricaoTipoConsulta(txtTipo.getText());
 		t.setPrecoConsulta(Double.parseDouble(txtPreco.getText()));
@@ -69,7 +69,7 @@ public class ViewTipoConsulta implements ActionListener{
 		return t;
 	}
 	
-	public void recebeEntidade() {
+	private void recebeEntidade() {
 		List<TipoConsulta> lista = controle.pesquisaTipo(txtTipo.getText());
 		if(lista != null && lista.size() > 0) {
 			TipoConsulta t = lista.get(0);

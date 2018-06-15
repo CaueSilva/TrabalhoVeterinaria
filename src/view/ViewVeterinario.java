@@ -69,7 +69,7 @@ public class ViewVeterinario implements ActionListener{
 		
 	}
 	
-	public Veterinario adicionaEntidade() {
+	private Veterinario adicionaEntidade() {
 		Veterinario v = new Veterinario();
 		AdminDAO ad = new AdminDAO();
 		Admin a = ad.pesquisaEspecifica(String.valueOf(v.getCodAdmin()));
@@ -83,7 +83,7 @@ public class ViewVeterinario implements ActionListener{
 		return v;
 	}
 	
-	public void recebeEntidade() {
+	private void recebeEntidade() {
 		Veterinario v = controle.buscaVeterinario(txtCRMV.getText());
 		if(v != null) {
 			txtCodigo.setText(String.valueOf(v.getCodVeterinario()));

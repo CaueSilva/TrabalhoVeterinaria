@@ -186,7 +186,7 @@ public class ViewPet extends JFrame implements ActionListener {
 
 	}
 
-	public Pet adicionaEntidade() {
+	private Pet adicionaEntidade() {
 		Pet p = new Pet();
 		p.setNomePet(txtNomePet.getText());
 		p.setCodTutor(Integer.parseInt(txtCpfTutor.getText()));
@@ -202,7 +202,7 @@ public class ViewPet extends JFrame implements ActionListener {
 		return p;
 	}
 
-	public void recebeEntidade() {
+	private void recebeEntidade() {
 		List<Pet> lista = controle.buscaPet(txtNomePet.getText());
 		TutorDAO tDao = new TutorDAO();
 		Tutor t = tDao.pesquisaEspecifica(txtCpfTutor.getText());

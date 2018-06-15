@@ -61,7 +61,7 @@ public class ViewTipoExame implements ActionListener{
 		btnCancelar.addActionListener(this);
 	}
 	
-	public TipoExame adicionaEntidade() {
+	private TipoExame adicionaEntidade() {
 		TipoExame t = new TipoExame();
 		t.setDescricaoTipoExame(txtTipo.getText());
 		t.setPrecoExame(Double.parseDouble(txtPreco.getText()));
@@ -69,7 +69,7 @@ public class ViewTipoExame implements ActionListener{
 		return t;
 	}
 	
-	public void recebeEntidade() {
+	private void recebeEntidade() {
 		List<TipoExame> lista = controle.pesquisaTipo(txtTipo.getText());
 		if(lista != null && lista.size() > 0) {
 			TipoExame t = lista.get(0);

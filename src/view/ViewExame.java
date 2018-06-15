@@ -46,7 +46,7 @@ public class ViewExame extends View implements ActionListener{
 		tblDisponivel = new JTable(controle);
 	}
 	
-	public Exame adicionaEntidade() {
+	private Exame adicionaEntidade() {
 		Exame e = new Exame();
 		TipoExameDAO tipoExameDao = new TipoExameDAO();
 		TipoExame tipo = tipoExameDao.pesquisaEspecifica(txtTipo.getText());
@@ -73,7 +73,7 @@ public class ViewExame extends View implements ActionListener{
 		return e;
 	}
 	
-	public void recebeEntidade() {
+	private void recebeEntidade() {
 		ControlePet controlPet = new ControlePet();
 		List<Pet> listaPet = controlPet.buscaPet(txtPesquisarPet.getText());
 		if(listaPet != null && listaPet.size() > 0 ){

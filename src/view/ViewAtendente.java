@@ -71,7 +71,7 @@ public class ViewAtendente implements ActionListener {
 		btnCancelar.addActionListener(this);
 	}
 
-	public Atendente adicionaEntidade() {
+	private Atendente adicionaEntidade() {
 		Atendente atendente = new Atendente();
 		AdminDAO ad = new AdminDAO();
 		Admin a = ad.pesquisaEspecifica(String.valueOf(atendente.getCodAdmin()));
@@ -86,7 +86,7 @@ public class ViewAtendente implements ActionListener {
 		return atendente;
 	}
 	
-	public void recebeEntidade() {
+	private void recebeEntidade() {
 		List<Atendente> lista = controle.buscaAtendente(txtCPF.getText());
 		if(lista != null && lista.size() > 0) {
 			Atendente a = lista.get(0);

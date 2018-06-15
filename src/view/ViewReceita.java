@@ -86,7 +86,7 @@ public class ViewReceita implements ActionListener{
 		
 	}
 
-	public Receita adicionaEntidade() {
+	private Receita adicionaEntidade() {
 		Receita r = new Receita();
 		r.setCodReceita(Integer.parseInt(txtCodReceita.getText()));
 		r.setCodPet(Integer.parseInt(txtNomePet.getText()));
@@ -97,7 +97,7 @@ public class ViewReceita implements ActionListener{
 		return r;
 	}
 	
-	public void recebeReceita() {
+	private void recebeReceita() {
 		List<Receita> lista = controle.buscaReceita(Integer.parseInt(txtCodReceita.getText()));
 		if(lista != null && lista.size() > 0) {
 			Receita r = lista.get(0);
@@ -113,14 +113,14 @@ public class ViewReceita implements ActionListener{
 		}
 	}
 	
-	public void recebePet() {
+	private void recebePet() {
 		ControlePet controlePet = new ControlePet();
 		List<Pet> lista = controlePet.buscaPet(txtNomePet.getText());
 		if(lista != null && lista.size() > 0) {
 			JOptionPane.showMessageDialog(null, "O pet está cadastrado.");
 		}
 	}
-	public void recebeVet() {
+	private void recebeVet() {
 		ControleVeterinario controleVet = new ControleVeterinario();
 		Veterinario v = controleVet.buscaVeterinario(txtCrmvVet.getText());
 		if(v != null) {

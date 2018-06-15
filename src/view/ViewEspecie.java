@@ -63,7 +63,7 @@ public class ViewEspecie implements ActionListener{
 		btnCancelar.addActionListener(this);
 	}
 	
-	public Especie adicionaEntidade() {
+	private Especie adicionaEntidade() {
 		Especie e = new Especie();
 		AdminDAO adminDao = new AdminDAO();
 		Admin a = adminDao.pesquisaEspecifica(txtLogin.getText());
@@ -74,7 +74,7 @@ public class ViewEspecie implements ActionListener{
 		return e;
 	}
 	
-	public void recebeEntidade() {
+	private void recebeEntidade() {
 		Especie e = controle.busca(txtDescricao.getText());
 		if(e != null) {
 			txtCodEspecie.setText(String.valueOf(e.getCodEspecie()));
