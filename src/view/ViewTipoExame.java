@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,7 +17,7 @@ import model.TipoExame;
 
 public class ViewTipoExame implements ActionListener{
 	
-	private JFrame janela = new JFrame("Manutenção de Consultas");
+	private JFrame janela = new JFrame("Manutenção de Exames");
 	private JPanel pnlPrincipal = new JPanel(new BorderLayout());
 	private JPanel pnlPrimario = new JPanel(new FlowLayout(FlowLayout.LEFT));
 	private JPanel pnlSecundario = new JPanel(new FlowLayout());
@@ -70,9 +69,8 @@ public class ViewTipoExame implements ActionListener{
 	}
 	
 	private void recebeEntidade() {
-		List<TipoExame> lista = controle.pesquisaTipo(txtTipo.getText());
-		if(lista != null && lista.size() > 0) {
-			TipoExame t = lista.get(0);
+		TipoExame t = controle.pesquisaTipo(txtTipo.getText());
+		if(t != null) {
 			txtPreco.setText(String.valueOf(t.getPrecoExame()));
 			txtCodigo.setText(String.valueOf(t.getCodTipoExame()));
 		} else {

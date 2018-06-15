@@ -70,9 +70,8 @@ public class ViewTipoConsulta implements ActionListener{
 	}
 	
 	private void recebeEntidade() {
-		List<TipoConsulta> lista = controle.pesquisaTipo(txtTipo.getText());
-		if(lista != null && lista.size() > 0) {
-			TipoConsulta t = lista.get(0);
+		TipoConsulta t = controle.pesquisaTipo(txtTipo.getText());
+		if(t != null) {
 			txtPreco.setText(String.valueOf(t.getPrecoConsulta()));
 			txtCodigo.setText(String.valueOf(t.getCodTipoConsulta()));
 		} else {

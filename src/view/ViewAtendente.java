@@ -80,9 +80,8 @@ public class ViewAtendente implements ActionListener {
 	}
 	
 	private void recebeEntidade() {
-		List<Atendente> lista = controle.buscaAtendente(txtCPF.getText());
-		if(lista != null && lista.size() > 0) {
-			Atendente a = lista.get(0);
+		Atendente a = controle.buscaAtendente(txtCPF.getText());
+		if(a != null) {
 			txtCPF.setText(a.getCpfAtendente());
 			txtNome.setText(a.getNomeAtendente());
 			txtLogin.setText(a.getLoginAtendente());

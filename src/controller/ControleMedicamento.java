@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -9,53 +8,41 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 import model.Medicamento;
+import model.MedicamentoDAO;
 
-public class ControleMedicamento implements TableModel{
-	
+public class ControleMedicamento implements TableModel {
+
 	private List<Medicamento> listaMedicamento = new ArrayList<>();
 	private List<Medicamento> listaPesquisados = new ArrayList<>();
-	private String [] nomesColunas = {"Princípio Ativo","Nome", "Tarja"};
-	
+	private String[] nomesColunas = { "Princípio Ativo", "Nome", "Tarja" };
+	private MedicamentoDAO medicamentoDao = new MedicamentoDAO();
+
 	public void adiciona(Medicamento medicamento) {
-		listaMedicamento.add(medicamento);
+		if (medicamento != null) {
+			listaMedicamento.add(medicamento);
+			medicamentoDao.adicionar(medicamento);
+		} else {
+			JOptionPane.showMessageDialog(null, "Não foi possível adicionar o medicamento.");
+		}
 	}
-	
+
 	public List<Medicamento> busca(String principio) {
 		listaPesquisados.clear();
-		for(Medicamento m : listaMedicamento) {
-			if(m.getPrincipioAtivo().equals(principio)) {
-				listaPesquisados.add(m);
-			}
-		}
+		listaPesquisados = medicamentoDao.pesquisaEspecifica(principio);
 		return listaPesquisados;
 	}
-	
-	public void remove(String principio) {
-		List<Medicamento> listaRmv = new ArrayList<>();
-		for(Medicamento m : listaMedicamento) {
-			if(m.getPrincipioAtivo().contains(principio)) {
-				listaRmv.add(m);
-			}
-		} if(!listaRmv.isEmpty()) {
-			listaMedicamento.removeAll(listaRmv);
-			listaRmv = null;
-			JOptionPane.showMessageDialog(null, "Medicamento removido.");
-		} else {
-			JOptionPane.showMessageDialog(null, "O medicamento não pôde ser removido.");
-		}
-	}
-	
+
 	@Override
 	public void addTableModelListener(TableModelListener l) {
 	}
 
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
-		if(columnIndex == 0) {
+		if (columnIndex == 0) {
 			return String.class;
-		} else if(columnIndex == 1) {
+		} else if (columnIndex == 1) {
 			return String.class;
-		} else if(columnIndex == 2) {
+		} else if (columnIndex == 2) {
 			return String.class;
 		}
 		return null;
@@ -79,11 +66,11 @@ public class ControleMedicamento implements TableModel{
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Medicamento m = listaPesquisados.get(rowIndex);
-		if(columnIndex == 0) {
+		if (columnIndex == 0) {
 			return m.getPrincipioAtivo();
-		} else if(columnIndex == 1) {
+		} else if (columnIndex == 1) {
 			return m.getNomeMedicamento();
-		} else if(columnIndex == 2) {
+		} else if (columnIndex == 2) {
 			return m.getTarjaMedicamento();
 		}
 		return null;
@@ -101,5 +88,5 @@ public class ControleMedicamento implements TableModel{
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 	}
-	
+
 }

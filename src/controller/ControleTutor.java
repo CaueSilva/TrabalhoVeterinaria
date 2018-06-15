@@ -1,44 +1,25 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JOptionPane;
 
 import model.Tutor;
+import model.TutorDAO;
 
 public class ControleTutor {
-	
-	List<Tutor> listaTutor = new ArrayList<>();
-	
+
+	private TutorDAO tutorDao = new TutorDAO();
+
 	public void adiciona(Tutor t) {
-		listaTutor.add(t);
-	}
-	
-	public List<Tutor> buscaTutor(String cpf){
-		List<Tutor> lista = new ArrayList<>();
-		for(Tutor t : listaTutor) {
-			if(t.getCpfTutor().equals(cpf)) {
-				lista.add(t);
-			}
-		}
-		return lista;
-	}
-	
-	public void remove(String cpf) {
-		List<Tutor> lista = new ArrayList<>();
-		for(Tutor t : listaTutor) {
-			if(t.getCpfTutor().equals(cpf)) {
-				lista.add(t);
-			}
-		}
-		if(!lista.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Tutor removido.");
-			listaTutor.removeAll(lista);
-			lista = null;
+		if (t != null) {
+			tutorDao.adicionar(t);
 		} else {
-			JOptionPane.showMessageDialog(null, "Não foi possível remover o tutor.");
+			JOptionPane.showMessageDialog(null, "Não foi possível adicionar tutor.");
 		}
 	}
-	
+
+	public Tutor buscaTutor(String cpf) {
+		Tutor t = tutorDao.pesquisaEspecifica(cpf);
+		return t;
+	}
+
 }

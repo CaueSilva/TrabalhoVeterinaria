@@ -1,44 +1,25 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JOptionPane;
 
 import model.TipoExame;
+import model.TipoExameDAO;
 
 public class ControleTipoExame {
 	
-	List<TipoExame> listaTipoExame = new ArrayList<>();
+	private TipoExameDAO tipoExameDao = new TipoExameDAO();
 	
 	public void adiciona(TipoExame t) {
-		listaTipoExame.add(t);
-	}
-	
-	public List<TipoExame> pesquisaTipo(String tipo){
-		List<TipoExame> lista = new ArrayList<>();
-		for(TipoExame t : listaTipoExame) {
-			if(t.getDescricaoTipoExame().equals(tipo)) {
-				lista.add(t);
-			}
-		}
-		return lista;
-	}
-	
-	public void remove(String tipo) {
-		List<TipoExame> lista = new ArrayList<>();
-		for(TipoExame t : listaTipoExame) {
-			if(t.getDescricaoTipoExame().equals(tipo)) {
-				lista.add(t);
-			}
-		}
-		if(!lista.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Tipo de Exame removido.");
-			listaTipoExame.removeAll(lista);
-			lista = null;
+		if(t != null) {
+			tipoExameDao.adicionar(t);
 		} else {
-			JOptionPane.showMessageDialog(null, "Não foi possível remover o tipo de exame.");
+			JOptionPane.showMessageDialog(null, "Não foi possível adicionar o tipo de exame.");
 		}
+	}
+	
+	public TipoExame pesquisaTipo(String tipo){
+		TipoExame t = tipoExameDao.pesquisaEspecifica(tipo);
+		return t;
 	}
 
 }

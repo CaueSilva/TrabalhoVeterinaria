@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -108,9 +107,8 @@ public class ViewTutor implements ActionListener{
 	}
 	
 	private void recebeEntidade() {
-		List<Tutor> lista = controle.buscaTutor(txtCpf.getText());
-		if(lista != null && lista.size() > 0) {
-			Tutor t = lista.get(0);
+		Tutor t = controle.buscaTutor(txtCpf.getText());
+		if(t != null) {
 			txtNome.setText(t.getNomeTutor());
 			txtCep.setText(String.valueOf(t.getCepTutor()));
 			txtRua.setText(t.getRuaTutor());

@@ -10,8 +10,6 @@ import javax.swing.table.TableModel;
 
 import model.Exame;
 import model.ExameDAO;
-import model.Pet;
-import model.PetDAO;
 
 public class ControleExame implements TableModel{
 	

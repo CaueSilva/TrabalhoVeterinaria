@@ -1,44 +1,25 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JOptionPane;
 
 import model.TipoConsulta;
+import model.TipoConsultaDAO;
 
 public class ControleTipoConsulta {
 	
-	List<TipoConsulta> listaTipoConsulta = new ArrayList<>();
+	private TipoConsultaDAO tipoConsultaDao = new TipoConsultaDAO();
 	
 	public void adiciona(TipoConsulta t) {
-		listaTipoConsulta.add(t);
-	}
-	
-	public List<TipoConsulta> pesquisaTipo(String tipo) {
-		List<TipoConsulta> lista = new ArrayList<>();
-		for(TipoConsulta t : listaTipoConsulta) {
-			if(t.getDescricaoTipoConsulta().equals(tipo)) {
-				lista.add(t);
-			}
-		}
-		return lista;
-	}
-	
-	public void remove(String tipo) {
-		List<TipoConsulta> lista = new ArrayList<>();
-		for(TipoConsulta t : listaTipoConsulta) {
-			if(t.getDescricaoTipoConsulta().equals(tipo)) {
-				lista.add(t);
-			}
-		}
-		if(!lista.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Tipo de consulta rmeovido.");
-			listaTipoConsulta.removeAll(lista);
-			lista = null;
+		if(t != null) {
+			tipoConsultaDao.adicionar(t);
 		} else {
-			JOptionPane.showMessageDialog(null, "Não foi possível remover o tipo de consulta informado.");
+			JOptionPane.showMessageDialog(null, "Não foi possível adicionar o tipo de consulta.");
 		}
+	}
+	
+	public TipoConsulta pesquisaTipo(String tipo) {
+		TipoConsulta t = tipoConsultaDao.pesquisaEspecifica(tipo);
+		return t;
 	}
 	
 }

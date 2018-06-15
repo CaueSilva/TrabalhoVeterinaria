@@ -94,9 +94,8 @@ public class ViewReceita implements ActionListener{
 	}
 	
 	private void recebeReceita() {
-		List<Receita> lista = controle.buscaReceita(Integer.parseInt(txtCodReceita.getText()));
-		if(lista != null && lista.size() > 0) {
-			Receita r = lista.get(0);
+		Receita r = controle.buscaReceita(Integer.parseInt(txtCodReceita.getText()));
+		if(r != null) {
 			ControleVeterinario controleVet = new ControleVeterinario();
 			Veterinario v = controleVet.buscaVeterinario(txtCrmvVet.getText());
 			
