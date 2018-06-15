@@ -21,6 +21,7 @@ import javax.swing.JRadioButton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -242,7 +243,11 @@ public class ViewPet extends JFrame implements ActionListener {
 		} else if (cmd.contains("Tutor")) {
 			pesquisaTutor();
 		} else if (cmd.equals("Salvar")) {
-			controle.adiciona(adicionaEntidade());
+			try {
+				controle.adiciona(adicionaEntidade());
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			tblPets.invalidate();
 			tblPets.revalidate();
 			tblPets.repaint();

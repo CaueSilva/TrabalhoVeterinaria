@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 import model.Especie;
@@ -9,7 +11,7 @@ public class ControleEspecie {
 	
 	private EspecieDAO especieDao = new EspecieDAO();
 	
-	public void adiciona(Especie especie) {
+	public void adiciona(Especie especie) throws SQLException {
 		if(!especie.getDescricaoEspecie().equals("")) {
 			especieDao.adicionar(especie);
 			JOptionPane.showMessageDialog(null, "Espécie "+especie.getDescricaoEspecie()+" adicionada.");

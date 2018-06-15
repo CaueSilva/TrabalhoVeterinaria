@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -84,7 +85,11 @@ public class ViewEspecie implements ActionListener{
 		if(cmd.equals("Pesquisar")){
 			recebeEntidade();
 		} else if(cmd.equals("Salvar")) {
-			controle.adiciona(adicionaEntidade());
+			try {
+				controle.adiciona(adicionaEntidade());
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		} else {
 			janela.dispose();
 		}

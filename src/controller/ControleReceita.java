@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 import model.Receita;
@@ -9,7 +11,7 @@ public class ControleReceita {
 	
 	private ReceitaDAO receitaDao = new ReceitaDAO();
 	
-	public void adiciona(Receita r) {
+	public void adiciona(Receita r) throws SQLException {
 		if(r != null) {
 			receitaDao.adicionar(r);
 		} else {

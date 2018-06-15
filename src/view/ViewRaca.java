@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -84,7 +85,7 @@ public class ViewRaca implements ActionListener {
 	private void recebeEspecie() {
 		ControleEspecie controleEspecie = new ControleEspecie();
 		Especie e = controleEspecie.busca(txtDescricaoEspecie.getText());
-		if(e != null) {
+		if (e != null) {
 			txtDescricaoEspecie.setText(e.getDescricaoEspecie());
 		}
 	}
@@ -94,8 +95,14 @@ public class ViewRaca implements ActionListener {
 		String cmd = e.getActionCommand();
 		if (cmd.contains("Raça")) {
 			recebeRaca();
+		} else if (cmd.contains("Espécie")) {
+			recebeEspecie();
 		} else if (cmd.contains("Salvar")) {
-			controle.adiciona(adicionaEntidade());
+			try {
+				controle.adiciona(adicionaEntidade());
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} else if (cmd.contains("Cancelar")) {
 			janela.dispose();
 		}

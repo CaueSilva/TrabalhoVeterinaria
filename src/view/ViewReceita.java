@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -131,7 +132,11 @@ public class ViewReceita implements ActionListener{
 		} else if(cmd.contains("Vet")) {
 			recebeVet();
 		} else if(cmd.contains("Salvar")) {
-				controle.adiciona(adicionaEntidade());
+				try {
+					controle.adiciona(adicionaEntidade());
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 		} else if(cmd.equals("Pesquisar")) {
 			recebeReceita();
 		} else if(cmd.contains("Cancelar")) {

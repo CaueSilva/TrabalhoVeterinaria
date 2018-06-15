@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 import model.Admin;
@@ -9,7 +11,7 @@ public class ControleAdmin {
 	
 	private AdminDAO adminDao = new AdminDAO();
 	
-	public void adiciona(Admin a) {
+	public void adiciona(Admin a) throws SQLException {
 		if(!a.getLoginAdmin().equals("")) {
 			adminDao.adicionar(a);
 		} else {

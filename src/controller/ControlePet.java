@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +19,8 @@ public class ControlePet implements TableModel {
 	private String[] nomesColunas = { "Nome", "Tutor", "Cor", "Descriçao" };
 	private PetDAO petDao = new PetDAO();
 
-	public void adiciona(Pet p) {
-		if (!p.getNomePet().equals("")) {
+	public void adiciona(Pet p) throws SQLException {
+		if (p != null) {
 			petDao.adicionar(p);
 			listaPets.add(p);
 			JOptionPane.showMessageDialog(null, "Pet " + p.getNomePet() + " adicionado.");

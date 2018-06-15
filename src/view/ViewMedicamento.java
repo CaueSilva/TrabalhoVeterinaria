@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -97,7 +98,11 @@ public class ViewMedicamento implements ActionListener {
 		if (cmd.equals("Pesquisar")) {
 			recebeEntidade();
 		} else if (cmd.equals("Salvar")) {
-			control.adiciona(adicionaEntidade());
+			try {
+				control.adiciona(adicionaEntidade());
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} else if (cmd.equals("Cancelar")) {
 			janela.dispose();
 		}

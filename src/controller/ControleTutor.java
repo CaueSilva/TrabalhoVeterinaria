@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 import model.Tutor;
@@ -9,7 +11,7 @@ public class ControleTutor {
 
 	private TutorDAO tutorDao = new TutorDAO();
 
-	public void adiciona(Tutor t) {
+	public void adiciona(Tutor t) throws SQLException {
 		if (t != null) {
 			tutorDao.adicionar(t);
 		} else {

@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 import model.Raca;
@@ -9,7 +11,7 @@ public class ControleRaca {
 
 	private RacaDAO racaDao = new RacaDAO();
 
-	public void adiciona(Raca r) {
+	public void adiciona(Raca r) throws SQLException {
 		if (r != null) {
 			racaDao.adicionar(r);
 		} else {

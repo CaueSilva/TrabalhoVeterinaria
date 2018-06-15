@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -83,7 +84,11 @@ public class ViewTipoConsulta implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		if(cmd.contains("Salvar")) {
-			controle.adiciona(adicionaEntidade());
+			try {
+				controle.adiciona(adicionaEntidade());
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} else if(cmd.contains("Pesquisar")) {
 			recebeEntidade();
 		} else if(cmd.contains("Cancelar")) {

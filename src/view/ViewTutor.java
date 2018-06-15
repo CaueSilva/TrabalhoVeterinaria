@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,8 +16,8 @@ import javax.swing.JTextField;
 import controller.ControleTutor;
 import model.Tutor;
 
-public class ViewTutor implements ActionListener{
-	
+public class ViewTutor implements ActionListener {
+
 	private JFrame janela = new JFrame("Manutenção de Tutores");
 	private JPanel pnlPrincipal = new JPanel(new BorderLayout());
 	private JPanel pnlPrimario = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -37,19 +38,19 @@ public class ViewTutor implements ActionListener{
 	private JButton btnSalvar = new JButton("Salvar");
 	private JButton btnCancelar = new JButton("Cancelar");
 	private JButton btnPesquisar = new JButton("Pesquisar");
-	
+
 	private ControleTutor controle = new ControleTutor();
-	
+
 	public ViewTutor() {
 		janela.setVisible(true);
 		janela.setSize(495, 230);
 		janela.setResizable(false);
 		janela.setContentPane(pnlPrincipal);
 		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
+
 		pnlPrincipal.add(pnlPrimario, BorderLayout.CENTER);
 		pnlPrincipal.add(pnlSecundario, BorderLayout.SOUTH);
-		
+
 		pnlPrimario.add(new JLabel("CPF: "));
 		pnlPrimario.add(txtCpf);
 		pnlPrimario.add(btnPesquisar);
@@ -78,16 +79,16 @@ public class ViewTutor implements ActionListener{
 		pnlPrimario.add(txtTelefone);
 		pnlPrimario.add(new JLabel("E-Mail: "));
 		pnlPrimario.add(txtEmail);
-		
+
 		pnlSecundario.add(btnSalvar);
 		pnlSecundario.add(btnCancelar);
-		
+
 		btnPesquisar.addActionListener(this);
 		btnCancelar.addActionListener(this);
 		btnSalvar.addActionListener(this);
-		
+
 	}
-	
+
 	private Tutor adicionaEntidade() {
 		Tutor t = new Tutor();
 		t.setCpfTutor(txtCpf.getText());
@@ -102,13 +103,12 @@ public class ViewTutor implements ActionListener{
 		t.setCelularTutor(Integer.parseInt(txtCelular.getText()));
 		t.setTelefoneTutor(Integer.parseInt(txtTelefone.getText()));
 		t.setEmailTutor(txtEmail.getText());
-		JOptionPane.showMessageDialog(null, "Tutor adicionado.");
 		return t;
 	}
-	
+
 	private void recebeEntidade() {
 		Tutor t = controle.buscaTutor(txtCpf.getText());
-		if(t != null) {
+		if (t != null) {
 			txtNome.setText(t.getNomeTutor());
 			txtCep.setText(String.valueOf(t.getCepTutor()));
 			txtRua.setText(t.getRuaTutor());
@@ -124,17 +124,22 @@ public class ViewTutor implements ActionListener{
 			JOptionPane.showMessageDialog(null, "A busca não retornou resultados.");
 		}
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
-		if(cmd.contains("Salvar")) {
-			controle.adiciona(adicionaEntidade());
-		} else if(cmd.contains("Pesquisar")) {
+		if (cmd.contains("Salvar")) {
+			try {
+				controle.adiciona(adicionaEntidade());
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} else if (cmd.contains("Pesquisar")) {
 			recebeEntidade();
-		} else if(cmd.equals("Cancelar")) {
+		} else if (cmd.equals("Cancelar")) {
 			janela.dispose();
 		}
-		
+
 	}
-	
+
 }

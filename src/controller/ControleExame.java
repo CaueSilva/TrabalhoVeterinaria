@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +18,7 @@ public class ControleExame implements TableModel{
 	private ExameDAO exameDao = new ExameDAO();
 	private List<Exame> listaExames = new ArrayList<>();
 	
-	public void adiciona(Exame e) {
+	public void adiciona(Exame e) throws SQLException {
 		if(e != null) {
 			exameDao.adicionar(e);
 			listaExames.add(e);

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -86,7 +87,11 @@ public class ViewAdmin implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		String cmd = event.getActionCommand();
 		if(cmd.contains("Salvar")) {
-			controle.adiciona(adicionaEntidade());
+			try {
+				controle.adiciona(adicionaEntidade());
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		} else if(cmd.contains("Pesquisar")) {
 			recebeEntidade();
 		} else if(cmd.contains("Cancelar")) {

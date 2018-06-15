@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class ControleMedicamento implements TableModel {
 	private String[] nomesColunas = { "Princípio Ativo", "Nome", "Tarja" };
 	private MedicamentoDAO medicamentoDao = new MedicamentoDAO();
 
-	public void adiciona(Medicamento medicamento) {
+	public void adiciona(Medicamento medicamento) throws SQLException {
 		if (medicamento != null) {
 			listaMedicamento.add(medicamento);
 			medicamentoDao.adicionar(medicamento);
