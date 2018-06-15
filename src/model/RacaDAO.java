@@ -22,7 +22,8 @@ public class RacaDAO {
 			p = con.prepareStatement("insert into tbRaca (descricaoRaca, codEspecie, codAdmin) values (?,?,?)");
 				   p.setString(1, r.getDescricaoRaca());
 				   p.setInt(2, r.getCodEspecie());
-				   p.setInt(3, r.getCodAdmin());
+				   //p.setInt(3, r.getCodAdmin());
+				   p.setInt(3, 1);
 				   p.executeUpdate();
 				   p.close();
 			con = c.fechar();
@@ -64,7 +65,8 @@ public class RacaDAO {
 			p = con.prepareStatement("update tbRaca set descricaoRaca = ?, codEspecie = ?, codAdmin = ? where codRaca = ?");
 			 		p.setString(1, r.getDescricaoRaca());
 			 		p.setInt(2, r.getCodEspecie());
-			 		p.setInt(3, r.getCodAdmin());
+			 		//p.setInt(3, r.getCodAdmin());
+			 		p.setInt(3, 1);
 			 		p.setInt(4, r.getCodRaca());
 			  		p.executeUpdate();
 			  		p.close();

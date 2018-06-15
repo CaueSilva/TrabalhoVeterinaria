@@ -22,7 +22,8 @@ public class EspecieDAO {
 		try {
 			p = con.prepareStatement("insert into tbEspecie (descricaoEspecie, codAdmin) values (?,?)");
 				   p.setString(1, e.getDescricaoEspecie());
-				   p.setInt(2, e.getCodAdmin());
+				   //p.setInt(2, e.getCodAdmin());
+				   p.setInt(2, 1);
 				   p.executeUpdate();
 				   p.close();
 			con = c.fechar();
@@ -62,7 +63,8 @@ public class EspecieDAO {
 		try {
 			p = con.prepareStatement("update tbEspecie set descricaoEspecie = ?, codAdmin = ? where codEspecie = ?");
 			  		p.setString(1, e.getDescricaoEspecie());
-			  		p.setInt(2, e.getCodAdmin());
+			  		//p.setInt(2, e.getCodAdmin());
+			  		p.setInt(2, 1);
 			  		p.setInt(3, e.getCodEspecie());
 			  		p.executeUpdate();
 			  		p.close();

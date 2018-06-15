@@ -22,7 +22,8 @@ public class TipoConsultaDAO {
 			p = con.prepareStatement("insert into tbTipoConsulta (descricaoTipoConsulta, precoConsulta, codAdmin) values (?,?,?)");
 				   p.setString(1, tc.getDescricaoTipoConsulta());
 				   p.setDouble(2, tc.getPrecoConsulta());
-				   p.setInt(3, tc.getCodAdmin());
+				   //p.setInt(3, tc.getCodAdmin());
+				   p.setInt(3, 1);
 				   p.executeUpdate();
 				   p.close();
 			con = c.fechar();
@@ -64,7 +65,8 @@ public class TipoConsultaDAO {
 			p = con.prepareStatement("update tbTipoConsulta set descricaoTipoConsulta = ?, precoConsulta = ?, codAdmin = ? where codTipoConsulta = ?");
 					p.setString(1, tc.getDescricaoTipoConsulta());
 					p.setDouble(2, tc.getPrecoConsulta());
-					p.setInt(3, tc.getCodAdmin());
+					//p.setInt(3, tc.getCodAdmin());
+					 p.setInt(3, 1);
 			 		p.setInt(4, tc.getCodTipoConsulta());
 			  		p.executeUpdate();
 			  		p.close();

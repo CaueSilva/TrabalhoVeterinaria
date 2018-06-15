@@ -24,8 +24,9 @@ public class VeterinarioDAO {
 				   p.setString(2, v.getCrmv());
 				   p.setString(3, v.getLoginVeterinario());
 				   p.setString(4, v.getSenhaVeterinario());
-				   p.setInt(5, v.getNivelPermissao());
-				   p.setInt(6, v.getCodAdmin());				   
+				   p.setInt(5, 0);
+				   //p.setInt(6, v.getCodAdmin());
+				   p.setInt(6, 1);
 				   p.executeUpdate();
 				   p.close();
 			con = c.fechar();
@@ -70,8 +71,9 @@ public class VeterinarioDAO {
 			   	p.setString(2, v.getCrmv());
 			   	p.setString(3, v.getLoginVeterinario());
 			   	p.setString(4, v.getSenhaVeterinario());
-			   	p.setInt(5, v.getNivelPermissao());
-			   	p.setInt(6, v.getCodAdmin());	
+			   	p.setInt(5, 0);
+			   	//p.setInt(6, v.getCodAdmin());
+			   	p.setInt(6, 1);
 			   	p.setInt(7, v.getCodVeterinario());
 			   	p.executeUpdate();
 			   	p.close();

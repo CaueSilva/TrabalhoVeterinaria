@@ -24,8 +24,8 @@ public class AtendenteDAO {
 				   p.setString(2, a.getCpfAtendente());
 				   p.setString(3, a.getLoginAtendente());
 				   p.setString(4, a.getSenhaAtendente());
-				   p.setInt(5, a.getCodAdmin());
-				   p.setInt(6, a.getNivelPermissao());				   
+				   p.setInt(5, 1);
+				   p.setInt(6, 1);				   
 				   p.executeUpdate();
 				   p.close();
 			con = c.fechar();
@@ -70,7 +70,8 @@ public class AtendenteDAO {
 				p.setString(2, a.getCpfAtendente());
 				p.setString(3, a.getLoginAtendente());
 				p.setString(4, a.getSenhaAtendente());
-				p.setInt(5, a.getCodAdmin());
+				//p.setInt(5, a.getCodAdmin());
+				p.setInt(5, 1);
 				p.setInt(6, 1);	
 				p.setInt(7, a.getCodAtendente());
 				p.executeUpdate();
