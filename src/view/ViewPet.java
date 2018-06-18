@@ -3,14 +3,19 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.TableModel;
 
+import com.mysql.fabric.xmlrpc.base.Array;
+
+import controller.ControleEspecie;
 import controller.ControlePet;
 import controller.ControlePetTable;
+import controller.ControleRaca;
+import controller.ControleTutor;
+import model.Especie;
 import model.Pet;
 import model.Raca;
-import model.RacaDAO;
 import model.Tutor;
-import model.TutorDAO;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,11 +26,15 @@ import javax.swing.JRadioButton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 public class ViewPet extends JFrame implements ActionListener {
 
@@ -37,8 +46,8 @@ public class ViewPet extends JFrame implements ActionListener {
 
 	private JTextField txtCodigo = new JTextField();
 	private JTextField txtCpfTutor = new JTextField();
-	private JTextField txtRaca = new JTextField();
-	private JTextField txtEspecie = new JTextField();
+	private JComboBox <String> cmbEspecie;
+	private JComboBox <String> cmbRaca;
 	private JRadioButton rdbtnVacinacaoS = new JRadioButton("Sim");
 	private JRadioButton rdbtnVacinacaoN = new JRadioButton("Não");
 	private JTextField txtCor = new JTextField();
@@ -56,6 +65,12 @@ public class ViewPet extends JFrame implements ActionListener {
 	private JButton btnPesquisarTutor = new JButton("Pesquisar Tutor");
 
 	public ViewPet() {
+		ControleEspecie controleEspecie = new ControleEspecie();
+		ControleRaca controleRaca = new ControleRaca();
+		
+		cmbEspecie = new JComboBox<String>(controleEspecie.retornaVetor());
+		cmbRaca = new JComboBox<>();
+		
 		setVisible(true);
 		setResizable(false);
 		setTitle("Manutenção de Pets");
@@ -93,22 +108,25 @@ public class ViewPet extends JFrame implements ActionListener {
 		contentPane.add(txtCpfTutor);
 		txtCpfTutor.setColumns(10);
 
-		JLabel lblRaca = new JLabel("Raça:");
+		JLabel lblRaca = new JLabel("Espécie:");
 		lblRaca.setBounds(12, 196, 39, 16);
 		contentPane.add(lblRaca);
-
-		txtRaca.setBounds(85, 196, 100, 22);
-		contentPane.add(txtRaca);
-		txtRaca.setColumns(10);
-
-		JLabel lblEspecie = new JLabel("Espécie:");
+		
+		cmbEspecie.setBounds(85, 196, 100, 22);
+		contentPane.add(cmbEspecie);
+		
+		JLabel lblEspecie = new JLabel("Raça:");
 		lblEspecie.setBounds(215, 196, 56, 16);
 		contentPane.add(lblEspecie);
-
-		txtEspecie.setBounds(283, 196, 116, 22);
-		contentPane.add(txtEspecie);
-		txtEspecie.setColumns(10);
-
+		cmbRaca.setBounds(283, 196, 116, 22);
+		contentPane.add(cmbRaca);
+		cmbRaca.setEnabled(false);
+		
+		if(cmbEspecie.getSelectedIndex() > 0) {
+			cmbRaca.setEnabled(true);
+			cmbRaca = new JComboBox<String>(controleRaca.retornaVetor(cmbEspecie.getSelectedItem().toString()));
+		}
+		
 		JLabel lblVacinado = new JLabel("Vacinado:");
 		lblVacinado.setBounds(12, 241, 66, 16);
 		contentPane.add(lblVacinado);
@@ -180,14 +198,34 @@ public class ViewPet extends JFrame implements ActionListener {
 		btnSalvar.addActionListener(this);
 		btnCancelar.addActionListener(this);
 		btnPesquisarTutor.addActionListener(this);
-
+		
+		//Table listener
+		/**tblPesquisa.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int i = tblPesquisa.getSelectedRow();
+				TableModel model = tblPesquisa.getModel();
+				List<Pet> lista = controle.buscaPet(model.getValueAt(i, 1).toString());
+				Pet p = lista.get(0);
+				ControleTutor controleTutor = new ControleTutor();
+				Tutor t = controleTutor.buscaTutor(model.getValueAt(i, 2).toString());
+				
+				txtCodigo.setText(String.valueOf(p.getCodPet()));
+				txtCpfTutor.setText(p.getcod);
+			}
+		});*/
 	}
 
 	private Pet adicionaEntidade() {
 		Pet p = new Pet();
+		ControleTutor controleTutor = new ControleTutor();
+		ControleRaca controleRaca = new ControleRaca();
+		Tutor t = controleTutor.buscaTutor(txtCpfTutor.getText());
+		Raca r = controleRaca.buscaRaca(cmbRaca.getSelectedItem().toString());
+		
 		p.setNomePet(txtNomePet.getText());
-		p.setCodTutor(Integer.parseInt(txtCpfTutor.getText()));
-		p.setCodRaca(Integer.parseInt(txtRaca.getText()));
+		p.setCodTutor(t.getCodTutor());
+		p.setCodRaca(r.getCodRaca());
 		if (rdbtnVacinacaoS.isSelected()) {
 			p.setVacinacaoPet(1);
 		} else {
@@ -201,10 +239,10 @@ public class ViewPet extends JFrame implements ActionListener {
 
 	private void recebeEntidade() {
 		List<Pet> lista = controle.buscaPet(txtNomePet.getText());
-		TutorDAO tDao = new TutorDAO();
-		Tutor t = tDao.pesquisaEspecifica(txtCpfTutor.getText());
+		ControleTutor controleTutor = new ControleTutor();
+		Tutor t = controleTutor.buscaTutor(txtCpfTutor.getText());
 		if (!lista.isEmpty() && lista.size() > 0) {
-			/**Pet p = lista.get(0);
+			Pet p = lista.get(0);
 			txtNomePet.setText(p.getNomePet());
 			txtCodigo.setText(String.valueOf(p.getCodPet()));
 			txtCpfTutor.setText(String.valueOf(t.getCpfTutor()));
@@ -216,7 +254,7 @@ public class ViewPet extends JFrame implements ActionListener {
 				rdbtnVacinacaoS.setSelected(false);
 			}
 			txtCor.setText(p.getCorPeloPet());
-			txtDescricao.setText(p.getDescricaoPet());*/
+			txtDescricao.setText(p.getDescricaoPet());
 			tblPesquisa.invalidate();
 			tblPesquisa.revalidate();
 			tblPesquisa.repaint();
@@ -226,12 +264,12 @@ public class ViewPet extends JFrame implements ActionListener {
 	}
 
 	public void pesquisaTutor() {
-		TutorDAO td = new TutorDAO();
-		Tutor t = td.pesquisaEspecifica(txtCpfTutor.getText());
+		ControleTutor controleTutor = new ControleTutor();
+		Tutor t = controleTutor.buscaTutor(txtCpfTutor.getText());
 		if(t != null) {
-			JOptionPane.showMessageDialog(null, "O tutor não está cadastrado no sistema.");
-		} else {
 			JOptionPane.showMessageDialog(null, "O tutor está cadastrado.");
+		} else {
+			JOptionPane.showMessageDialog(null, "O tutor não está cadastrado.");
 		}
 	}
 

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -27,6 +28,8 @@ public class ViewExame extends View implements ActionListener {
 		lblCodigo.setText("Código Exame:");
 		lblTipo.setText("Tipo Exame:");
 		lblDisponiveis.setText("Exames Disponíveis");
+		
+		cmbExame = new JComboBox<>(controle.retornaVetor());
 
 		btnPesquisarPet.addActionListener(this);
 		btnSalvar.setBounds(290, 551, 97, 25);
@@ -46,7 +49,7 @@ public class ViewExame extends View implements ActionListener {
 	private Exame adicionaEntidade() {
 		Exame e = new Exame();
 		TipoExameDAO tipoExameDao = new TipoExameDAO();
-		TipoExame tipo = tipoExameDao.pesquisaEspecifica(txtTipo.getText());
+		TipoExame tipo = tipoExameDao.pesquisaEspecifica(cmbExame.getSelectedItem().toString());
 		ControlePet control = new ControlePet();
 		List<Pet> pet = control.buscaPet(txtNomePet.getText());
 		Pet p = pet.get(0);
@@ -90,7 +93,7 @@ public class ViewExame extends View implements ActionListener {
 		Pet p = listaPet.get(0);
 		
 		if(e != null) {
-			txtTipo.setText(String.valueOf(e.getCodTipoExame()));
+			cmbExame.setSelectedItem(e.getDescTipoExame());
 			txtNomePet.setText(e.getNomePet());
 			txtData.setText(e.getDataExame());
 			txtHora.setText(e.getHoraExame());

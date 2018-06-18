@@ -5,6 +5,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
+
+import controller.ControleExame;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -12,6 +15,7 @@ import java.text.ParseException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
 import javax.swing.JRadioButton;
@@ -24,7 +28,7 @@ public class View extends JFrame {
 	protected JLabel lblCodigo = new JLabel("Código:");
 	protected JTextField txtCodigo = new JTextField();
 	protected JLabel lblTipo = new JLabel("Tipo:");
-	protected JTextField txtTipo = new JTextField();
+	protected JComboBox<String> cmbExame;
 	protected JLabel lblPesquisarPet = new JLabel("Pesquisar Pet (Nome):");
 	protected JTextField txtNomePet = new JTextField();
 
@@ -81,10 +85,10 @@ public class View extends JFrame {
 
 		lblTipo.setBounds(12, 42, 116, 16);
 		pnlPrincipal.add(lblTipo);
-
-		txtTipo.setBounds(162, 39, 116, 22);
-		pnlPrincipal.add(txtTipo);
-		txtTipo.setColumns(10);
+		
+		cmbExame = new JComboBox<String>();
+		cmbExame.setBounds(162, 39, 116, 22);
+		pnlPrincipal.add(cmbExame);
 
 		lblPesquisarPet.setBounds(12, 74, 138, 16);
 		pnlPrincipal.add(lblPesquisarPet);

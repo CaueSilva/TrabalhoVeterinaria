@@ -26,6 +26,16 @@ public class ControleConsulta implements TableModel {
 		Consulta lista = consultaDao.pesquisaEspecifica(cod);
 		return lista;
 	}
+	
+	public String[] retornaVetor() {
+		String vet [] = new String[listaConsulta.size()];
+		int cont = 0;
+		for(Consulta c : listaConsulta) {
+			vet[cont] = c.getDescTipoConsulta();
+			cont++;
+		}
+		return vet;
+	}
 
 	@Override
 	public void addTableModelListener(TableModelListener l) {

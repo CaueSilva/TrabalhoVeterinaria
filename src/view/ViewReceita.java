@@ -11,11 +11,13 @@ import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import controller.ControlePet;
 import controller.ControleReceita;
@@ -35,8 +37,8 @@ public class ViewReceita implements ActionListener{
 	private JTextField txtNomePet = new JTextField(9);
 	private JTextField txtCrmvVet = new JTextField(8);
 	private JTextField txtObs = new JTextField(26);
-	private JTextField txtEmissao = new JTextField(7);
-	private JTextField txtValidade = new JTextField(8);
+	private JFormattedTextField txtEmissao = new JFormattedTextField(mascaraData("##/##/####"));
+	private JFormattedTextField txtValidade = new JFormattedTextField(mascaraData("##/##/####"));
 	private JButton btnPesquisarReceita = new JButton("Pesquisar");
 	private JButton btnPesquisarPet = new JButton("Pesquisar Pet");
 	private JButton btnPesquisarVet = new JButton("Pesquisar Vet.");
@@ -69,8 +71,10 @@ public class ViewReceita implements ActionListener{
 		pnlPrimario.add(txtObs);
 		pnlPrimario.add(new JLabel("Emissão:"));
 		pnlPrimario.add(txtEmissao);
+		txtEmissao.setColumns(6);
 		pnlPrimario.add(new JLabel("Validade:"));
 		pnlPrimario.add(txtValidade);
+		txtValidade.setColumns(6);
 		
 		pnlSecundario.add(btnSalvar);
 		pnlSecundario.add(btnCancelar);
@@ -142,5 +146,16 @@ public class ViewReceita implements ActionListener{
 		} else if(cmd.contains("Cancelar")) {
 			janela.dispose();
 		}
+	}
+	
+	private MaskFormatter mascaraData(String mascara) {
+		MaskFormatter mask = new MaskFormatter();
+		try {
+			mask.setMask(mascara);
+			mask.setPlaceholderCharacter(' ');
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return mask;
 	}
 }

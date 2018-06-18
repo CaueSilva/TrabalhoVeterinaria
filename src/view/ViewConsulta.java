@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,7 +32,7 @@ public class ViewConsulta extends JFrame implements ActionListener{
 	
 	public JPanel pnlPrincipal;
 	protected JTextField txtCodigo = new JTextField();
-	protected JTextField txtTipo = new JTextField();
+	protected JComboBox<String> cmbConsulta;
 	protected JTextField txtNomePet = new JTextField();
 
 	private ControleConsulta controle = new ControleConsulta();
@@ -75,9 +76,9 @@ public class ViewConsulta extends JFrame implements ActionListener{
 		
 		pnlPrincipal.add(new JLabel("Tipo Consulta:")).setBounds(12, 42, 116, 16);
 		
-		txtTipo.setBounds(162, 39, 116, 22);
-		pnlPrincipal.add(txtTipo);
-		txtTipo.setColumns(10);
+		cmbConsulta = new JComboBox<String>(controle.retornaVetor());
+		cmbConsulta.setBounds(162, 39, 116, 22);
+		pnlPrincipal.add(cmbConsulta);
 		
 		pnlPrincipal.add(new JLabel("Pesquisar Pet (Nome):")).setBounds(12, 74, 138, 16);
 		
@@ -172,7 +173,7 @@ public class ViewConsulta extends JFrame implements ActionListener{
 	private Consulta adicionaEntidade() {
 		Consulta c = new Consulta();
 		TipoConsultaDAO tipoConsultaDao = new TipoConsultaDAO();
-		TipoConsulta tipo = tipoConsultaDao.pesquisaEspecifica(txtTipo.getText());
+		TipoConsulta tipo = tipoConsultaDao.pesquisaEspecifica(cmbConsulta.getSelectedItem().toString());
 		ControlePet control = new ControlePet();
 		List<Pet> pet = control.buscaPet(txtNomePet.getText());
 		Pet p = pet.get(0);
@@ -213,7 +214,7 @@ public class ViewConsulta extends JFrame implements ActionListener{
 		Pet p = listaPet.get(0);
 		
 		if(c != null) {
-			txtTipo.setText(String.valueOf(c.getCodTipoConsulta()));
+			cmbConsulta.setSelectedItem(String.valueOf(c.getCodTipoConsulta()));
 			txtNomePet.setText(c.getNomePet());
 			txtData.setValue(c.getDataConsulta());
 			txtHora.setValue(c.getHoraConsulta());

@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
+import model.Consulta;
 import model.Exame;
 import model.ExameDAO;
 
@@ -30,6 +31,16 @@ public class ControleExame implements TableModel{
 	public Exame buscaExame(int cod) {
 		Exame lista = exameDao.pesquisaEspecifica(cod);
 		return lista;
+	}
+	
+	public String[] retornaVetor() {
+		String vet [] = new String[listaExames.size()];
+		int cont = 0;
+		for(Exame e : listaExames) {
+			vet[cont] = e.getDescTipoExame();
+			cont++;
+		}
+		return vet;
 	}
 
 	@Override
