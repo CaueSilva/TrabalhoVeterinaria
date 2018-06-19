@@ -200,7 +200,7 @@ public class ViewPet extends JFrame implements ActionListener {
 		btnPesquisarTutor.addActionListener(this);
 		
 		//Table listener
-		/**tblPesquisa.addMouseListener(new MouseAdapter() {
+		tblPesquisa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int i = tblPesquisa.getSelectedRow();
@@ -211,9 +211,10 @@ public class ViewPet extends JFrame implements ActionListener {
 				Tutor t = controleTutor.buscaTutor(model.getValueAt(i, 2).toString());
 				
 				txtCodigo.setText(String.valueOf(p.getCodPet()));
-				txtCpfTutor.setText(p.getcod);
+				txtCpfTutor.setText(t.getCpfTutor());
+				
 			}
-		});*/
+		});
 	}
 
 	private Pet adicionaEntidade() {

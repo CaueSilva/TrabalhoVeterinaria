@@ -28,7 +28,7 @@ public class ControlePet implements TableModel {
 	}
 
 	public List<Pet> buscaPet(String nome) {
-		listaPesquisados.clear();
+		//listaPesquisados.clear();
 		listaPesquisados = petDao.pesquisaEspecifica(nome);
 		return listaPesquisados;
 	}
