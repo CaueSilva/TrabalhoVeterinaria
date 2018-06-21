@@ -29,8 +29,8 @@ public class ViewExame extends View implements ActionListener {
 		lblTipo.setText("Tipo Exame:");
 		lblDisponiveis.setText("Exames Disponíveis");
 		
-		cmbExame = new JComboBox<>(controle.retornaVetor());
-
+		cmbExame = new JComboBox<String>(controle.retornaVetor());
+		
 		btnPesquisarPet.addActionListener(this);
 		btnSalvar.setBounds(290, 551, 97, 25);
 		btnSalvar.addActionListener(this);

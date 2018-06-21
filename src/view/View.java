@@ -57,7 +57,7 @@ public class View extends JFrame {
 	protected JRadioButton rdbtnEncaminhamentoN = new JRadioButton("Não");;
 	protected JLabel lblEncaminhamento = new JLabel("Encaminhamento Exame:");
 	protected JButton btnPesquisarExame = new JButton("Pesquisar Exame");
-
+	private ControleExame controle = new ControleExame();
 	// Método necessário para construir a View
 	/**
 	 * public static void main(String[] args) { EventQueue.invokeLater(new
@@ -86,7 +86,7 @@ public class View extends JFrame {
 		lblTipo.setBounds(12, 42, 116, 16);
 		pnlPrincipal.add(lblTipo);
 		
-		cmbExame = new JComboBox<String>();
+		cmbExame = new JComboBox<String>(controle.retornaVetor());
 		cmbExame.setBounds(162, 39, 116, 22);
 		pnlPrincipal.add(cmbExame);
 

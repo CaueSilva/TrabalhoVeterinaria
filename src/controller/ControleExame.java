@@ -12,6 +12,10 @@ import javax.swing.table.TableModel;
 import model.Consulta;
 import model.Exame;
 import model.ExameDAO;
+import model.TipoConsulta;
+import model.TipoConsultaDAO;
+import model.TipoExame;
+import model.TipoExameDAO;
 
 public class ControleExame implements TableModel{
 	
@@ -34,10 +38,19 @@ public class ControleExame implements TableModel{
 	}
 	
 	public String[] retornaVetor() {
-		String vet [] = new String[listaExames.size()];
-		int cont = 0;
-		for(Exame e : listaExames) {
-			vet[cont] = e.getDescTipoExame();
+//		String vet [] = new String[listaExames.size()];
+//		int cont = 0;
+//		for(Exame e : listaExames) {
+//			vet[cont] = e.getDescTipoExame();
+//			cont++;
+//		}
+//		return vet;
+		TipoExameDAO tp = new TipoExameDAO();
+		String vet[] = new String[tp.retornaDados().size()];
+		List<TipoExame> tc = tp.retornaDados();
+		int cont = 0;		
+		for(TipoExame r : tc) {
+			vet[cont] = r.getDescricaoTipoExame();
 			cont++;
 		}
 		return vet;

@@ -76,6 +76,8 @@ public class ViewConsulta extends JFrame implements ActionListener{
 		
 		pnlPrincipal.add(new JLabel("Tipo Consulta:")).setBounds(12, 42, 116, 16);
 		
+		
+		//System.out.println(controle.retornaVetor().toString());
 		cmbConsulta = new JComboBox<String>(controle.retornaVetor());
 		cmbConsulta.setBounds(162, 39, 116, 22);
 		pnlPrincipal.add(cmbConsulta);
