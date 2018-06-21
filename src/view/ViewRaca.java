@@ -65,12 +65,15 @@ public class ViewRaca implements ActionListener {
 
 	private Raca adicionaEntidade() {
 		Raca r = new Raca();
-		r.setCodRaca(Integer.parseInt(txtCodRaca.getText()));
+		//r.setCodRaca(Integer.parseInt(txtCodRaca.getText()));
+		ControleEspecie controleEspecie = new ControleEspecie();
+		Especie e = controleEspecie.busca(txtDescricaoEspecie.getText());
 		r.setDescricaoRaca(txtDescricaoRaca.getText());
+		r.setDescEspecie(txtDescricaoEspecie.getText());
+		r.setCodEspecie(e.getCodEspecie());
 		JOptionPane.showMessageDialog(null, "Raça adicionada.");
 		return r;
 	}
-
 	private void recebeRaca() {
 		Raca r = controle.buscaRaca(txtDescricaoRaca.getText());
 		ControleEspecie controleEspecie = new ControleEspecie();

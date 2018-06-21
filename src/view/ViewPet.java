@@ -69,7 +69,20 @@ public class ViewPet extends JFrame implements ActionListener {
 		ControleRaca controleRaca = new ControleRaca();
 		
 		cmbEspecie = new JComboBox<String>(controleEspecie.retornaVetor());
-		cmbRaca = new JComboBox<>();
+		//cmbRaca = new JComboBox<String>();
+		//if(cmbEspecie.getSelectedIndex() > 0) {
+		if(cmbEspecie.getSelectedItem()!=null) {
+			cmbRaca = new JComboBox<String>();
+			cmbRaca.setEnabled(true);
+			String s = cmbEspecie.getSelectedItem().toString();
+			System.out.print(s);
+			cmbRaca = new JComboBox<String>(controleRaca.retornaVetor(s));
+			//cmbEspecie = new JComboBox<String>(controleEspecie.retornaVetor());
+			//cmbRaca = new JComboBox<String>(controleRaca.retornaVetor(cmbEspecie.getSelectedItem().toString()));
+		}else {
+			cmbRaca = new JComboBox<String>();
+			cmbRaca.setEnabled(false);
+		}
 		
 		setVisible(true);
 		setResizable(false);
@@ -120,12 +133,9 @@ public class ViewPet extends JFrame implements ActionListener {
 		contentPane.add(lblEspecie);
 		cmbRaca.setBounds(283, 196, 116, 22);
 		contentPane.add(cmbRaca);
-		cmbRaca.setEnabled(false);
+		//cmbRaca.setEnabled(false);
 		
-		if(cmbEspecie.getSelectedIndex() > 0) {
-			cmbRaca.setEnabled(true);
-			cmbRaca = new JComboBox<String>(controleRaca.retornaVetor(cmbEspecie.getSelectedItem().toString()));
-		}
+		
 		
 		JLabel lblVacinado = new JLabel("Vacinado:");
 		lblVacinado.setBounds(12, 241, 66, 16);
@@ -215,6 +225,7 @@ public class ViewPet extends JFrame implements ActionListener {
 				
 			}
 		});
+		
 	}
 
 	private Pet adicionaEntidade() {

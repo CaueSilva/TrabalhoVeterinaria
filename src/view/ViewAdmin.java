@@ -63,7 +63,7 @@ public class ViewAdmin implements ActionListener {
 
 	private Admin adicionaEntidade() {
 		Admin a = new Admin();
-		a.setCodAdmin(Integer.parseInt(txtCod.getText()));
+		//a.setCodAdmin(Integer.parseInt(txtCod.getText()));
 		a.setNomeAdmin(txtNome.getText());
 		a.setLoginAdmin(txtLogin.getText());
 		a.setSenhaAdmin(txtSenha.getText());

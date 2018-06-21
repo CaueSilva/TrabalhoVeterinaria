@@ -103,8 +103,10 @@ public class ViewTutor implements ActionListener {
 		t.setCelularTutor(Integer.parseInt(txtCelular.getText()));
 		t.setTelefoneTutor(Integer.parseInt(txtTelefone.getText()));
 		t.setEmailTutor(txtEmail.getText());
+		JOptionPane.showMessageDialog(null, "Tutor adicionado.");
 		return t;
 	}
+	
 
 	private void recebeEntidade() {
 		Tutor t = controle.buscaTutor(txtCpf.getText());

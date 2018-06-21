@@ -30,15 +30,15 @@ public class ControleRaca {
 	}
 	
 	public String[] retornaVetor(String descricao){
-		String vet[] = new String[listaRaca.size()];
-		ControleEspecie controlEspecie = new ControleEspecie();
-		int cont = 0;
-		Especie e = controlEspecie.busca(descricao);
-		for(Raca r : listaRaca) {
-			if(r.getCodEspecie() == e.getCodEspecie()) {
-				vet[cont] = r.getDescricaoRaca();
-				cont++;
-			}
+		String vet[] = new String[racaDao.pesquisaPorEspecie(descricao).size()];
+		List<Raca> ra = racaDao.pesquisaPorEspecie(descricao);
+		int cont = 0;		
+		for(Raca r : ra) {
+			vet[cont] = r.getDescricaoRaca();
+			cont++;
+		}
+		for(int i=0; i<vet.length;i++) {
+			System.out.println(vet[i]);
 		}
 		return vet;
 	}

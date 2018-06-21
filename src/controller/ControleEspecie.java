@@ -30,9 +30,10 @@ public class ControleEspecie {
 	}
 	
 	public String[] retornaVetor(){
-		String vet[] = new String[listaEspecie.size()];
+		String vet[] = new String[especieDao.retornaDados().size()];    //alterei aqui
+		List<Especie> ex = especieDao.retornaDados();
 		int cont = 0;
-		for(Especie e : listaEspecie) {
+		for(Especie e : ex) {
 			vet[cont] = e.getDescricaoEspecie();
 			cont++;
 		}

@@ -38,7 +38,7 @@ public class RacaDAO {
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("SELECT r.codRaca, r.descricaoRaca, e.descricaoEspecie, a.loginAdmin FROM tbraca r, tbadmin a, tbespecie WHERE r.codEspecie = e.codEspecie AND r.codAdmin = a.codAdmin");
+			p = con.prepareStatement("SELECT r.codRaca, r.descricaoRaca, e.descricaoEspecie, a.loginAdmin FROM tbraca r, tbadmin a, tbespecie e WHERE r.codEspecie = e.codEspecie AND r.codAdmin = a.codAdmin");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
 				Raca r = new Raca();
@@ -83,7 +83,7 @@ public class RacaDAO {
 		con = c.abrir();
 		PreparedStatement p;
 		try {
-			p = con.prepareStatement("SELECT r.codRaca, r.descricaoRaca, e.descricaoEspecie, a.loginAdmin FROM tbraca r, tbadmin a, tbespecie WHERE r.codEspecie = e.codEspecie AND r.codAdmin = a.codAdmin and descricaoRaca like ?");
+			p = con.prepareStatement("SELECT r.codRaca, r.descricaoRaca, e.descricaoEspecie, a.loginAdmin FROM tbraca r, tbadmin a, tbespecie e WHERE r.codEspecie = e.codEspecie AND r.codAdmin = a.codAdmin and descricaoRaca like ?");
 			p.setString(1, "%" + desc + "%");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()){
@@ -102,4 +102,31 @@ public class RacaDAO {
 		}		
 		return ra;
 	}
+	
+	public List<Raca> pesquisaPorEspecie(String descEspec) {
+		List<Raca> ra = new ArrayList<Raca>();
+		Conexao c = new Conexao();
+		con = c.abrir();
+		PreparedStatement p;
+		try {
+			p = con.prepareStatement("SELECT r.codRaca, r.descricaoRaca, e.descricaoEspecie, a.loginAdmin FROM tbraca r, tbadmin a, tbespecie e WHERE r.codEspecie = e.codEspecie AND r.codAdmin = a.codAdmin and e.descricaoEspecie = ?");
+			p.setString(1, descEspec);
+			ResultSet rs = p.executeQuery();
+			while(rs.next()){
+				Raca r = new Raca();
+				r.setCodRaca(rs.getInt("codRaca"));
+				r.setDescricaoRaca(rs.getString("descricaoRaca"));
+				r.setDescEspecie(rs.getString("descricaoEspecie"));
+				r.setLoginAdmin(rs.getString("loginAdmin"));
+				ra.add(r);
+			}
+		rs.close();
+		p.close();
+		con.close();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Nenhuma raça encontrada nessa espécie");
+		}		
+		return ra;
+	}
+	
 }
