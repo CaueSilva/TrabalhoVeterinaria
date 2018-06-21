@@ -63,7 +63,7 @@ public class ControlePet implements TableModel {
 
 	@Override
 	public int getRowCount() {
-		return listaPets.size();
+		return listaPesquisados.size();
 	}
 
 	@Override
