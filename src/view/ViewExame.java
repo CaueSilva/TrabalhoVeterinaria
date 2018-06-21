@@ -44,6 +44,8 @@ public class ViewExame extends View implements ActionListener {
 
 		tblPet = new JTable(controlePet);
 		tblDisponivel = new JTable(controle);
+
+		this.setLocationRelativeTo(null);
 	}
 
 	private Exame adicionaEntidade() {

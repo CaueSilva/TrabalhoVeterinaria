@@ -44,6 +44,7 @@ public class ViewMedicamento implements ActionListener {
 		janela.setContentPane(pnlPrincipal);
 		janela.setResizable(false);
 
+		janela.setLocationRelativeTo(null);
 		pnlPrincipal.add(pnlPrimario, BorderLayout.CENTER);
 		pnlPrincipal.add(pnlSecundario, BorderLayout.SOUTH);
 

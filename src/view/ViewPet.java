@@ -208,7 +208,8 @@ public class ViewPet extends JFrame implements ActionListener {
 		btnSalvar.addActionListener(this);
 		btnCancelar.addActionListener(this);
 		btnPesquisarTutor.addActionListener(this);
-		
+
+		this.setLocationRelativeTo(null);
 		//Table listener
 		tblPesquisa.addMouseListener(new MouseAdapter() {
 			@Override

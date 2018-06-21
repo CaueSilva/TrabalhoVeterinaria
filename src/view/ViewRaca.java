@@ -41,6 +41,8 @@ public class ViewRaca implements ActionListener {
 		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		janela.setContentPane(pnlPrincipal);
 
+		janela.setLocationRelativeTo(null);
+
 		pnlPrincipal.add(pnlPrimario, BorderLayout.CENTER);
 		pnlPrincipal.add(pnlSecundario, BorderLayout.SOUTH);
 

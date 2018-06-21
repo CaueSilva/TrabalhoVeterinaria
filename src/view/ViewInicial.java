@@ -28,6 +28,8 @@ public class ViewInicial extends JFrame {
 			pnlBotoes.add(btn);
 		}
 		setVisible(true);
+
+		this.setLocationRelativeTo(null);
 	}
 
 	public static void main(String[] args) {

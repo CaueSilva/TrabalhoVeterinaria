@@ -38,7 +38,8 @@ public class ViewEspecie implements ActionListener{
 		janela.setContentPane(pnlPrincipal);
 		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		janela.setSize(277,160);
-		
+
+		janela.setLocationRelativeTo(null);
 		pnlPrincipal.add(pnlPrimario, BorderLayout.CENTER);
 		pnlPrincipal.add(pnlSecundario, BorderLayout.SOUTH);
 		

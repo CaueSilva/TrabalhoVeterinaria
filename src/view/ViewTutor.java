@@ -47,6 +47,7 @@ public class ViewTutor implements ActionListener {
 		janela.setResizable(false);
 		janela.setContentPane(pnlPrincipal);
 		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		janela.setLocationRelativeTo(null);
 
 		pnlPrincipal.add(pnlPrimario, BorderLayout.CENTER);
 		pnlPrincipal.add(pnlSecundario, BorderLayout.SOUTH);

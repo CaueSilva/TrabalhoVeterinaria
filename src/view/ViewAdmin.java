@@ -37,8 +37,8 @@ public class ViewAdmin implements ActionListener {
 		janela.setSize(250,190);
 		janela.setResizable(false);
 		janela.setContentPane(pnlPrincipal);
+		janela.setLocationRelativeTo(null);
 		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
 		pnlPrincipal.add(pnlPrimario, BorderLayout.CENTER);
 		pnlPrincipal.add(pnlSecundario, BorderLayout.SOUTH);
 		

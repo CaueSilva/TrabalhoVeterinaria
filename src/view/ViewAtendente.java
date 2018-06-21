@@ -41,7 +41,7 @@ public class ViewAtendente implements ActionListener {
 		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		janela.setResizable(false);
 		janela.setContentPane(pnlPrincipal);
-		
+		janela.setLocationRelativeTo(null);
 		pnlPrincipal.add(pnlPrimario, BorderLayout.CENTER);
 		pnlPrincipal.add(pnlSecundario, BorderLayout.SOUTH);
 		
@@ -68,6 +68,7 @@ public class ViewAtendente implements ActionListener {
 		btnPesquisar.addActionListener(this);
 		btnSalvar.addActionListener(this);
 		btnCancelar.addActionListener(this);
+		
 	}
 
 	private Atendente adicionaEntidade() {

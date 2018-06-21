@@ -40,6 +40,7 @@ public class ViewTipoExame implements ActionListener{
 		janela.setContentPane(pnlPrincipal);
 		janela.setResizable(false);
 		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		janela.setLocationRelativeTo(null);
 		
 		pnlPrincipal.add(pnlPrimario, BorderLayout.CENTER);
 		pnlPrincipal.add(pnlSecundario, BorderLayout.SOUTH);

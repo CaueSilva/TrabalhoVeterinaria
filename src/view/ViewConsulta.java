@@ -61,11 +61,15 @@ public class ViewConsulta extends JFrame implements ActionListener{
 		setTitle("Manutenção de Consultas");
 		setVisible(true);
 		setResizable(false);
+
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 520, 665);
 		pnlPrincipal = new JPanel();
 		pnlPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(pnlPrincipal);
+
+		this.setLocationRelativeTo(null);
 		pnlPrincipal.setLayout(null);
 		
 		pnlPrincipal.add(new JLabel("Código:")).setBounds(12, 13, 116, 16);

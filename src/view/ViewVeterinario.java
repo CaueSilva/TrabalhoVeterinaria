@@ -42,6 +42,7 @@ public class ViewVeterinario implements ActionListener{
 		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		janela.setResizable(false);
 		janela.setContentPane(pnlPrincipal);
+		janela.setLocationRelativeTo(null);
 		
 		pnlPrincipal.add(pnlPrimario, BorderLayout.CENTER);
 		pnlPrincipal.add(pnlSecundario, BorderLayout.SOUTH);
