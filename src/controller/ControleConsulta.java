@@ -10,6 +10,9 @@ import javax.swing.table.TableModel;
 
 import model.Consulta;
 import model.ConsultaDAO;
+import model.Raca;
+import model.TipoConsulta;
+import model.TipoConsultaDAO;
 
 public class ControleConsulta implements TableModel {
 	
@@ -28,10 +31,20 @@ public class ControleConsulta implements TableModel {
 	}
 	
 	public String[] retornaVetor() {
-		String vet [] = new String[listaConsulta.size()];
-		int cont = 0;
-		for(Consulta c : listaConsulta) {
-			vet[cont] = c.getDescTipoConsulta();
+		//String vet [] = new String[listaConsulta.size()];
+		//int cont = 0;
+		//for(Consulta c : listaConsulta) {
+		//	vet[cont] = c.getDescTipoConsulta();
+		//	cont++;
+		//}
+		//return vet;
+		
+		TipoConsultaDAO tp = new TipoConsultaDAO();
+		String vet[] = new String[tp.retornaDados().size()];
+		List<TipoConsulta> tc = tp.retornaDados();
+		int cont = 0;		
+		for(TipoConsulta r : tc) {
+			vet[cont] = r.getDescricaoTipoConsulta();
 			cont++;
 		}
 		return vet;
